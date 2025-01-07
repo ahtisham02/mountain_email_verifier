@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import DashboardNavbar from "../ui-components/Dashboard/Navbar/Navbar";
-import Sidebar from "../ui-components/Dashboard/Sidebar/sidebar";
-import Footer from "../ui-components/Dashboard/Footer/Footer";
+import DashboardNavbar from "../ui-components/Dashboard/Common/Navbar/Navbar";
+import Sidebar from "../ui-components/Dashboard/Common/Sidebar/sidebar";
+import Footer from "../ui-components/Dashboard/Common/Footer/Footer";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {

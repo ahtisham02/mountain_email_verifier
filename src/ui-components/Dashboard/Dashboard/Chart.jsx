@@ -39,19 +39,18 @@ export default function Chart() {
       <h2 className="px-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Charts
       </h2>
-      <div className="flex gap-6 p-6">
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 w-1/4 2xl:w-[30%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[29%_29%_40%] 2xl:grid-cols-[29%_29%_41%] lg:gap-3 gap-6 p-6">
+        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4">
           <Bar data={dailyCreditsData} className="max-w-full max-h-56" options={{ responsive: true }} />
           <p className="text-lg font-medium mt-4">Daily Credits</p>
           <p className="text-sm text-gray-600">20/20 Credits Remaining</p>
         </div>
-        {" "}
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 w-1/4 2xl:w-[30%]">
+        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4">
           <Bar data={instantCreditsData} className="max-w-full max-h-56" options={{ responsive: true }} />
           <p className="text-lg font-medium mt-4">Instant Credits</p>
           <p className="text-sm text-gray-600">100 Credits Remaining</p>
         </div>
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 w-1/2 2xl:w-[40%]">
+        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 sm:col-span-2 lg:col-span-1">
           <p className="text-lg font-medium">Reoon Lead Generator (B2B)</p>
           <p className="text-sm text-gray-600 text-center mt-2">
             Get thousands of local business leads from online directories

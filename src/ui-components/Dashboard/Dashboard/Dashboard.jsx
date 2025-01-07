@@ -107,7 +107,7 @@ export default function Dashboard() {
       <h2 className="p-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Dashboard
       </h2>
-      <div className="grid gap-6 pb-8 md:grid-cols-2 px-6">
+      <div className="grid lg:gap-3 gap-6 pb-8 md:grid-cols-2 px-6">
         <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-[350px] flex flex-col">
           <div className="p-4 flex flex-col items-start">
             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
