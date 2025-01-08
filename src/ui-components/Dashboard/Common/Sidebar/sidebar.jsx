@@ -1,21 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Home,
-  Clipboard,
   BotIcon,
   PieChart,
   MousePointer,
   FileText,
   Table,
   Menu,
+  MailCheck,
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, onToggleSidebar }) => {
   const [activeItem, setActiveItem] = useState("Dashboard");
+  const navigate = useNavigate();
+
+  const menuItems = [
+    { icon: Home, label: "Dashboard", path: "/" },
+    {
+      icon: MailCheck,
+      label: "Email Verification",
+      path: "/emailverification",
+    },
+    { icon: BotIcon, label: "Cards", path: "/cards" },
+    { icon: PieChart, label: "Charts", path: "/charts" },
+    { icon: MousePointer, label: "Buttons", path: "/buttons" },
+    { icon: FileText, label: "Modals", path: "/modals" },
+    { icon: Table, label: "Tables", path: "/tables" },
+  ];
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen shadow-md lg:ml-16 z-20 transition-all duration-300 ${
+      className={`fixed top-0 left-0 h-screen shadow-md lg:ml-16 z-20 transition-all duration-500 ${
         isOpen ? "translate-x-0 w-64 lg:!ml-0" : "-translate-x-full w-16"
       }`}
       style={{
@@ -23,35 +39,33 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
       }}
     >
       <div className={`${isOpen ? "py-4" : ""}`}>
-        <div className="flex items-center mb-8 mt-3">
+        <div
+          style={{
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+          }}
+          className="flex items-center pb-5 mt-[6px]"
+        >
           <Menu
             onClick={onToggleSidebar}
             className={`text-purple-500 mr-3 cursor-pointer w-6 h-6 ml-4 ${
-              isOpen ? "lg:ml-3 lg:mr-3" : "lg:ml-4 lg:mr-0 mt-2"
+              isOpen ? "lg:ml-5 lg:mr-3" : "lg:ml-[18px] lg:mr-0 mt-4 mb-1"
             }`}
           />
           <h1
-            className={`ml-1 text-gray-100 text-xl font-bold ${
-              !isOpen ? "hidden" : ""
-            }`}
+            className={`text-gray-100 text-[18px] ${!isOpen ? "hidden" : ""}`}
           >
-            Mountain<span className="text-xs"> EmailFinder</span>
+            Mountain Email Finder
           </h1>
         </div>
 
         <ul className="mt-4 space-y-4">
-          {[
-            { icon: Home, label: "Dashboard" },
-            { icon: Clipboard, label: "Forms" },
-            { icon: BotIcon, label: "Cards" },
-            { icon: PieChart, label: "Charts" },
-            { icon: MousePointer, label: "Buttons" },
-            { icon: FileText, label: "Modals" },
-            { icon: Table, label: "Tables" },
-          ].map(({ icon: Icon, label }, index) => (
+          {menuItems.map(({ icon: Icon, label, path }, index) => (
             <li
               key={index}
-              onClick={() => setActiveItem(label)}
+              onClick={() => {
+                setActiveItem(label);
+                navigate(path);
+              }}
               className={`relative flex items-center justify-between p-2.5 text-sm cursor-pointer ${
                 activeItem === label
                   ? "text-white bg-purple-900"
@@ -63,7 +77,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
               )}
               <div
                 className={`flex items-center space-x-4 pl-4 ${
-                  isOpen ? "lg:pl-4" : "lg:pl-2"
+                  isOpen ? "lg:pl-4" : "lg:pl-2.5"
                 }`}
               >
                 <Icon

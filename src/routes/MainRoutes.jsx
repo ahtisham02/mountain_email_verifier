@@ -4,6 +4,7 @@ import Login from "../pages/LoginPages/Login/Login";
 import Signup from "../pages/LoginPages/Signup/Signup";
 import ForgotPass from "../pages/LoginPages/ForgotPass/ForgotPass";
 import UserDashboard from "../pages/AdminPages/Dashboard/Dashboard";
+import EmailVerification from "../pages/AdminPages/EmailVerification/EmailVerification";
 import DashboardLayout from "./DashboardLayout";
 
 const MainRoutes = () => {
@@ -27,6 +28,11 @@ const MainRoutes = () => {
           <Route
             path="/"
             element={<UserDashboard />
+            }
+          />
+          <Route
+            path="/emailverification"
+            element={<EmailVerification />
             }
           />
         </Route>

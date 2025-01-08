@@ -4,41 +4,73 @@ import {
   ArcElement,
   CategoryScale,
   LinearScale,
-  LineElement,
-  PointElement,
+  BarElement,
+  BarController,
   Title,
   Tooltip,
   Legend,
   PieController,
-  LineController,
 } from "chart.js";
 
 Chart.register(
   ArcElement,
   CategoryScale,
   LinearScale,
-  LineElement,
-  PointElement,
+  BarElement,
+  BarController,
   Title,
   Tooltip,
   Legend,
-  PieController, 
-  LineController
+  PieController
 );
 
 export default function Dashboard() {
   const pieChartRef = useRef(null);
-  const lineChartRef = useRef(null);
+  const barChartRef = useRef(null);
 
   useEffect(() => {
+    const centerTextPlugin = {
+      id: "centerText",
+      beforeDraw(chart) {
+        if (chart.config.type === "pie") {
+          const { width, height, ctx } = chart;
+          ctx.save();
+    
+          const total = chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+          const centerX = width / 2;
+          const centerY = height / 2;
+    
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = "bold 16px Arial";
+          ctx.fillStyle = "#333";
+          ctx.fillText("Total", centerX, centerY - 10);
+          ctx.font = "bold 20px Arial";
+          ctx.fillStyle = "#000";
+          ctx.fillText(total, centerX, centerY + 15);
+    
+          ctx.restore();
+        }
+      },
+    };
+    Chart.register(centerTextPlugin);
+
     const pieChart = new Chart(pieChartRef.current, {
       type: "pie",
       data: {
-        // labels: ['Shirts', 'Shoes', 'Bags'],
+        labels: ["Safe", "Disabled", "Inactive", "Role", "Active", "Disposable", "Invalid"],
         datasets: [
           {
-            data: [300, 200, 100],
-            backgroundColor: ["#3b82f6", "#14b8a6", "#9333ea"],
+            data: [30, 20, 10, 40, 50, 23, 13],
+            backgroundColor: [
+              "#3b82f6",
+              "#14b8a6",
+              "#9333ea",
+              "#10b981",
+              "#f59e0b",
+              "#ef4444",
+              "#6366f1",
+            ],
           },
         ],
       },
@@ -46,29 +78,28 @@ export default function Dashboard() {
         responsive: true,
         plugins: {
           legend: {
-            position: "top",
+            display: false,
           },
+          centerText: true,
         },
-        cutout: "80%",
+        cutout: "50%",
       },
     });
 
-    const lineChart = new Chart(lineChartRef.current, {
-      type: "line",
+    const barChart = new Chart(barChartRef.current, {
+      type: "bar",
       data: {
         labels: ["January", "February", "March", "April", "May", "June"],
         datasets: [
           {
             label: "Organic",
             data: [65, 59, 80, 81, 56, 55],
-            borderColor: "#14b8a6",
-            fill: false,
+            backgroundColor: "#14b8a6",
           },
           {
             label: "Paid",
-            data: [28, 48, 40, 19, 86, 27],
-            borderColor: "#9333ea",
-            fill: false,
+            data: [28, 48, 50, 19, 86, 27],
+            backgroundColor: "#9333ea",
           },
         ],
       },
@@ -98,7 +129,7 @@ export default function Dashboard() {
 
     return () => {
       pieChart.destroy();
-      lineChart.destroy();
+      barChart.destroy();
     };
   }, []);
 
@@ -108,37 +139,89 @@ export default function Dashboard() {
         Dashboard
       </h2>
       <div className="grid lg:gap-3 gap-6 pb-8 md:grid-cols-2 px-6">
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-[350px] flex flex-col">
-          <div className="p-4 flex flex-col items-start">
+        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-[350px] flex p-4 gap-6">
+          <div className="flex-1 flex flex-col">
             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Lifetime Usage Statistics
+              Lifetime Usage Statistics
             </h4>
-            <canvas ref={pieChartRef} className="max-w-full max-h-56"></canvas>
+            <div className="flex-1 flex items-center justify-center -mr-20">
+              <canvas
+                ref={pieChartRef}
+                className="max-w-full max-h-56"
+              ></canvas>
+            </div>
           </div>
-          <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <div className="flex items-center">
-              <span className="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-              <span>Safe</span>
-            </div>
-            <div className="flex items-center">
-              <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-              <span>Disabled</span>
-            </div>
-            <div className="flex items-center">
-              <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-              <span>Inactive</span>
-            </div>
+
+          <div className="flex-1 flex flex-col justify-center ml-28">
+            <ul className="space-y-2">
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#3b82f6" }}
+                ></span>
+                Safe: 30
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#14b8a6" }}
+                ></span>
+                Disabled: 20
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#9333ea" }}
+                ></span>
+                Inactive: 10
+              </li>
+
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#10b981" }}
+                ></span>
+                Role: 40
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#f59e0b" }}
+                ></span>
+                Catch-All: 23
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#ef4444" }}
+                ></span>
+                Disposable: 80
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#6366f1" }}
+                ></span>
+                Invalid: 50
+              </li>
+              <li className="flex items-center">
+                <span
+                  className="inline-block w-3 h-3 mr-2 rounded-full"
+                  style={{ backgroundColor: "#6b7280" }}
+                ></span>
+                Unknown: 0
+              </li>
+            </ul>
           </div>
         </div>
 
         <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-[350px]">
           <div className="min-w-0 p-4">
             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Verification Activity
+              Verification Activity
             </h4>
-            <canvas ref={lineChartRef} className="max-w-full max-h-56"></canvas>
+            <canvas ref={barChartRef} className="max-w-full max-h-56"></canvas>
             <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-              {/* Chart legend */}
               <div className="flex items-center">
                 <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
                 <span>Organic</span>
