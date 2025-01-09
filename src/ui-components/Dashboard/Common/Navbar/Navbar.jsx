@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, Search, Moon, Bell, Settings, LogOut, User } from "lucide-react";
+import { Menu, Clock, Moon, Bell, Settings, LogOut, User, ZapIcon } from "lucide-react";
 import img from "../../../../assets/img/American_Express.webp";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ onToggleSidebar, isOpen}) {
-  const navigate = useNavigate()
+export default function Navbar({ onToggleSidebar, isOpen }) {
+  const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -13,7 +13,7 @@ export default function Navbar({ onToggleSidebar, isOpen}) {
   };
 
   const handleLogout = () => {
-    navigate('/login')
+    navigate("/login");
   };
 
   const handlenavigate = () => {
@@ -35,19 +35,26 @@ export default function Navbar({ onToggleSidebar, isOpen}) {
   }, []);
 
   return (
-    <div className={`fixed top-0 right-0 flex items-center justify-between px-8 py-4 shadow-md bg-white ${
+    <div
+      className={`fixed top-0 right-0 flex items-center justify-between px-8 py-4 shadow-md bg-white ${
         isOpen ? "lg:left-64 left-0" : "left-0 lg:left-16"
-      }`}>
+      }`}
+    >
       <div className="flex items-center space-x-4">
-        <Menu onClick={onToggleSidebar} className="text-purple-500 cursor-pointer w-8 h-8 lg:hidden" />
+        <Menu
+          onClick={onToggleSidebar}
+          className="text-purple-500 cursor-pointer w-8 h-8 lg:hidden"
+        />
 
-        <div className="flex items-center bg-gray-100 rounded-lg p-2 w-full !ml-12 lg:!ml-0">
-          <Search className="text-purple-500 w-4 h-4" />
-          <input
-            type="text"
-            placeholder="Search for projects"
-            className="ml-2 bg-transparent outline-none w-full text-gray-600 text-sm"
-          />
+        <div className="flex items-center px-2 py-[5px] w-full !ml-12 lg:!ml-0">
+          <div className="flex items-center text-sm bg-[#EFF6FF] rounded-full px-4 py-1 mr-2">
+            <ZapIcon size={16} className="text-[#7E69E1] mr-1" />
+            <span className="text-[#7E69E1] font-medium">Credits: 0</span>
+          </div>
+          <div className="flex items-center text-sm bg-[#FAF5FF] rounded-full px-4 py-1">
+            <Clock size={16} className="text-[#AE33EA] mr-1" />
+            <span className="text-[#AE33EA] font-medium">Usage: 0</span>
+          </div>
         </div>
       </div>
 

@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Home,
-  BotIcon,
   PieChart,
-  MousePointer,
-  FileText,
   Table,
   Menu,
   MailCheck,
+  IdCard,
+  UserRoundPen,
+  Zap,
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, onToggleSidebar }) => {
   const [activeItem, setActiveItem] = useState("Dashboard");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
     { icon: Home, label: "Dashboard", path: "/" },
@@ -22,12 +23,20 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
       label: "Email Verification",
       path: "/emailverification",
     },
-    { icon: BotIcon, label: "Cards", path: "/cards" },
-    { icon: PieChart, label: "Charts", path: "/charts" },
-    { icon: MousePointer, label: "Buttons", path: "/buttons" },
-    { icon: FileText, label: "Modals", path: "/modals" },
+    { icon: IdCard, label: "Task & Results", path: "/tasks" },
+    { icon: PieChart, label: "Credits History", path: "/creditshistory" },
+    { icon: Zap, label: "Buy Credits", path: "/buycredits" },
+    { icon: UserRoundPen, label: "My Profile", path: "/settings" },
     { icon: Table, label: "Tables", path: "/tables" },
   ];
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const activeMenuItem = menuItems.find((item) => item.path === currentPath);
+    if (activeMenuItem) {
+      setActiveItem(activeMenuItem.label);
+    }
+  }, [location.pathname]);
 
   return (
     <div

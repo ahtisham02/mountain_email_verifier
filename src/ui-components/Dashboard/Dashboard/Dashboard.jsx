@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import 'chart.js/auto'
 import { Chart } from "chart.js";
 import {
   ArcElement,

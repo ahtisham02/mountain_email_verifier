@@ -1,6 +1,7 @@
 import React from "react";
 import { UploadCloud, CheckCircle } from "lucide-react";
-import img from "../../../assets/img/bg.svg";
+import img from "../../../assets/3129492.jpg";
+import img1 from "../../../assets/4957160.jpg";
 
 export default function EmailVerification() {
   return (
@@ -35,7 +36,7 @@ export default function EmailVerification() {
                   Email Addresses
                 </label>
                 <textarea
-                  rows="4"
+                  rows="5"
                   placeholder="Enter email addresses one per line"
                   className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-[#7E3AF2] focus:outline-none"
                 ></textarea>
@@ -47,13 +48,13 @@ export default function EmailVerification() {
           </div>
 
           <div className="lg:w-1/2 w-full flex justify-center items-center">
-            <img src={img} alt="Verification" className="w-full h-80 ml-14 -mb-10" />
+            <img src={img1} alt="Verification" className="w-96 h-96 ml-14" />
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 w-full flex justify-center items-center">
-            <img src={img} alt="Upload" className="w-full h-80 mr-14 -mb-10" />
+            <img src={img} alt="Upload" className="w-96 h-96 mr-14" />
           </div>
 
           <div className="lg:w-1/2 w-full flex flex-col">
