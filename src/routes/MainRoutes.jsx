@@ -11,6 +11,9 @@ import SingleTaskPage from "../pages/AdminPages/SingleTask/SingleTask";
 import CreditsHistory from "../pages/AdminPages/CreditsHistory/CreditsHistory";
 import Settings from "../pages/AdminPages/Settings/Settings";
 import BuyCredits from "../pages/AdminPages/BuyCredits/BuyCredits";
+import Affiliate from "../pages/AdminPages/Affiliate/Affiliate";
+import Faq from "../pages/AdminPages/Faq/Faq";
+import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration";
 
 const MainRoutes = () => {
   return (
@@ -63,6 +66,21 @@ const MainRoutes = () => {
           <Route
             path="/buycredits"
             element={<BuyCredits />
+            }
+          />
+          <Route
+            path="/affiliate"
+            element={<Affiliate />
+            }
+          />
+          <Route
+            path="/faqs"
+            element={<Faq />
+            }
+          />
+          <Route
+            path="/apisettings"
+            element={<ApiIntegeration />
             }
           />
         </Route>

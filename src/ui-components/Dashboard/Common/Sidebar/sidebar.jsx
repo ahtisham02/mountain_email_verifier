@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Home,
   PieChart,
-  Table,
   Menu,
   MailCheck,
   IdCard,
   UserRoundPen,
   Zap,
+  Award,
+  ScrollText,
+  CodeXml,
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, onToggleSidebar }) => {
@@ -16,27 +18,28 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
-    { icon: Home, label: "Dashboard", path: "/" },
-    {
-      icon: MailCheck,
-      label: "Email Verification",
-      path: "/emailverification",
-    },
-    { icon: IdCard, label: "Task & Results", path: "/tasks" },
-    { icon: PieChart, label: "Credits History", path: "/creditshistory" },
-    { icon: Zap, label: "Buy Credits", path: "/buycredits" },
-    { icon: UserRoundPen, label: "My Profile", path: "/settings" },
-    { icon: Table, label: "Tables", path: "/tables" },
-  ];
-
+  const menuItems = useMemo(
+    () => [
+      { icon: Home, label: "Dashboard", path: "/" },
+      { icon: MailCheck, label: "Email Verification", path: "/emailverification" },
+      { icon: IdCard, label: "Task & Results", path: "/tasks" },
+      { icon: CodeXml, label: "API & Integerations", path: "/apisettings" },
+      { icon: PieChart, label: "Credits History", path: "/creditshistory" },
+      { icon: Zap, label: "Buy Credits", path: "/buycredits" },
+      { icon: UserRoundPen, label: "My Profile", path: "/settings" },
+      { icon: Award, label: "Affiliate Program", path: "/affiliate" },
+      { icon: ScrollText, label: "FAQ", path: "/faqs" },
+    ],
+    []
+  );
+  
   useEffect(() => {
     const currentPath = location.pathname;
     const activeMenuItem = menuItems.find((item) => item.path === currentPath);
     if (activeMenuItem) {
       setActiveItem(activeMenuItem.label);
     }
-  }, [location.pathname]);
+  }, [location.pathname, menuItems]);
 
   return (
     <div

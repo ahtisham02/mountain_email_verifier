@@ -42,7 +42,7 @@ export default function BuyCredits() {
   return (
     <div className="bg-gray-50 p-6">
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-gray-800">Buy Credits</h2>
+        <h2 className="text-2xl font-bold text-gray-800">Buy Credits</h2>
         <p className="text-gray-600">
           Buy credits to start email verification.
         </p>
