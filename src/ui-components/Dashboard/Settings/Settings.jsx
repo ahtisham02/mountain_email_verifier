@@ -14,7 +14,7 @@ export default function Settings() {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
         <div className="flex items-center mb-4">
-          <FaUser className="text-gray-600 mr-2" />
+          <FaUser className="text-btnBackground mr-2" />
           <h3 className="text-lg font-bold text-gray-800">
             General Information
           </h3>
@@ -44,7 +44,7 @@ export default function Settings() {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
         <div className="flex items-center mb-4">
-          <FaLocationArrow className="text-gray-600 mr-2" />
+          <FaLocationArrow className="text-btnBackground mr-2" />
           <h3 className="text-lg font-bold text-gray-800">Location</h3>
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -71,7 +71,7 @@ export default function Settings() {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex items-center mb-4">
-          <FaLock className="text-gray-600 mr-2" />
+          <FaLock className="text-btnBackground mr-2" />
           <h3 className="text-lg font-bold text-gray-800">
             Update Account Password
           </h3>
@@ -93,7 +93,7 @@ export default function Settings() {
             className="p-3 border rounded"
           />
         </div>
-        <button className="mt-4 w-full p-3 rounded bg-[#7E3AF2] text-white font-bold">
+        <button className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold">
           Change Password
         </button>
       </div>

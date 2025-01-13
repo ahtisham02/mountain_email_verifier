@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
         isOpen ? "translate-x-0 w-64 lg:!ml-0" : "-translate-x-full w-16"
       }`}
       style={{
-        background: "linear-gradient(to bottom, #5a217a, #2c0a47)",
+        background: "linear-gradient(to bottom, #1e3a8a, #0f172a)",
       }}
     >
       <div className={`${isOpen ? "py-4" : ""}`}>
@@ -59,7 +59,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
         >
           <Menu
             onClick={onToggleSidebar}
-            className={`text-purple-500 mr-3 cursor-pointer w-6 h-6 ml-4 ${
+            className={`text-blue-500 mr-3 cursor-pointer w-6 h-6 ml-4 ${
               isOpen ? "lg:ml-5 lg:mr-3" : "lg:ml-[18px] lg:mr-0 mt-4 mb-1"
             }`}
           />
@@ -70,7 +70,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
           </h1>
         </div>
 
-        <ul className="mt-4 space-y-4">
+        <ul className="mt-4 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)] scrollbar-hide pb-5">
           {menuItems.map(({ icon: Icon, label, path }, index) => (
             <li
               key={index}
@@ -80,12 +80,12 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
               }}
               className={`relative flex items-center justify-between p-2.5 text-sm cursor-pointer ${
                 activeItem === label
-                  ? "text-white bg-purple-900"
-                  : "text-gray-200 hover:bg-purple-900"
+                  ? "text-white bg-blue-900"
+                  : "text-gray-200 hover:bg-blue-900"
               }`}
             >
               {activeItem === label && (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-purple-500 rounded-r-md"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-r-md"></div>
               )}
               <div
                 className={`flex items-center space-x-4 pl-4 ${

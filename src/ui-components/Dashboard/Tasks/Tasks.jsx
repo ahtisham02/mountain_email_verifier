@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Clock, HelpCircle } from "lucide-react";
+import { FaArrowTrendUp } from "react-icons/fa6";
 
 export default function Tasks() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +34,7 @@ export default function Tasks() {
       taskName: "Weekly Email Check",
       status: "Pending",
       totalEmails: 500,
-      currentProgress: "0%",
+      currentProgress: "10%",
       action: "Start Now",
     },
     {
@@ -60,7 +61,7 @@ export default function Tasks() {
       taskName: "Weekly Email Check 2",
       status: "Pending",
       totalEmails: 450,
-      currentProgress: "0%",
+      currentProgress: "15%",
       action: "Start Now",
     },
     {
@@ -87,7 +88,7 @@ export default function Tasks() {
       taskName: "Weekly Email Check 3",
       status: "Pending",
       totalEmails: 600,
-      currentProgress: "0%",
+      currentProgress: "20%",
       action: "Start Now",
     },
     {
@@ -142,30 +143,62 @@ export default function Tasks() {
       case "Completed":
         return {
           style:
-            "bg-green-600 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
-          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1" />,
+            "bg-completed text-white py-0.5 text-green-50 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
+          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />,
         };
       case "In Progress":
         return {
           style:
-            "bg-yellow-500 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
-          icon: <Clock className="w-[14px] h-[14px]" />,
+            "bg-inprogress text-white py-0.5 px-2 rounded-full text-yellow-50 w-28 text-xs text-center flex items-center justify-center gap-1",
+          icon: <Clock className="w-[14px] h-[14px] text-yellow-50" />,
         };
       case "Pending":
         return {
           style:
-            "bg-gray-500 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
-          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4" />,
+            "bg-pending text-white py-0.5 px-2 rounded-full w-28 text-red-50 text-xs text-center flex items-center justify-center gap-1",
+          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4 text-red-50" />,
         };
       default:
         return {
           style:
-            "bg-gray-500 text-white py-0.5 px-2 rounded-full text-sm text-center flex items-center justify-center gap-1",
+            "bg-gray-400 text-white py-0.5 px-2 rounded-full text-sm text-center flex items-center justify-center gap-1",
           icon: <HelpCircle className="w-[14px] h-[14px]" />,
         };
     }
   };
   
+  
+  const getProgressIcon = (progress) => {
+    const progressValue = parseInt(progress.replace("%", ""));
+    if (progressValue > 75) {
+      return (
+        <div className="flex items-center justify-center space-x-2">
+          <div className="text-green-500">
+            <CheckCircle className="w-4 h-4" />
+          </div>
+          <span className="text-green-600">{progress}</span>
+        </div>
+      );
+    } else if (progressValue > 50) {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-yellow-500">
+            <FaArrowTrendUp className="w-4 h-4" />
+          </div>
+          <span className="text-yellow-600">{progress}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-red-500">
+            <XCircle className="w-4 h-4" />
+          </div>
+          <span className="text-red-600">{progress}</span>
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="bg-gray-50 p-6">
@@ -183,7 +216,7 @@ export default function Tasks() {
           onClick={() => {
             navigate("/task-single");
           }}
-          className="bg-[#7E3AF2] text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
         >
           Check API & Single Verification Results
         </button>
@@ -230,7 +263,7 @@ export default function Tasks() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {task.taskName}
                   </td>
-                  <td className="p-2">
+                  <td className="p-2 flex justify-center text-center">
                     <div className={getStatusStyle(task.status).style}>
                       {getStatusStyle(task.status).icon}
                       {task.status}
@@ -241,7 +274,7 @@ export default function Tasks() {
                     {task.totalEmails}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-600">
-                    {task.currentProgress}
+                  {getProgressIcon(task.currentProgress)}
                   </td>
                   <td className="px-4 py-2 text-center text-[#7E3AF2]">
                     {task.action}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CheckCircle, ChevronLeft, ChevronRight, Server } from "lucide-react";
+import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 export default function CreditsHistory() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +21,7 @@ export default function CreditsHistory() {
       dailyCreditsChange: 50,
       instantCreditsChange: 20,
       dailyBalanceAfter: 950,
-      instantBalanceAfter: 70,
+      instantBalanceAfter: 69,
     },
     {
       dateCreated: "2025-01-07",
@@ -28,7 +29,7 @@ export default function CreditsHistory() {
       dailyCreditsChange: -30,
       instantCreditsChange: -10,
       dailyBalanceAfter: 900,
-      instantBalanceAfter: 50,
+      instantBalanceAfter: 56,
     },
     {
       dateCreated: "2025-01-06",
@@ -36,7 +37,7 @@ export default function CreditsHistory() {
       dailyCreditsChange: -100,
       instantCreditsChange: 0,
       dailyBalanceAfter: 930,
-      instantBalanceAfter: 60,
+      instantBalanceAfter: 30,
     },
     {
       dateCreated: "2025-01-05",
@@ -44,7 +45,7 @@ export default function CreditsHistory() {
       dailyCreditsChange: 100,
       instantCreditsChange: 0,
       dailyBalanceAfter: 1030,
-      instantBalanceAfter: 60,
+      instantBalanceAfter: 42,
     },
   ];
 
@@ -66,6 +67,68 @@ export default function CreditsHistory() {
     }
   };
 
+  const getProgressIcon = (dailyBalanceAfter) => {
+    if (dailyBalanceAfter > 999) {
+      return (
+        <div className="flex items-center justify-center space-x-2">
+          <div className="text-green-500">
+            <CheckCircle className="w-4 h-4" />
+          </div>
+          <span className="text-green-600">{dailyBalanceAfter}</span>
+        </div>
+      );
+    } else if (dailyBalanceAfter > 901) {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-yellow-500">
+            <FaArrowTrendUp className="w-4 h-4" />
+          </div>
+          <span className="text-yellow-600">{dailyBalanceAfter}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-red-500">
+            <FaArrowTrendDown className="w-4 h-4" />
+          </div>
+          <span className="text-red-600">{dailyBalanceAfter}</span>
+        </div>
+      );
+    }
+  };
+
+  const getProgressIcon2 = (instantBalanceAfter) => {
+    if (instantBalanceAfter > 99) {
+      return (
+        <div className="flex items-center justify-center space-x-2">
+          <div className="text-green-500">
+            <CheckCircle className="w-4 h-4" />
+          </div>
+          <span className="text-green-600">{instantBalanceAfter}</span>
+        </div>
+      );
+    } else if (instantBalanceAfter > 51) {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-yellow-500">
+            <FaArrowTrendUp className="w-4 h-4" />
+          </div>
+          <span className="text-yellow-600">{instantBalanceAfter}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex items-center justify-center space-x-2 -ml-2">
+          <div className="text-red-500">
+            <FaArrowTrendDown className="w-4 h-4" />
+          </div>
+          <span className="text-red-600">{instantBalanceAfter}</span>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="bg-gray-50 p-6">
       <div className="flex justify-between items-center mb-6">
@@ -76,12 +139,12 @@ export default function CreditsHistory() {
           </p>
         </div>
         <div className="flex space-x-4">
-          <div className="flex items-center bg-purple-100 text-purple-700 px-4 py-2 rounded-lg">
+          <div className="flex items-center bg-[#EFF6FF] text-[#806BE2] px-4 py-2 rounded-lg">
             <CheckCircle className="mr-2 h-5 w-5" />
             <span className="font-semibold">Total Single Verifications:</span>
             <span className="ml-1">1</span>
           </div>
-          <div className="flex items-center bg-purple-100 text-purple-700 px-4 py-2 rounded-lg">
+          <div className="flex items-center bg-[#EFF6FF] text-[#806BE2] px-4 py-2 rounded-lg">
             <Server className="mr-2 h-5 w-5" />
             <span className="font-semibold">Total API Verifications:</span>
             <span className="ml-1">0</span>
@@ -136,10 +199,10 @@ export default function CreditsHistory() {
                     {record.instantCreditsChange}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-800">
-                    {record.dailyBalanceAfter}
+                  {getProgressIcon(record.dailyBalanceAfter)}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-800">
-                    {record.instantBalanceAfter}
+                  {getProgressIcon2(record.instantBalanceAfter)}
                   </td>
                 </tr>
               ))}

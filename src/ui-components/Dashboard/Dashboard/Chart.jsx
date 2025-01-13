@@ -69,7 +69,7 @@ export default function Chart() {
             Get thousands of local business leads from online directories
             (including emails and phone numbers).
           </p>
-          <button className="bg-[#7E3AF2] text-white font-medium px-4 py-2 mt-4 rounded-lg hover:bg-purple-800">
+          <button className="bg-btnBackground text-white font-medium px-4 py-2 mt-4 rounded-lg hover:bg-btnBackgroundhover">
             Start Getting Leads Now
           </button>
         </div>

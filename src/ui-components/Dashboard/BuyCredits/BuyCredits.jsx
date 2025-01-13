@@ -64,7 +64,7 @@ export default function BuyCredits() {
             {creditsPerDay.toLocaleString()} credits / day
           </p>
           <div className="text-right">
-            <button className="bg-[#7E3AF2] text-white px-4 py-2 rounded-md shadow-md">
+            <button className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md">
               Subscribe Now
             </button>
           </div>
@@ -86,7 +86,7 @@ export default function BuyCredits() {
             max="100"
             value={rangeValue}
             onChange={(e) => setRangeValue(Number(e.target.value))}
-            className="w-full mt-4 bg-[#7E3AF2]"
+            className="w-full mt-6 mb-4"
           />
           <p className="text-sm text-[#7E3AF2] bg-[#F3E8FF] p-2 rounded mt-2">
             Select your preferred credit range to unlock features and maximize
@@ -109,7 +109,7 @@ export default function BuyCredits() {
             </p>
           </div>
           <p className="text-gray-600">{credits2.toLocaleString()} credits</p>
-          <button className="bg-[#7E3AF2] text-white px-4 py-2 rounded-md shadow-md">
+          <button className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md">
             Subscribe Now
           </button>
         </div>
@@ -131,7 +131,7 @@ export default function BuyCredits() {
             max="100"
             value={rangeValue2}
             onChange={(e) => setRangeValue2(Number(e.target.value))}
-            className="w-full mt-4 bg-[#7E3AF2]"
+            className="w-full mt-6 mb-4"
           />
           <p className="text-sm text-[#6e5acf] bg-[#EFF6FF] p-2 rounded mt-2">
             Purchase instant credits now to enjoy lifetime usage without

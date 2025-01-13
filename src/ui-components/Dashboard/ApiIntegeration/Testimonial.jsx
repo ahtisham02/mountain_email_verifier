@@ -87,8 +87,8 @@ export default function TestimonialTwo() {
   return (
     <div className="bg-white m-6 p-4 flex flex-col rounded-2xl shadow-md">
       <div className="flex flex-col lg:flex-row w-full gap-4">
-        <div className="w-full lg:w-[50%] order-2 lg:order-2">
-          <div className="rounded-lg w-full">
+        <div className="w-full lg:w-1/2 order-2 lg:order-2">
+          <div className="rounded-lg">
             <div>
               <div className="flex items-center bg-[#19253C] p-4 rounded-t-xl border-b-[1px] border-gray-500">
                 <button
@@ -105,7 +105,10 @@ export default function TestimonialTwo() {
                   Copied!
                 </span>
               )}
-              <pre className="bg-[#19253C] h-80 lg:h-[630px] min-[1058px]:h-[600px] min-[1099px]:h-[570px] min-[1185px]:h-[490px] min-[1338px]:h-[460px] min-[1842px]:h-[440px] text-white p-4 rounded-b-xl overflow-y-auto overflow-x-auto scrollbar-hide">
+              <pre
+                style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
+                className="bg-[#19253C] h-80 lg:h-[630px] min-[1058px]:h-[600px] min-[1099px]:h-[570px] min-[1185px]:h-[490px] min-[1338px]:h-[460px] min-[1842px]:h-[440px] text-white p-4 rounded-b-xl overflow-y-auto scrollbar-hide"
+              >
                 {JSON.stringify(results, null, 2)}
               </pre>
             </div>
@@ -113,7 +116,7 @@ export default function TestimonialTwo() {
         </div>
 
         {/* Sidebar Content */}
-        <div className="w-full lg:w-[50%] order-1 lg:order-1 pl-2 pr-6 lg:pr-24">
+        <div className="w-full lg:w-1/2 order-1 lg:order-1">
           <div className="text-left">
             <h2 className="text-2xl text-gray-800 font-bold">
               API Documentation (Single & Bulk API Validation)
@@ -138,7 +141,7 @@ export default function TestimonialTwo() {
                   Single Email Validation
                 </span>
                 <FaChevronRight
-                  className={`transition-transform duration-200 text-[#757C81] ${
+                  className={`duration-200 text-[#757C81] ${
                     activeSection === "DomainSearch"
                       ? "rotate-90 !text-black"
                       : ""
@@ -161,11 +164,14 @@ export default function TestimonialTwo() {
                     programming language.
                   </p>
                   <div className="flex items-center mt-4 text-lg text-gray-600 px-2 pb-5 cursor-pointer">
-                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 transform hover:scale-105">
+                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
                       GET Request URL (HTTPS):
                     </p>
                   </div>
-                  <pre className="bg-[#19253C] text-white p-4 mb-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide">
+                  <pre
+                    style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
+                    className="bg-[#19253C] text-white p-4 mb-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
+                  >
                     {`https://emailverifier.reoon.com/api/v1/verify?email=<email>&key=<key>&mode=quick`}
                   </pre>
                 </div>
@@ -189,7 +195,7 @@ export default function TestimonialTwo() {
                   Bulk Email Validation (Different Endpoint)
                 </span>
                 <FaChevronRight
-                  className={`transition-transform duration-200 text-[#757C81] ${
+                  className={`duration-200 text-[#757C81] ${
                     activeSection === "EmailFinder"
                       ? "rotate-90 !text-black"
                       : ""
@@ -212,13 +218,16 @@ export default function TestimonialTwo() {
                     verification task will be created.
                   </p>
                   <div className="flex items-center mt-4 text-lg text-gray-600 px-2 pb-5 cursor-pointer">
-                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 transform hover:scale-105">
+                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
                       POST Request URL (HTTPS):
                     </p>
                   </div>
-                    <pre className="bg-[#19253C] text-white p-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide">
-                      {`https://emailverifier.reoon.com/api/v1/create-bulk-verification-task/`}
-                    </pre>{" "}
+                  <pre
+                    style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
+                    className="bg-[#19253C] text-white p-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
+                  >
+                    {`https://emailverifier.reoon.com/api/v1/create-bulk-verification-task/`}
+                  </pre>{" "}
                 </div>
               )}
             </div>

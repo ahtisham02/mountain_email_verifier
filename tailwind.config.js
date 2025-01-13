@@ -4,7 +4,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        btnBackground: "var(--btnBackground)",
+        btnBackgroundhover: "var(--btnBackgroundhover)",
+        pending: "var(--pending)",
+        completed: "var(--completed)",
+        inprogress: "var(--inprogress)",
+      },
+    },
   },
   plugins: [],
 }

@@ -130,19 +130,19 @@ export default function ApiIntegeration() {
       case "Completed":
         return {
           style:
-            "bg-green-600 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
+            "bg-completed text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
           icon: <CheckCircle className="w-[14px] h-[14px] -ml-1" />,
         };
       case "In Progress":
         return {
           style:
-            "bg-yellow-500 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
+            "bg-inprogress text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
           icon: <Clock className="w-[14px] h-[14px]" />,
         };
       case "Pending":
         return {
           style:
-            "bg-gray-500 text-white py-0.5 px-2 rounded-full w-28 text-xs text-center lg:ml-6 ml-5 xl:ml-14 2xl:ml-24 flex items-center justify-center gap-1",
+            "bg-pending text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
           icon: <HelpCircle className="w-[14px] h-[14px] -ml-4" />,
         };
       default:
@@ -167,7 +167,7 @@ export default function ApiIntegeration() {
           onClick={() => {
             navigate("/task-single");
           }}
-          className="bg-[#7E3AF2] text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
         >
           Create New API Key
         </button>
@@ -205,7 +205,7 @@ export default function ApiIntegeration() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {task.dateCreated}
                   </td>
-                  <td className="p-2">
+                  <td className="p-2 flex items-center justify-center">
                     <div className={getStatusStyle(task.status).style}>
                       {getStatusStyle(task.status).icon}
                       {task.status}

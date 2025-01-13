@@ -28,7 +28,7 @@ export default function Affiliate() {
       </div>
       <div className="mb-6 bg-white rounded-lg shadow p-6">
         <div className="flex items-center pb-3 mb-5 border-b border-gray-200">
-          <Bell className="text-[#A855F7] mr-2" />
+          <Bell className="text-btnBackgroundhover mr-2" />
           <h3 className="text-lg font-bold text-gray-800">Notifications</h3>
         </div>
         <p className="text-gray-600">
@@ -37,7 +37,7 @@ export default function Affiliate() {
         </p>
         <a
           href="/"
-          className="text-[#A855F7] hover:underline mt-2 inline-block"
+          className="text-btnBackgroundhover hover:underline mt-2 inline-block"
         >
           Preview affiliate payments
         </a>
@@ -46,7 +46,7 @@ export default function Affiliate() {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
             <div className="flex items-center border-gray-200">
-              <Shapes className="text-[#A855F7] mr-2" />
+              <Shapes className="text-btnBackgroundhover mr-2" />
               <h3 className="text-lg font-bold text-gray-800">
                 Your Earning Statistics
               </h3>
@@ -86,7 +86,7 @@ export default function Affiliate() {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center pb-4 border-b border-gray-200">
-            <HelpCircle className="text-[#A855F7] mr-2" />
+            <HelpCircle className="text-btnBackground mr-2" />
             <h3 className="text-lg font-bold text-gray-800">Need help?</h3>
           </div>
           <div className="flex items-center">
@@ -100,7 +100,7 @@ export default function Affiliate() {
                 Need help setting up Mountain Email Finder or have any questions
                 about the plugin?
               </p>
-              <button className="bg-[#7E3AF2] hover:bg-purple-700 text-white px-4 py-2 rounded">
+              <button className="bg-btnBackground hover:bg-purple-700 text-white px-4 py-2 rounded">
                 Open a support ticket
               </button>
             </div>
@@ -108,7 +108,7 @@ export default function Affiliate() {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center border-b pb-4 border-gray-200 mb-3">
-            <UserRoundPlus className="text-[#A855F7] mr-2" />
+            <UserRoundPlus className="text-btnBackground mr-2" />
             <h3 className="text-lg font-bold text-gray-800">
               Latest Registered Affiliates
             </h3>
@@ -159,7 +159,7 @@ export default function Affiliate() {
                 <td colSpan="2" className="py-2 px-4 text-center">
                   <a
                     href="/"
-                    className="text-blue-600 hover:underline inline-block"
+                    className="text-btnBackgroundhover hover:underline inline-block"
                   >
                     View all affiliates →
                   </a>
@@ -170,7 +170,7 @@ export default function Affiliate() {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center border-b mb-4 pb-4 border-gray-200">
-            <Banknote className="text-[#A855F7] mr-2" />
+            <Banknote className="text-btnBackgroundhover mr-2" />
             <h3 className="text-lg font-bold text-gray-800">
               Your Affiliate Links
             </h3>
@@ -185,7 +185,7 @@ export default function Affiliate() {
                 value="https://www.reoon.com/email-verifier/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-2 bg-[#A855F7] text-white rounded-lg px-4 py-2">
+              <button className="ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg px-4 py-2">
                 Copy Link
               </button>
             </div>
@@ -199,7 +199,7 @@ export default function Affiliate() {
                 value="https://emailverifier.reoon.com/register/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-2 bg-[#A855F7] text-white rounded-lg px-4 py-2">
+              <button className="ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg px-4 py-2">
                 Copy Link
               </button>
             </div>
@@ -208,20 +208,20 @@ export default function Affiliate() {
           <p className="text-center font-semibold text-gray-700 my-3">
             Share the Links with Your Friends
           </p>
-          <div className="flex justify-center space-x-4">
-            <button className="flex items-center bg-blue-500 text-white rounded-full px-4 py-2">
+          <div className="flex justify-center space-x-4 flex-wrap">
+            <button className="flex items-center bg-blue-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
               <Facebook className="w-5 h-5 mr-2" />
               Facebook
             </button>
-            <button className="flex items-center bg-blue-400 text-white rounded-full px-4 py-2">
+            <button className="flex items-center bg-blue-400 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
               <Twitter className="w-5 h-5 mr-2" />
               Twitter
             </button>
-            <button className="flex items-center bg-blue-600 text-white rounded-full px-4 py-2">
+            <button className="flex items-center md:mt-2 min-[1225px]:mt-0 bg-blue-600 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
               <Linkedin className="w-5 h-5 mr-2" />
               LinkedIn
             </button>
-            <button className="flex items-center bg-green-500 text-white rounded-full px-4 py-2">
+            <button className="flex items-center sm:mt-2 min-[660px]:mt-0 md:mt-2 min-[1400px]:mt-0 bg-green-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
               <MessageCircle className="w-5 h-5 mr-2" />
               WhatsApp
             </button>

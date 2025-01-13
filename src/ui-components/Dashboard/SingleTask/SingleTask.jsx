@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CheckCircle, ChevronLeft, ChevronRight, Clock, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function SingleTask() {
@@ -68,6 +68,36 @@ export default function SingleTask() {
     }
   };
 
+  const getStatusStyle = (resultStatus) => {
+    switch (resultStatus) {
+      case "Verified":
+        return {
+          style:
+            "bg-completed text-white py-0.5 px-2 text-green-50 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
+          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />,
+        };
+      case "Pending":
+        return {
+          style:
+            "bg-inprogress text-white py-0.5 px-2 text-yellow-50 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
+          icon: <Clock className="w-[14px] h-[14px] text-yellow-50" />,
+        };
+      case "Failed":
+        return {
+          style:
+            "bg-pending text-white py-0.5 px-2 rounded-full text-red-50 w-28 text-xs text-center flex items-center justify-center gap-1",
+          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4 text-red-50" />,
+        };
+      default:
+        return {
+          style:
+            "bg-gray-500 text-white py-0.5 px-2 rounded-full text-sm text-center flex items-center justify-center gap-1",
+          icon: <HelpCircle className="w-[14px] h-[14px]" />,
+        };
+    }
+  };
+  
+
   return (
     <div className="bg-gray-50 p-6">
       <div className="flex justify-between items-center mb-6">
@@ -84,7 +114,7 @@ export default function SingleTask() {
           onClick={() => {
             navigate("/tasks");
           }}
-          className="bg-[#7E3AF2] text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
         >
           Check Bulk Verification Results
         </button>
@@ -130,8 +160,11 @@ export default function SingleTask() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {record.verificationMethod}
                   </td>
-                  <td className="px-4 py-2 text-center text-gray-800">
-                    {record.resultStatus}
+                  <td className="px-4 py-2 flex justify-center text-center">
+                    <div className={getStatusStyle(record.resultStatus).style}>
+                      {getStatusStyle(record.resultStatus).icon}
+                      {record.resultStatus}
+                    </div>
                   </td>
                   <td className="px-4 py-2 text-center text-gray-800">
                     {record.timeTaken}

@@ -56,8 +56,7 @@ export default function Company() {
         <p className="text-gray-600 text-center mb-4">superior accuracy for businesses
         everywhere.</p>
         <button
-          className="px-6 py-2 rounded-md text-white"
-          style={{ backgroundColor: "#7E3AF2" }}
+          className="px-6 py-2 rounded-md text-white bg-btnBackground hover:bg-btnBackgroundhover"
         >
           Learn More
         </button>

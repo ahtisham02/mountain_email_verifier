@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, Clock, Moon, Bell, Settings, LogOut, User, ZapIcon } from "lucide-react";
+import {
+  Menu,
+  Clock,
+  Settings,
+  LogOut,
+  User,
+  ZapIcon,
+  ChevronDown,
+} from "lucide-react";
 import img from "../../../../assets/img/American_Express.webp";
 import { useNavigate } from "react-router-dom";
 
@@ -57,19 +65,16 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
           </div>
         </div>
       </div>
-
-      <div className="flex items-center space-x-7">
-        <Moon className="text-purple-500 w-5 h-5 fill-current" />
-        <div className="relative">
-          <Bell className="text-purple-500 w-5 h-5 fill-current" />
-          <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full"></span>
-        </div>
+      <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
         <img
           src={img}
           alt="Profile"
-          className="w-8 h-8 rounded-full cursor-pointer"
-          onClick={toggleDropdown}
+          className="w-8 h-8 rounded-full"
         />
+        <span className="ml-3 flex items-center">
+          AhtishamM
+          <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />
+        </span>
         {dropdownOpen && (
           <div
             ref={dropdownRef}
