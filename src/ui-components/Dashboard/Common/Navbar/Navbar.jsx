@@ -44,24 +44,24 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 flex items-center justify-between px-8 py-4 shadow-md bg-white ${
+      className={`fixed top-0 right-0 flex items-center justify-between min-[400px]:px-8 px-1.5 py-4 shadow-md bg-white ${
         isOpen ? "lg:left-64 left-0" : "left-0 lg:left-16"
       }`}
     >
       <div className="flex items-center space-x-4">
         <Menu
           onClick={onToggleSidebar}
-          className="text-purple-500 cursor-pointer w-8 h-8 lg:hidden"
+          className="text-purple-500 cursor-pointer w-7 h-7 sm:w-8 sm:h-8 lg:hidden"
         />
 
-        <div className="flex items-center px-2 py-[5px] w-full !ml-12 lg:!ml-0">
-          <div className="flex items-center text-sm bg-[#EFF6FF] rounded-full px-4 py-1 mr-2">
-            <ZapIcon size={16} className="text-[#7E69E1] mr-1" />
-            <span className="text-[#7E69E1] font-medium">Credits: 0</span>
+        <div className="flex items-center sm:px-2 px-1 py-[5px] w-full min-[450px]:!ml-2 !ml-0.5 sm:!ml-12 lg:!ml-0">
+          <div className="flex items-center text-sm bg-[#EFF6FF] rounded-full sm:px-4 px-2 sm:py-1 py-0.5 mr-2">
+            <ZapIcon className="text-[#7E69E1] sm:w-4 sm:h-4 w-3 h-3 mr-1" />
+            <span className="text-[#7E69E1] font-medium text-sm">Credits: 0</span>
           </div>
-          <div className="flex items-center text-sm bg-[#FAF5FF] rounded-full px-4 py-1">
-            <Clock size={16} className="text-[#AE33EA] mr-1" />
-            <span className="text-[#AE33EA] font-medium">Usage: 0</span>
+          <div className="flex items-center text-sm bg-[#FAF5FF] rounded-full sm:px-4 px-2 sm:py-1 py-0.5">
+            <Clock className="text-[#AE33EA] sm:w-4 sm:h-4 w-3 h-3 mr-1" />
+            <span className="text-[#AE33EA] font-medium text-sm">Usage: 0</span>
           </div>
         </div>
       </div>
@@ -69,11 +69,15 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         <img
           src={img}
           alt="Profile"
-          className="w-8 h-8 rounded-full"
+          className="sm:w-8 sm:h-8 w-7 h-7 rounded-full"
         />
-        <span className="ml-3 flex items-center">
+        <span className="sm:ml-3 min-[450px]:flex hidden ml-2 sm:text-base text-sm font-medium items-center">
           AhtishamM
           <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />
+        </span>
+        <span className="sm:ml-3 min-[450px]:ml-2 ml-0.5 sm:text-base text-sm font-medium min-[450px]:hidden flex items-center">
+          AM
+          <ChevronDown className="sm:ml-2 ml-0.5 w-4 h-4 text-gray-600" />
         </span>
         {dropdownOpen && (
           <div

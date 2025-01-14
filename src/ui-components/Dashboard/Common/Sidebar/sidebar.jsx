@@ -70,7 +70,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
           </h1>
         </div>
 
-        <ul className="mt-4 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)] scrollbar-hide pb-5">
+        <ul className="mt-4 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)] scrollbar-hide pb-10 sm:pb-7">
           {menuItems.map(({ icon: Icon, label, path }, index) => (
             <li
               key={index}
