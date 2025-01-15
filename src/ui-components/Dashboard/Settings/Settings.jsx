@@ -6,20 +6,20 @@ export default function Settings() {
     <div className="bg-gray-50 p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
-          <p className="text-gray-600">
+          <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">Account Settings</h2>
+          <p className="text-gray-600 text-sm md:text-base">
             Update your account details or modify your personal information.
           </p>
         </div>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
         <div className="flex items-center mb-4">
-          <FaUser className="text-btnBackground mr-2" />
-          <h3 className="text-lg font-bold text-gray-800">
+          <FaUser className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
+          <h3 className="sm:text-lg text-base font-bold text-gray-800">
             General Information
           </h3>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-4">
           <input
             type="text"
             placeholder="First Name"
@@ -44,10 +44,10 @@ export default function Settings() {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
         <div className="flex items-center mb-4">
-          <FaLocationArrow className="text-btnBackground mr-2" />
-          <h3 className="text-lg font-bold text-gray-800">Location</h3>
+          <FaLocationArrow className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
+          <h3 className="sm:text-lg text-base font-bold text-gray-800">Location</h3>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-4">
           <input
             type="text"
             placeholder="Address"
@@ -71,8 +71,8 @@ export default function Settings() {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex items-center mb-4">
-          <FaLock className="text-btnBackground mr-2" />
-          <h3 className="text-lg font-bold text-gray-800">
+          <FaLock className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
+          <h3 className="sm:text-lg text-base font-bold text-gray-800">
             Update Account Password
           </h3>
         </div>

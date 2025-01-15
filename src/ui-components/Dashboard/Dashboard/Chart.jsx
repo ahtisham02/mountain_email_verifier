@@ -48,7 +48,7 @@ export default function Chart() {
 
   return (
     <div className="bg-gray-50">
-      <h2 className="px-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      <h2 className="px-6 md:text-2xl text-xl font-semibold text-gray-700 dark:text-gray-200">
         Combined Timeline Chart
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[58%_40%] 2xl:grid-cols-[58%_41%] lg:gap-3 gap-6 p-6">
@@ -63,7 +63,7 @@ export default function Chart() {
             Combined view of Daily and Instant Credits over 10 days
           </p>
         </div>
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 sm:col-span-2 lg:col-span-1">
+        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 lg:col-span-1">
           <p className="text-lg font-medium">Reoon Lead Generator (B2B)</p>
           <p className="text-sm text-gray-600 text-center mt-2">
             Get thousands of local business leads from online directories

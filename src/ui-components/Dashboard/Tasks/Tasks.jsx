@@ -144,7 +144,9 @@ export default function Tasks() {
         return {
           style:
             "bg-completed text-white py-0.5 text-green-50 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />,
+          icon: (
+            <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />
+          ),
         };
       case "In Progress":
         return {
@@ -166,8 +168,7 @@ export default function Tasks() {
         };
     }
   };
-  
-  
+
   const getProgressIcon = (progress) => {
     const progressValue = parseInt(progress.replace("%", ""));
     if (progressValue > 75) {
@@ -202,12 +203,12 @@ export default function Tasks() {
 
   return (
     <div className="bg-gray-50 p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 flex-col sm:flex-row">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
             Email Verification Task Overview
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm md:text-base">
             View the status and results of all ongoing and completed email
             verification tasks.
           </p>
@@ -216,14 +217,14 @@ export default function Tasks() {
           onClick={() => {
             navigate("/task-single");
           }}
-          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-white text-sm sm:text-base px-4 py-2 rounded-lg w-full sm:w-auto mt-4 sm:mt-0"
         >
           Check API & Single Verification Results
         </button>
       </div>
 
       <div
-        className="bg-white rounded-lg shadow p-4 flex flex-col"
+        className="bg-white rounded-lg mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] md:w-full shadow p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
         <div className="flex-grow overflow-x-auto">
@@ -274,7 +275,7 @@ export default function Tasks() {
                     {task.totalEmails}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-600">
-                  {getProgressIcon(task.currentProgress)}
+                    {getProgressIcon(task.currentProgress)}
                   </td>
                   <td className="px-4 py-2 text-center text-[#7E3AF2]">
                     {task.action}

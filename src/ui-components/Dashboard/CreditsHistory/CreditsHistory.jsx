@@ -131,32 +131,38 @@ export default function CreditsHistory() {
 
   return (
     <div className="bg-gray-50 p-6">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800">Credits History</h2>
-          <p className="text-gray-600">
-            Find our how your credits are charged or refunded.
+      <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6">
+        <div className="mb-4 md:mb-0">
+          <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
+            Credits History
+          </h2>
+          <p className="text-gray-600 text-sm md:text-base">
+            Find out how your credits are charged or refunded.
           </p>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-col min-[550px]:flex-row min-[550px]:space-x-4 md:flex-row space-y-4 min-[550px]:space-y-0 md:space-x-4">
           <div className="flex items-center bg-[#EFF6FF] text-[#806BE2] px-4 py-2 rounded-lg">
             <CheckCircle className="mr-2 h-5 w-5" />
-            <span className="font-semibold">Total Single Verifications:</span>
+            <span className="font-semibold text-sm md:text-base">
+              Total Single Verifications:
+            </span>
             <span className="ml-1">1</span>
           </div>
           <div className="flex items-center bg-[#EFF6FF] text-[#806BE2] px-4 py-2 rounded-lg">
             <Server className="mr-2 h-5 w-5" />
-            <span className="font-semibold">Total API Verifications:</span>
+            <span className="font-semibold text-sm md:text-base">
+              Total API Verifications:
+            </span>
             <span className="ml-1">0</span>
           </div>
         </div>
       </div>
 
       <div
-        className="bg-white rounded-lg shadow p-4 flex flex-col"
+        className="bg-white rounded-lg mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] sm:w-full shadow p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
-        <div className="flex-grow overflow-x-auto">
+        <div className="overflow-x-auto scrollbar-hide max-w-full">
           <table className="min-w-full table-auto">
             <thead className="bg-slate-100">
               <tr>
@@ -199,10 +205,10 @@ export default function CreditsHistory() {
                     {record.instantCreditsChange}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-800">
-                  {getProgressIcon(record.dailyBalanceAfter)}
+                    {getProgressIcon(record.dailyBalanceAfter)}
                   </td>
                   <td className="px-4 py-2 text-center text-gray-800">
-                  {getProgressIcon2(record.instantBalanceAfter)}
+                    {getProgressIcon2(record.instantBalanceAfter)}
                   </td>
                 </tr>
               ))}

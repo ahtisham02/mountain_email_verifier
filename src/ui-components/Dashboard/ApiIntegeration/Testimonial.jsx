@@ -85,7 +85,7 @@ export default function TestimonialTwo() {
   };
 
   return (
-    <div className="bg-white m-6 p-4 flex flex-col rounded-2xl shadow-md">
+    <div className="bg-white m-6 p-4 flex flex-col rounded-2xl shadow-md w-[82vw] min-[550px]:w-auto">
       <div className="flex flex-col lg:flex-row w-full gap-4">
         <div className="w-full lg:w-1/2 order-2 lg:order-2">
           <div className="rounded-lg">
@@ -107,7 +107,7 @@ export default function TestimonialTwo() {
               )}
               <pre
                 style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
-                className="bg-[#19253C] h-80 lg:h-[630px] min-[1058px]:h-[600px] min-[1099px]:h-[570px] min-[1185px]:h-[490px] min-[1338px]:h-[460px] min-[1842px]:h-[440px] text-white p-4 rounded-b-xl overflow-y-auto scrollbar-hide"
+                className="bg-[#19253C] text-sm sm:text-base h-80 lg:h-[630px] min-[1058px]:h-[600px] min-[1099px]:h-[570px] min-[1185px]:h-[490px] min-[1338px]:h-[460px] min-[1842px]:h-[440px] text-white p-4 rounded-b-xl overflow-y-auto scrollbar-hide"
               >
                 {JSON.stringify(results, null, 2)}
               </pre>
@@ -118,7 +118,7 @@ export default function TestimonialTwo() {
         {/* Sidebar Content */}
         <div className="w-full lg:w-1/2 order-1 lg:order-1">
           <div className="text-left">
-            <h2 className="text-2xl text-gray-800 font-bold">
+            <h2 className="sm:text-2xl text-lg text-gray-800 font-bold">
               API Documentation (Single & Bulk API Validation)
             </h2>
             <div className="mt-8">
@@ -132,7 +132,7 @@ export default function TestimonialTwo() {
                 }`}
               >
                 <span
-                  className={`font-semibold text-xl pl-2 ${
+                  className={`font-semibold text-lg sm:text-xl pl-2 ${
                     activeSection === "DomainSearch"
                       ? "text-black"
                       : "text-[#757C81]"
@@ -156,7 +156,7 @@ export default function TestimonialTwo() {
                       : "border-transparent"
                   }`}
                 >
-                  <p className="mt-4 text-gray-600 px-2 pb-5">
+                  <p className="mt-4 text-xs sm:text-base text-gray-600 px-2 pb-5">
                     This API endpoint is ideal for verifying email at its
                     entry-level. You can verify an email to check its validity
                     before allowing it to enter your email database. This
@@ -164,13 +164,13 @@ export default function TestimonialTwo() {
                     programming language.
                   </p>
                   <div className="flex items-center mt-4 text-lg text-gray-600 px-2 pb-5 cursor-pointer">
-                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
+                    <p className="mr-2 text-xs sm:text-base border-b border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
                       GET Request URL (HTTPS):
                     </p>
                   </div>
                   <pre
                     style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
-                    className="bg-[#19253C] text-white p-4 mb-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
+                    className="bg-[#19253C] text-xs sm:text-base text-white p-4 mb-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
                   >
                     {`https://emailverifier.reoon.com/api/v1/verify?email=<email>&key=<key>&mode=quick`}
                   </pre>
@@ -186,7 +186,7 @@ export default function TestimonialTwo() {
                 }`}
               >
                 <span
-                  className={`font-semibold text-xl pl-2 ${
+                  className={`font-semibold text-lg sm:text-xl pl-2 ${
                     activeSection === "EmailFinder"
                       ? "text-black"
                       : "text-[#757C81]"
@@ -210,7 +210,7 @@ export default function TestimonialTwo() {
                       : "border-transparent"
                   }`}
                 >
-                  <p className="mt-4 text-gray-600 px-2 pb-5">
+                  <p className="mt-4 text-gray-600 px-2 pb-5 text-sm sm:text-base">
                     This API Endpoint is ideal for verifying large email sets at
                     a great speed. This endpoint creates a bulk verification
                     task for the given list of emails. The emails will be
@@ -218,13 +218,13 @@ export default function TestimonialTwo() {
                     verification task will be created.
                   </p>
                   <div className="flex items-center mt-4 text-lg text-gray-600 px-2 pb-5 cursor-pointer">
-                    <p className="mr-2 border-b border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
+                    <p className="mr-2 border-b text-sm sm:text-base border-transparent hover:border-gray-600 transition-all duration-300 hover:scale-105">
                       POST Request URL (HTTPS):
                     </p>
                   </div>
                   <pre
                     style={{ whiteSpace: "pre-wrap", overflowX: "hidden" }}
-                    className="bg-[#19253C] text-white p-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
+                    className="bg-[#19253C] text-sm sm:text-base text-white p-4 rounded-xl overflow-y-auto overflow-x-auto scrollbar-hide"
                   >
                     {`https://emailverifier.reoon.com/api/v1/create-bulk-verification-task/`}
                   </pre>{" "}

@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51Qhdn0HGEuCTQqD7ZhH98KpgNo3XC451VnVs2hf76TtYzPwKx5wxq10mj0ZRF756FLCSvTKgyCKax6pFCZqiXl8500qI2Emgn3"
+);
 
 export default function BuyCredits() {
   const [rangeValue, setRangeValue] = useState(0);
@@ -39,32 +44,46 @@ export default function BuyCredits() {
     2
   );
 
+  const handleSubscribeNow = async (planType) => {
+    const priceToCharge = planType === "monthly" ? discountedPrice : price2;
+    const stripe = await stripePromise;
+    const sessionUrl = `https://checkout.stripe.com/pay/cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt#sessionId=cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt`;
+    window.location.href = sessionUrl;
+  };
+
   return (
     <div className="bg-gray-50 p-6">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800">Buy Credits</h2>
-        <p className="text-gray-600">
+        <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
+          Buy Credits
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base">
           Buy credits to start email verification.
         </p>
       </div>
 
-      <h3 className="text-xl font-bold text-gray-800 mb-4">
+      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
         Monthly Subscription Plan
       </h3>
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="flex justify-between items-center">
-          <div>
-            <p className="font-bold text-gray-800">Monthly Subscription</p>
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="mb-4 sm:mb-0">
+            <p className="font-bold text-gray-800 text-center sm:text-left">
+              Monthly Subscription
+            </p>
             <p className="text-sm text-gray-500">
               You can use up to {monthlyCredits.toLocaleString()} credits per
               month
             </p>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4 sm:mb-0">
             {creditsPerDay.toLocaleString()} credits / day
           </p>
-          <div className="text-right">
-            <button className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md">
+          <div className="w-full sm:w-auto text-right">
+            <button
+              onClick={() => handleSubscribeNow("monthly")}
+              className="w-full sm:w-auto bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md"
+            >
               Subscribe Now
             </button>
           </div>
@@ -95,23 +114,30 @@ export default function BuyCredits() {
         </div>
       </div>
 
-      <h3 className="text-xl font-bold text-gray-800 mt-8 mb-4">
+      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mt-8 mb-4">
         Instant Credits Plan (Lifetime Access)
       </h3>
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center justify-between">
           <div>
-            <p className="font-bold text-gray-800">
+            <p className="font-bold text-gray-800 text-center sm:text-left">
               Instant Credits (Lifetime)
             </p>
             <p className="text-sm text-gray-500">
               Instant credits never expire
             </p>
           </div>
-          <p className="text-gray-600">{credits2.toLocaleString()} credits</p>
-          <button className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md">
-            Subscribe Now
-          </button>
+          <p className="text-gray-600 mb-4 sm:mb-0">
+            {credits2.toLocaleString()} credits
+          </p>
+          <div className="w-full sm:w-auto text-right">
+            <button
+              onClick={() => handleSubscribeNow("lifetime")}
+              className="w-full sm:w-auto bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md"
+            >
+              Subscribe Now
+            </button>
+          </div>
         </div>
 
         <hr className="my-4" />

@@ -25,8 +25,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
   };
 
   const handlenavigate = () => {
-    // Implement navigation logic here
-    console.log("Navigating to profile or settings");
+    navigate("/settings");
   };
 
   useEffect(() => {
@@ -84,15 +83,6 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             ref={dropdownRef}
             className="absolute right-3 lg:right-5 top-14 w-52 bg-white border rounded-lg shadow-lg px-4 py-2 space-y-1"
           >
-            <div className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100">
-              <Settings className="text-gray-600 w-4 h-4 mr-1" />
-              <button
-                onClick={handlenavigate}
-                className="text-sm text-gray-800"
-              >
-                Settings
-              </button>
-            </div>
             <div className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100">
               <User className="text-gray-600 w-4 h-4 mr-1" />
               <button

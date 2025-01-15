@@ -181,7 +181,7 @@ export default function Affiliate() {
             </tfoot>
           </table>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow py-4 px-3 min-[450]::p-6">
           <div className="flex items-center border-b mb-4 pb-4 border-gray-200">
             <Banknote className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
             <h3 className="sm:text-lg text-base font-bold text-gray-800">
@@ -198,7 +198,7 @@ export default function Affiliate() {
                 value="https://www.reoon.com/email-verifier/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
                 Copy Link
               </button>
             </div>
@@ -212,7 +212,7 @@ export default function Affiliate() {
                 value="https://emailverifier.reoon.com/register/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-lg p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-lg p-1 text-sm sm:text-base sm:px-4 sm:py-2">
                 Copy Link
               </button>
             </div>
@@ -221,7 +221,7 @@ export default function Affiliate() {
           <p className="text-center font-semibold text-gray-700 my-3">
             Share the Links with Your Friends
           </p>
-          <div className="flex justify-center space-x-4 flex-wrap">
+          <div className="flex justify-center sm:space-x-4 flex-wrap">
             <button className="flex items-center bg-blue-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
               <Facebook className="w-5 h-5 mr-2" />
               Facebook

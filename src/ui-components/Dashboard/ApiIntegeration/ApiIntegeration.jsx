@@ -156,10 +156,12 @@ export default function ApiIntegeration() {
 
   return (
     <div className="bg-gray-50 p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 flex-col sm:flex-row">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">API Settings</h2>
-          <p className="text-gray-600">
+          <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
+            API Settings
+          </h2>
+          <p className="text-gray-600 text-sm md:text-base">
             Use API to verify email addresses programmatically.
           </p>
         </div>
@@ -167,14 +169,14 @@ export default function ApiIntegeration() {
           onClick={() => {
             navigate("/task-single");
           }}
-          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-sm sm:text-base text-white px-4 py-2 rounded-lg w-full sm:w-auto mt-4 sm:mt-0"
         >
           Create New API Key
         </button>
       </div>
 
       <div
-        className="bg-white rounded-lg shadow p-4 flex flex-col"
+        className="bg-white rounded-lg mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] md:w-full shadow p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
         <div className="flex-grow overflow-x-auto">
