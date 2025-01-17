@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Menu,
   Clock,
-  Settings,
   LogOut,
   User,
   ZapIcon,
