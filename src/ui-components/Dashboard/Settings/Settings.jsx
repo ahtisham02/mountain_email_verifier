@@ -1,6 +1,5 @@
 import React from "react";
-import { User, Lock, Edit } from "lucide-react";
-import img from "../../../assets/img/American_Express.webp";
+import { User, Lock } from "lucide-react";
 
 export default function Settings() {
   return (
@@ -16,93 +15,85 @@ export default function Settings() {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <div className="flex items-center mb-4">
-          <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
-            <User className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
+      {/* Parent container with equal heights */}
+      <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+        {/* Profile Section */}
+        <div className="bg-white p-6 rounded-lg shadow-md lg:w-[60%] flex-1">
+          <div className="flex items-center mb-4">
+            <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
+              <User className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
+            </div>
+            <h3 className="sm:text-lg text-base font-bold text-gray-800">
+              General Information
+            </h3>
           </div>
-          <h3 className="sm:text-lg text-base font-bold text-gray-800">
-            General Information
-          </h3>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-6">
-          <div className="flex-none sm:w-[30%] w-full flex justify-center">
-          <div className="w-36 mt-5 h-36 rounded-full bg-gray-200 flex items-center justify-center border-[1.5px] border-btnBackground">
-              <img
-                src={img}
-                alt="Profile"
-                className="rounded-full w-full h-full object-cover"
+          <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex-1 sm:w-[70%] lg:w-[50%] w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                placeholder="Name"
+                className="p-3 border rounded-lg"
               />
-              <div className="mt-24 ml-24 absolute bg-white rounded-full p-2 shadow-md">
-                <Edit className="text-gray-600 w-4 h-4" />
-              </div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="p-3 border rounded-lg"
+              />
+              <input
+                type="tel"
+                placeholder="Phone"
+                className="p-3 border rounded-lg"
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                className="p-3 border rounded-lg"
+              />
+              <input
+                type="text"
+                placeholder="City"
+                className="p-3 border rounded-lg"
+              />
             </div>
           </div>
+          <div className="mt-4">
+            <button className="w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold">
+              Submit
+            </button>
+          </div>
+        </div>
 
-          <div className="flex-1 sm:w-[70%] w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Password Section */}
+        <div className="bg-white p-6 rounded-lg shadow-md lg:w-[40%] flex-1">
+          <div className="flex items-center mb-4">
+            <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
+              <Lock className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
+            </div>
+            <h3 className="sm:text-lg text-base font-bold text-gray-800">
+              Update Account Password
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
             <input
-              type="text"
-              placeholder="Name"
+              type="password"
+              placeholder="Current Password"
               className="p-3 border rounded-lg"
             />
             <input
-              type="email"
-              placeholder="Email"
+              type="password"
+              placeholder="New Password"
               className="p-3 border rounded-lg"
             />
             <input
-              type="tel"
-              placeholder="Phone"
-              className="p-3 border rounded-lg"
-            />
-            <input
-              type="text"
-              placeholder="Address"
-              className="p-3 border rounded-lg"
-            />
-            <input
-              type="text"
-              placeholder="City"
+              type="password"
+              placeholder="Confirm New Password"
               className="p-3 border rounded-lg"
             />
           </div>
-        </div>
-        <div className="mt-4">
-          <button className="w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold">
-            Submit
+          <button className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold">
+            Change Password
           </button>
         </div>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="flex items-center mb-4">
-          <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
-            <Lock className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
-          </div>
-          <h3 className="sm:text-lg text-base font-bold text-gray-800">
-            Update Account Password
-          </h3>
-        </div>
-        <div className="grid grid-cols-1 gap-4">
-          <input
-            type="password"
-            placeholder="Current Password"
-            className="p-3 border rounded-lg"
-          />
-          <input
-            type="password"
-            placeholder="New Password"
-            className="p-3 border rounded-lg"
-          />
-          <input
-            type="password"
-            placeholder="Confirm New Password"
-            className="p-3 border rounded-lg"
-          />
-        </div>
-        <button className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold">
-          Change Password
-        </button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { Calendar, CreditCard, Settings } from "lucide-react";
 
 const stripePromise = loadStripe(
   "pk_test_51Qhdn0HGEuCTQqD7ZhH98KpgNo3XC451VnVs2hf76TtYzPwKx5wxq10mj0ZRF756FLCSvTKgyCKax6pFCZqiXl8500qI2Emgn3"
@@ -54,138 +55,131 @@ export default function BuyCredits() {
   return (
     <div className="bg-gray-50 p-6">
       <div className="mb-8">
-        <h2 className="text-3xl font-extrabold text-gray-900">Buy Credits</h2>
+        <h2 className="md:text-2xl text-xl pt-2 sm:pt- font-extrabold text-gray-900">
+          Buy Credits
+        </h2>
         <p className="text-gray-600 text-sm md:text-base">
           Buy credits to start email verification.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 mb-4">
-            Monthly Subscription Plan
-          </h3>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="flex flex-col sm:flex-row justify-between items-center">
-              <div className="mb-4 sm:mb-0">
-                <p className="font-bold text-gray-900 text-center sm:text-left">
-                  Monthly Subscription
-                </p>
-                <p className="text-sm text-gray-500">
-                  You can use up to{" "}
-                  <span className="font-semibold">
-                    {monthlyCredits.toLocaleString()}
-                  </span>{" "}
-                  credits <span className="font-semibold">per month</span>
-                </p>
+      <div className="bg-gray-50 py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Page Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900">
+              Flexible Plans for Every Need
+            </h2>
+            <p className="text-lg text-gray-600 mt-4">
+              Choose between our monthly subscription or lifetime access plans
+              to get started.
+            </p>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Monthly Subscription Plan */}
+            <div className="relative bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+              <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-100 text-indigo-600 text-sm font-semibold rounded-lg">
+                Most Popular
               </div>
-              <p className="text-gray-600 font-bold mb-4 sm:mb-0">
-                {creditsPerDay.toLocaleString()} credits / day
-              </p>
-              <div className="w-full sm:w-auto text-right">
-                <button
-                  onClick={() => handleSubscribeNow("monthly")}
-                  className="w-full sm:w-auto bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md"
-                >
-                  Subscribe Now
-                </button>
-              </div>
-            </div>
-            <hr className="my-4" />
-            <div>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="font-bold text-gray-900">
-                    Select Credits Range
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Monthly Total -{" "}
-                    <span className="font-bold text-gray-900">
-                      Save {discountPercentage}%
-                    </span>
-                  </p>
+              <div className="flex items-center mb-4">
+                <div className="rounded-lg bg-indigo-100 p-3 flex items-center justify-center">
+                  <Calendar className="w-6 h-6 text-indigo-600" />
                 </div>
-                <p className="text-gray-600 font-bold">
+                <h3 className="ml-4 text-2xl font-semibold text-gray-900">
+                  Monthly Subscription
+                </h3>
+              </div>
+              <p className="text-gray-600 text-lg mb-6">
+                Get up to{" "}
+                <span className="font-bold text-gray-900">
+                  {monthlyCredits.toLocaleString()}
+                </span>{" "}
+                credits per month with a daily usage limit of{" "}
+                <span className="font-bold">
+                  {creditsPerDay.toLocaleString()}
+                </span>{" "}
+                credits/day.
+              </p>
+
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-xl text-gray-700 font-medium">
+                  Save {discountPercentage}%!
+                </p>
+                <p className="text-4xl font-bold text-indigo-600">
                   ${discountedPrice.toLocaleString()}
                 </p>
               </div>
+
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={rangeValue}
                 onChange={(e) => setRangeValue(Number(e.target.value))}
-                className="w-full mt-6 mb-4"
-                style={{
-                  background: `linear-gradient(to right, rgb(44,67,113) ${rangeValue}%, #e0e0e0 ${rangeValue}%)`,
-                }}
+                className="w-full h-2 rounded-full bg-gray-200 focus:ring-2 focus:ring-indigo-600"
               />
-              <p className="text-sm text-[#7E3AF2] bg-[#F3E8FF] p-2 rounded mt-2">
-                Select your preferred credit range to unlock features and
-                maximize your monthly usage.
+              <p className="text-sm text-indigo-700 bg-indigo-50 p-3 rounded-lg mt-4">
+                Adjust the slider to customize your credit range.
               </p>
+
+              <button
+                onClick={() => handleSubscribeNow("monthly")}
+                className="mt-6 w-full py-3 bg-indigo-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition"
+              >
+                Subscribe Now
+              </button>
             </div>
-          </div>
-        </div>
-        <div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 mt-8 lg:mt-0 mb-4">
-            Instant Credits Plan (Lifetime Access)
-          </h3>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="flex flex-col sm:flex-row items-center justify-between">
-              <div>
-                <p className="font-bold text-gray-900 text-center sm:text-left">
-                  Instant Credits (Lifetime)
-                </p>
-                <p className="text-sm text-gray-500">
-                  Instant credits never expire
-                </p>
+
+            {/* Instant Credits Plan */}
+            <div className="relative bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+              <div className="absolute top-4 right-4 px-3 py-1 bg-purple-100 text-purple-600 text-sm font-semibold rounded-lg">
+                Lifetime Deal
               </div>
-              <p className="text-gray-600 font-bold mb-4 sm:mb-0">
-                {credits2.toLocaleString()} credits
-              </p>
-              <div className="w-full sm:w-auto text-right">
-                <button
-                  onClick={() => handleSubscribeNow("lifetime")}
-                  className="w-full sm:w-auto bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-md shadow-md"
-                >
-                  Subscribe Now
-                </button>
-              </div>
-            </div>
-            <hr className="my-4" />
-            <div>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="font-bold text-gray-900">
-                    Select Credits Range
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Onetime Payment -{" "}
-                    <span className="font-bold text-gray-900">
-                      Save {discount2}%
-                    </span>
-                  </p>
+              <div className="flex items-center mb-4">
+                <div className="rounded-lg bg-purple-100 p-3 flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-purple-600" />
                 </div>
-                <p className="text-gray-600 font-bold">
+                <h3 className="ml-4 text-2xl font-semibold text-gray-900">
+                  Instant Credits Plan
+                </h3>
+              </div>
+              <p className="text-gray-600 text-lg mb-6">
+                Purchase{" "}
+                <span className="font-bold text-gray-900">
+                  {credits2.toLocaleString()}
+                </span>{" "}
+                credits with lifetime access. Credits never expire!
+              </p>
+
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-xl text-gray-700 font-medium">
+                  Save {discount2}%!
+                </p>
+                <p className="text-4xl font-bold text-purple-600">
                   ${price2.toLocaleString()}
                 </p>
               </div>
+
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={rangeValue2}
                 onChange={(e) => setRangeValue2(Number(e.target.value))}
-                className="w-full mt-6 mb-4"
-                style={{
-                  background: `linear-gradient(to right, rgb(44,67,113) ${rangeValue2}%, #e0e0e0 ${rangeValue2}%)`,
-                }}
+                className="w-full h-2 rounded-full bg-gray-200 focus:ring-2 focus:ring-purple-600"
               />
-              <p className="text-sm text-[#6e5acf] bg-[#EFF6FF] p-2 rounded mt-2">
-                Purchase instant credits now to enjoy lifetime usage without
-                expiration.
+              <p className="text-sm text-purple-700 bg-purple-50 p-3 rounded-lg mt-4">
+                Adjust the slider to find your perfect credit package.
               </p>
+
+              <button
+                onClick={() => handleSubscribeNow("lifetime")}
+                className="mt-6 w-full py-3 bg-purple-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-purple-700 transition"
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
