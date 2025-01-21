@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { Calendar, CreditCard, Settings } from "lucide-react";
+import { Calendar, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51Qhdn0HGEuCTQqD7ZhH98KpgNo3XC451VnVs2hf76TtYzPwKx5wxq10mj0ZRF756FLCSvTKgyCKax6pFCZqiXl8500qI2Emgn3"
@@ -9,6 +10,7 @@ const stripePromise = loadStripe(
 export default function BuyCredits() {
   const [rangeValue, setRangeValue] = useState(0);
   const [rangeValue2, setRangeValue2] = useState(0);
+  const navigate = useNavigate()
 
   const minCredits2 = 10000;
   const maxCredits2 = 1000000;
@@ -46,10 +48,11 @@ export default function BuyCredits() {
   );
 
   const handleSubscribeNow = async (planType) => {
-    const priceToCharge = planType === "monthly" ? discountedPrice : price2;
-    const stripe = await stripePromise;
-    const sessionUrl = `https://checkout.stripe.com/pay/cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt#sessionId=cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt`;
-    window.location.href = sessionUrl;
+    // const priceToCharge = planType === "monthly" ? discountedPrice : price2;
+    // const stripe = await stripePromise;
+    // const sessionUrl = `https://checkout.stripe.com/pay/cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt#sessionId=cs_test_a1zB1J1N2I0bD6F7sJ4JxY5lMlz4XlPmnaMopBYIjkbZXE5Hjpz8skpYYt`;
+    // window.location.href = sessionUrl;
+    navigate('/payment')
   };
 
   return (
@@ -65,7 +68,6 @@ export default function BuyCredits() {
 
       <div className="bg-gray-50 py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Page Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900">
               Flexible Plans for Every Need
@@ -76,10 +78,8 @@ export default function BuyCredits() {
             </p>
           </div>
 
-          {/* Pricing Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Monthly Subscription Plan */}
-            <div className="relative bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+            <div className="bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-100 text-indigo-600 text-sm font-semibold rounded-lg">
                 Most Popular
               </div>
@@ -132,8 +132,7 @@ export default function BuyCredits() {
               </button>
             </div>
 
-            {/* Instant Credits Plan */}
-            <div className="relative bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+            <div className="bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <div className="absolute top-4 right-4 px-3 py-1 bg-purple-100 text-purple-600 text-sm font-semibold rounded-lg">
                 Lifetime Deal
               </div>
