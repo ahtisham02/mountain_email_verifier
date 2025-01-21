@@ -14,6 +14,7 @@ import BuyCredits from "../pages/AdminPages/BuyCredits/BuyCredits";
 import Affiliate from "../pages/AdminPages/Affiliate/Affiliate";
 import Faq from "../pages/AdminPages/Faq/Faq";
 import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration";
+import PaymentForm from "../ui-components/Dashboard/BuyCredits/Payment";
 
 const MainRoutes = () => {
   return (
@@ -81,6 +82,11 @@ const MainRoutes = () => {
           <Route
             path="/apisettings"
             element={<ApiIntegeration />
+            }
+          />
+          <Route
+            path="/payment"
+            element={<PaymentForm />
             }
           />
         </Route>
