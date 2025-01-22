@@ -1,16 +1,55 @@
 import React, { useState } from "react";
-import img from "../../../assets/img/bg.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Worm } from "lucide-react";
+import img from "../../../assets/img/bg.svg";
+import { useDispatch } from "react-redux";
+import apiRequest from "../../../utils/apiRequest";
+import { setUserInfo } from "../../../auth/authSlice";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await apiRequest("post", "/api/login", values);
+        if (response.data.status === "success") {
+          dispatch(setUserInfo(response.data));          
+          toast.success(response.data.message);
+          navigate("/");
+        }
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        );
+      }
+    },
+  });
 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -47,60 +86,84 @@ export default function Login() {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Login
               </h1>
-              <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400">Email</span>
-                <input
-                  type="email"
-                  className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
-                  placeholder="Email"
-                  required
-                />
-              </label>
-              <label className="block mt-4 text-sm relative">
-                <span className="text-gray-700 dark:text-gray-400">
-                  Password
-                </span>
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
-                  placeholder="Password"
-                  required
-                />
-                <span
-                  className="absolute right-3 text-gray-800 top-[70%] transform -translate-y-1/2 cursor-pointer"
-                  onClick={togglePasswordVisibility}
-                >
-                  {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
-                </span>
-              </label>
-
-              <div className="flex justify-between items-center mt-2.5">
-                <div className="flex items-center">
+              <form onSubmit={formik.handleSubmit}>
+                <label className="block text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">Email</span>
                   <input
-                    type="checkbox"
-                    className="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    required
+                    type="email"
+                    name="email"
+                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      formik.touched.email && formik.errors.email
+                        ? "border-red-500"
+                        : ""
+                    }`}
+                    placeholder="Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
-                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-400">
-                    Remember me
+                  {formik.touched.email && formik.errors.email && (
+                    <span className="text-red-500 text-sm">
+                      {formik.errors.email}
+                    </span>
+                  )}
+                </label>
+
+                <label className="block mt-4 text-sm relative">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Password
+                  </span>
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    name="password"
+                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      formik.touched.password && formik.errors.password
+                        ? "border-red-500"
+                        : ""
+                    }`}
+                    placeholder="Password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  <span
+                    className="absolute right-3 text-gray-800 top-[70%] transform -translate-y-1/2 cursor-pointer"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </span>
+                  {formik.touched.password && formik.errors.password && (
+                    <span className="text-red-500 text-sm">
+                      {formik.errors.password}
+                    </span>
+                  )}
+                </label>
+
+                <div className="flex justify-between items-center mt-2.5">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                    />
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-400">
+                      Remember me
+                    </span>
+                  </div>
+                  <span
+                    className="text-sm cursor-pointer font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                    onClick={() => navigate("/forgotpassword")}
+                  >
+                    Forgot password?
                   </span>
                 </div>
-                <span
-                  className="text-sm cursor-pointer font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  onClick={() => {
-                    navigate("/forgotpassword");
-                  }}
-                >
-                  Forgot password?
-                </span>
-              </div>
 
-              <button
-                type="submit"
-                className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              >
-                Log in
-              </button>
+                <button
+                  type="submit"
+                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                >
+                  Log in
+                </button>
+              </form>
 
               <hr className="my-8" />
 
@@ -118,9 +181,7 @@ export default function Login() {
                 Not registered?{" "}
                 <span
                   className="font-medium cursor-pointer text-purple-600 dark:text-purple-400 hover:underline"
-                  onClick={() => {
-                    navigate("/signup");
-                  }}
+                  onClick={() => navigate("/signup")}
                 >
                   Create account
                 </span>

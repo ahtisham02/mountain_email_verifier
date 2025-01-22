@@ -1,0 +1,81 @@
+import React, { useEffect, useCallback, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { removeUserInfo } from "../auth/authSlice";
+
+const RouteMiddleware = ({ children, isAuthRequired = false }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const accessToken = useSelector((state) => state?.auth?.userToken);
+  const [tokenReady, setTokenReady] = useState(false);
+  const getLocalStorageToken = () => {
+    const persistAuth = localStorage.getItem("persist:auth");
+    if (persistAuth) {
+      try {
+        const parsedPersistAuth = JSON.parse(persistAuth);
+        const userInfo = JSON.parse(parsedPersistAuth.userToken || "{}");
+        return userInfo || null;
+      } catch (error) {
+        console.error("Error parsing localStorage token:", error);
+        return null;
+      }
+    }
+    return null;
+  };
+
+  const localStorageToken = getLocalStorageToken();
+
+  const handleLogout = useCallback(async () => {
+    try {
+      const parsedToken = localStorageToken ? localStorageToken.replace(/^"|"$/g, "") : null;
+      if (parsedToken) {
+          dispatch(removeUserInfo());
+          localStorage.removeItem("persist:auth");
+      }
+      navigate("/login");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || error.message || "Something went wrong. Please try again."
+      );
+      console.error("Error:", error);
+    }
+  }, [dispatch, localStorageToken, navigate]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+
+      if (localStorageToken === null || accessToken === undefined) {
+        setTokenReady(true); 
+        return;
+      }
+
+      if (!localStorageToken || !accessToken || localStorageToken !== accessToken) {
+        handleLogout();
+      } else {
+        setTokenReady(true); 
+      }
+    }, 100);
+
+    return () => clearTimeout(timer); 
+  }, [accessToken, localStorageToken, handleLogout]);
+
+  if (!tokenReady) {
+    return null;
+  }
+
+  if (isAuthRequired) {
+    if (!accessToken || !localStorageToken || localStorageToken !== accessToken) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  }
+
+  if (accessToken && localStorageToken && localStorageToken === accessToken) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+};
+
+export default RouteMiddleware;

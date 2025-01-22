@@ -15,78 +15,124 @@ import Affiliate from "../pages/AdminPages/Affiliate/Affiliate";
 import Faq from "../pages/AdminPages/Faq/Faq";
 import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration";
 import PaymentForm from "../ui-components/Dashboard/BuyCredits/Payment";
+import RouteMiddleware from "./RouteMIddleware";
 
 const MainRoutes = () => {
   return (
     <Router>
       <Routes>
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/signup"
-            element={<Signup />}
-          />
-          <Route
-            path="/forgotpassword"
-            element={<ForgotPass />}
-          />
+        <Route
+          path="/login"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <Login />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <Signup />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/forgotpassword"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <ForgotPass />
+            </RouteMiddleware>
+          }
+        />
         {/* Dashboard Routes */}
         <Route element={<DashboardLayout />}>
           <Route
             path="/"
-            element={<UserDashboard />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <UserDashboard />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/emailverification"
-            element={<EmailVerification />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <EmailVerification />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/tasks"
-            element={<TasksPage />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <TasksPage />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/task-single"
-            element={<SingleTaskPage />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <SingleTaskPage />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/creditshistory"
-            element={<CreditsHistory />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <CreditsHistory />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/settings"
-            element={<Settings />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <Settings />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/buycredits"
-            element={<BuyCredits />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <BuyCredits />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/affiliate"
-            element={<Affiliate />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <Affiliate />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/faqs"
-            element={<Faq />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <Faq />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/apisettings"
-            element={<ApiIntegeration />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <ApiIntegeration />
+              </RouteMiddleware>
             }
           />
           <Route
             path="/payment"
-            element={<PaymentForm />
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <PaymentForm />
+              </RouteMiddleware>
             }
           />
         </Route>

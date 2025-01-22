@@ -3,15 +3,66 @@ import img from "../../../assets/img/bg.svg";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Worm } from "lucide-react";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import apiRequest from "../../../utils/apiRequest";
+// import { setUserInfo } from "../../../auth/authSlice";
 
 export default function Signup() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [CpasswordVisible, setCPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+  const toggleCPasswordVisibility = () => {
+    setCPasswordVisible(!CpasswordVisible);
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      password_confirmation: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        const response = await apiRequest("post", "/api/signup", values);
+        if (response.data.status === "success") {
+          // dispatch(setUserInfo(response.data.data));
+          toast.success(response.data.message);
+          navigate("/login");
+        }
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        );
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -53,17 +104,29 @@ export default function Signup() {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Create account
               </h1>
-              <form action="#" method="POST">
-                <label className="block text-sm">
+              <form onSubmit={formik.handleSubmit}>
+                <label className="block text-sm mt-4">
                   <span className="text-gray-700 dark:text-gray-400">
                     Email
                   </span>
                   <input
                     type="email"
-                    className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
+                    name="email"
+                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      formik.touched.email && formik.errors.email
+                        ? "border-red-500"
+                        : ""
+                    }`}
                     placeholder="Email"
-                    required
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
                   />
+                  {formik.touched.email && formik.errors.email && (
+                    <span className="text-red-500 text-xs">
+                      {formik.errors.email}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block mt-4 text-sm relative">
@@ -72,16 +135,29 @@ export default function Signup() {
                   </span>
                   <input
                     type={passwordVisible ? "text" : "password"}
-                    className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
+                    name="password"
+                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      formik.touched.password && formik.errors.password
+                        ? "border-red-500"
+                        : ""
+                    }`}
                     placeholder="Password"
-                    required
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
                   />
                   <span
-                    className="absolute right-3 text-gray-800 top-[70%] transform -translate-y-1/2 cursor-pointer"
+                    className={`absolute right-3 ${formik.touched.password ? "top-1/2" : "top-[70%]"} top-1/2 transform -translate-y-1/2 text-gray-800 cursor-pointer`}
                     onClick={togglePasswordVisibility}
                   >
                     {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
                   </span>
+
+                  {formik.touched.password && formik.errors.password && (
+                    <span className="text-red-500 text-xs">
+                      {formik.errors.password}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block mt-4 text-sm relative">
@@ -89,17 +165,36 @@ export default function Signup() {
                     Confirm Password
                   </span>
                   <input
-                    type={passwordVisible ? "text" : "password"}
-                    className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
-                    placeholder="Password"
-                    required
+                    type={CpasswordVisible ? "text" : "password"}
+                    name="password_confirmation"
+                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      formik.touched.password_confirmation &&
+                      formik.errors.password_confirmation
+                        ? "border-red-500"
+                        : ""
+                    }`}
+                    placeholder="Confirm Password"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password_confirmation}
                   />
                   <span
-                    className="absolute right-3 text-gray-800 top-[70%] transform -translate-y-1/2 cursor-pointer"
-                    onClick={togglePasswordVisibility}
+                    className={`absolute right-3 ${formik.touched.password_confirmation ? "top-1/2" : "top-[69%]"} transform -translate-y-1/2 text-gray-800 cursor-pointer`}
+                    onClick={toggleCPasswordVisibility}
                   >
-                    {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {CpasswordVisible ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
                   </span>
+
+                  {formik.touched.password_confirmation &&
+                    formik.errors.password_confirmation && (
+                      <span className="text-red-500 text-xs">
+                        {formik.errors.password_confirmation}
+                      </span>
+                    )}
                 </label>
 
                 <div className="flex mt-6 text-sm">
@@ -120,9 +215,12 @@ export default function Signup() {
 
                 <button
                   type="submit"
-                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  disabled={loading}
+                  className={`block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 ${
+                    loading ? "bg-gray-400" : "bg-[#7E3AF2]"
+                  } border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple`}
                 >
-                  Create account
+                  {loading ? "Creating Account..." : "Create account"}
                 </button>
 
                 <hr className="my-8" />
@@ -141,9 +239,7 @@ export default function Signup() {
               <p className="mt-4 text-sm text-center">
                 Already have an account?{" "}
                 <span
-                  onClick={() => {
-                    navigate("/login");
-                  }}
+                  onClick={() => navigate("/login")}
                   className="font-medium cursor-pointer text-purple-600 dark:text-purple-400 hover:underline"
                 >
                   Login
