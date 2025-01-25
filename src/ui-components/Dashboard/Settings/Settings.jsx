@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { User, Lock, MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import apiRequest from "../../../utils/apiRequest";
 import { setUserInfo } from "../../../auth/authSlice";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Settings() {
   const user = useSelector((state) => state?.auth?.userInfo);
   const token = useSelector((state) => state?.auth?.userToken);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -53,6 +57,50 @@ export default function Settings() {
         toast.error(
           error.response?.data?.message ||
             "Something went wrong. Please try again."
+        );
+      }
+    },
+  });
+
+  const formikPassword = useFormik({
+    initialValues: {
+      old_password: "",
+      new_password: "",
+      new_password_confirmation: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.old_password) {
+        errors.old_password = "Current password is required.";
+      }
+      if (!values.new_password) {
+        errors.new_password = "New password is required.";
+      } else if (values.new_password.length < 6) {
+        errors.new_password = "Password must be at least 6 characters.";
+      }
+      if (!values.new_password_confirmation) {
+        errors.new_password_confirmation = "Confirm new password is required.";
+      } else if (values.new_password !== values.new_password_confirmation) {
+        errors.new_password_confirmation = "Passwords do not match.";
+      }
+      return errors;
+    },
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const response = await apiRequest(
+          "post",
+          "/api/password/update",
+          values,
+          token
+        );
+        if (response.data.status === "success") {
+          toast.success(response.data.message);
+          resetForm();
+        }
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message ||
+            "Unable to update password. Try again."
         );
       }
     },
@@ -153,29 +201,89 @@ export default function Settings() {
               Update Account Password
             </h3>
           </div>
-          <div className="grid grid-cols-1 gap-4">
-            <input
-              type="password"
-              placeholder="Current Password"
-              className="p-3 border rounded-lg"
-            />
-            <input
-              type="password"
-              placeholder="New Password"
-              className="p-3 border rounded-lg"
-            />
-            <input
-              type="password"
-              placeholder="Confirm New Password"
-              className="p-3 border rounded-lg"
-            />
-          </div>
-          <button
-            onClick={formik.handleSubmit}
-            className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
+          <form
+            onSubmit={formikPassword.handleSubmit}
+            className="grid grid-cols-1 gap-4"
           >
-            Change Password
-          </button>
+            <div className="relative">
+              <input
+                type="password"
+                placeholder="Current Password"
+                className="p-3 border rounded-lg w-full"
+                name="old_password"
+                value={formikPassword.values.old_password}
+                onChange={formikPassword.handleChange}
+                onBlur={formikPassword.handleBlur}
+              />
+              {formikPassword.touched.old_password &&
+                formikPassword.errors.old_password && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formikPassword.errors.old_password}
+                  </div>
+                )}
+            </div>
+            <div className="relative">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                placeholder="New Password"
+                className="p-3 border rounded-lg w-full"
+                name="new_password"
+                value={formikPassword.values.new_password}
+                onChange={formikPassword.handleChange}
+                onBlur={formikPassword.handleBlur}
+              />
+              <div
+                className={`absolute right-3 ${formikPassword.touched.new_password ? "top-[35%]" : "top-[50%]"} transform -translate-y-1/2 cursor-pointer`}
+                onClick={() => setShowNewPassword((prev) => !prev)}
+              >
+                {showNewPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </div>
+              {formikPassword.touched.new_password &&
+                formikPassword.errors.new_password && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formikPassword.errors.new_password}
+                  </div>
+                )}
+            </div>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm New Password"
+                className="p-3 border rounded-lg w-full"
+                name="new_password_confirmation"
+                value={formikPassword.values.new_password_confirmation}
+                onChange={formikPassword.handleChange}
+                onBlur={formikPassword.handleBlur}
+              />
+              <div
+                className={`absolute right-3 ${formikPassword.touched.new_password_confirmation ? "top-[35%]" : "top-[50%]"} top-[50%] transform -translate-y-1/2 cursor-pointer`}
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </div>
+              {formikPassword.touched.new_password_confirmation &&
+                formikPassword.errors.new_password_confirmation && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formikPassword.errors.new_password_confirmation}
+                  </div>
+                )}
+            </div>
+
+            <button
+              type="submit"
+              className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
+            >
+              Change Password
+            </button>
+          </form>
         </div>
       </div>
 

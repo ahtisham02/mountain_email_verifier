@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { UploadCloud, CheckCircle, Upload } from "lucide-react";
 import img from "../../../assets/3129492.jpg";
 import img1 from "../../../assets/4957160.jpg";
+import { useNavigate } from "react-router-dom";
+import SuccessModal from "./SuccessModal";
 
 export default function EmailVerification() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/result-details");
+    setModalOpen(false);
+  };
+
   return (
+    <>
     <div className="bg-gray-50">
       <h2 className="px-6 pt-6 pb-1 md:text-2xl text-xl font-bold text-gray-800">
         Bulk Email Verification
@@ -42,7 +53,10 @@ export default function EmailVerification() {
                 ></textarea>
               </div>
             </div>
-            <button className="w-full mt-4 bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="w-full mt-4 bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover"
+            >
               Start Verification
             </button>
           </div>
@@ -85,12 +99,21 @@ export default function EmailVerification() {
                 <input type="file" className="hidden" />
               </label>
             </div>
-            <button className="w-full bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover mt-auto">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="w-full bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover mt-auto"
+            >
               Start Verification
             </button>
           </div>
         </div>
       </div>
     </div>
+    <SuccessModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onNavigate={handleNavigate}
+      />
+    </>
   );
 }

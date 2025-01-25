@@ -11,6 +11,7 @@ import SingleTaskPage from "../pages/AdminPages/SingleTask/SingleTask";
 import CreditsHistory from "../pages/AdminPages/CreditsHistory/CreditsHistory";
 import Settings from "../pages/AdminPages/Settings/Settings";
 import BuyCredits from "../pages/AdminPages/BuyCredits/BuyCredits";
+import ResultDetails from "../pages/AdminPages/ResultDetails/ResultDetails";
 import Affiliate from "../pages/AdminPages/Affiliate/Affiliate";
 import Faq from "../pages/AdminPages/Faq/Faq";
 import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration";
@@ -100,6 +101,14 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={true}>
                 <BuyCredits />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/result-details"
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <ResultDetails />
               </RouteMiddleware>
             }
           />

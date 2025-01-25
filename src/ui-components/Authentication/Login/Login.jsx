@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FaGithub, FaTwitter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Worm } from "lucide-react";
 import img from "../../../assets/img/bg.svg";
@@ -9,9 +8,12 @@ import { useDispatch } from "react-redux";
 import apiRequest from "../../../utils/apiRequest";
 import { setUserInfo } from "../../../auth/authSlice";
 import { toast } from "react-toastify";
+import gimg from "../../../assets/gimg.jpeg";
+import loaderGif from "../../../assets/loader1.gif";
 
 export default function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,10 +37,11 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: async (values) => {
+      setLoading(true);
       try {
         const response = await apiRequest("post", "/api/login", values);
         if (response.data.status === "success") {
-          dispatch(setUserInfo(response.data));          
+          dispatch(setUserInfo(response.data));
           toast.success(response.data.message);
           navigate("/");
         }
@@ -47,6 +50,8 @@ export default function Login() {
           error.response?.data?.message ||
             "Something went wrong. Please try again."
         );
+      } finally {
+        setLoading(false);
       }
     },
   });
@@ -61,7 +66,7 @@ export default function Login() {
                 <Worm size={20} className="text-white" />
               </div>
               <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-                Reoon Email Verifier
+                Mountain Email Verifier
               </h1>
             </div>
             <p className="my-3 text-md px-8 text-gray-700 dark:text-gray-400">
@@ -88,7 +93,9 @@ export default function Login() {
               </h1>
               <form onSubmit={formik.handleSubmit}>
                 <label className="block text-sm">
-                  <span className="text-gray-700 dark:text-gray-400">Email</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Email
+                  </span>
                   <input
                     type="email"
                     name="email"
@@ -127,7 +134,7 @@ export default function Login() {
                     onBlur={formik.handleBlur}
                   />
                   <span
-                    className="absolute right-3 text-gray-800 top-[70%] transform -translate-y-1/2 cursor-pointer"
+                    className={`absolute right-3 text-gray-800 ${formik.touched.password && formik.errors.password ? "top-[52%]" : "top-[70%]"}  transform -translate-y-1/2 cursor-pointer`}
                     onClick={togglePasswordVisibility}
                   >
                     {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -159,22 +166,25 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  className="block w-full h-10 px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
-                  Log in
+                  {loading ? (
+                    <img
+                      src={loaderGif}
+                      alt="Loading..."
+                      className="mx-auto h-14 w-[74px] -mt-[18px]"
+                    />
+                  ) : (
+                    "Log in"
+                  )}
                 </button>
               </form>
 
               <hr className="my-8" />
 
-              <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white bg-[#0c0d0e] transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
-                <FaGithub className="mr-2.5" />
-                Log in with Github
-              </button>
-
-              <button className="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white bg-[#1C9CEA] transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
-                <FaTwitter className="mr-2.5" />
-                Log in with Twitter
+              <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray">
+                <img alt="img" src={gimg} className="mr-1 h-[22px] w-10" />
+                Log in with Google
               </button>
 
               <p className="mt-4 text-center text-sm">

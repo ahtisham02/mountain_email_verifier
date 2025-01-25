@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import img from "../../../assets/img/bg.svg";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import gimg from "../../../assets/gimg.jpeg";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Worm } from "lucide-react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import apiRequest from "../../../utils/apiRequest";
 // import { setUserInfo } from "../../../auth/authSlice";
+import loaderGif from "../../../assets/loader1.gif";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [CpasswordVisible, setCPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,7 +66,7 @@ export default function Signup() {
   });
 
   return (
-    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div className="flex items-center min-h-screen p-5 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="flex flex-col justify-center items-start py-5 md:w-1/2 bg-gray-50">
@@ -74,7 +75,7 @@ export default function Signup() {
                 <Worm size={20} className="text-white" />
               </div>
               <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-                Reoon Email Verifier
+                Mountain Email Verifier
               </h1>
             </div>
             <p className="my-3 text-md px-8 text-gray-700 dark:text-gray-400">
@@ -147,7 +148,9 @@ export default function Signup() {
                     value={formik.values.password}
                   />
                   <span
-                    className={`absolute right-3 ${formik.touched.password ? "top-1/2" : "top-[70%]"} top-1/2 transform -translate-y-1/2 text-gray-800 cursor-pointer`}
+                    className={`absolute right-3 ${
+                      formik.touched.password && formik.errors.password ? "top-[40%]" : "top-[50%]"
+                    } transform top-[50%] text-gray-800 cursor-pointer`}
                     onClick={togglePasswordVisibility}
                   >
                     {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -179,7 +182,12 @@ export default function Signup() {
                     value={formik.values.password_confirmation}
                   />
                   <span
-                    className={`absolute right-3 ${formik.touched.password_confirmation ? "top-1/2" : "top-[69%]"} transform -translate-y-1/2 text-gray-800 cursor-pointer`}
+                    className={`absolute right-3 ${
+                      formik.touched.password_confirmation  &&
+                      formik.errors.password_confirmation
+                        ? "top-[40%]"
+                        : "top-[50%]"
+                    } transform top-[50%] text-gray-800 cursor-pointer`}
                     onClick={toggleCPasswordVisibility}
                   >
                     {CpasswordVisible ? (
@@ -216,23 +224,23 @@ export default function Signup() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 ${
-                    loading ? "bg-gray-400" : "bg-[#7E3AF2]"
-                  } border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple`}
+                  className="block w-full h-10 px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-[#7E3AF2] border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
-                  {loading ? "Creating Account..." : "Create account"}
+                  {loading ? (
+                    <img
+                      src={loaderGif}
+                      alt="Loading..."
+                      className="mx-auto h-14 w-[74px] -mt-[18px]"
+                    />
+                  ) : (
+                    "Create account"
+                  )}
                 </button>
 
                 <hr className="my-8" />
-
-                <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white bg-[#0c0d0e] transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
-                  <FaGithub className="mr-2.5" />
-                  Log in with Github
-                </button>
-
-                <button className="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white bg-[#1C9CEA] transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
-                  <FaTwitter className="mr-2.5" />
-                  Log in with Twitter
+                <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray">
+                  <img src={gimg} alt="img" className="mr-1 h-[22px] w-10" />
+                  Log in with Google
                 </button>
               </form>
 
