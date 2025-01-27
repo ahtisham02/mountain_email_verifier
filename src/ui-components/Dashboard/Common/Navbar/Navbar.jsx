@@ -39,7 +39,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
       if (response.data.status === "success") {
         dispatch(removeUserInfo());
         toast.success(response.data.message);
-        navigate("/login");
+        navigate("/auth");
       }
     } catch (error) {
       toast.error(

@@ -3,6 +3,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Calendar, CreditCard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../../utils/apiRequest";
+import { useDispatch } from "react-redux";
+import { removeUserInfo } from "../../../auth/authSlice";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line
 const stripePromise = loadStripe(
@@ -15,6 +18,7 @@ export default function BuyCredits() {
   const [subscriptionData, setSubscriptionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchSubscriptions = async () => {
@@ -24,16 +28,26 @@ export default function BuyCredits() {
           setSubscriptionData(response.data);
         } else {
           console.error("API Error:", response.data.message);
+          dispatch(removeUserInfo());
+          toast.success(
+            "You have been logged out. Please log in again to continue."
+          );
+          navigate("/auth");
         }
       } catch (error) {
         console.error("Error fetching subscriptions:", error);
+        dispatch(removeUserInfo());
+        toast.success(
+          "You have been logged out. Please log in again to continue."
+        );
+        navigate("/auth");
       } finally {
         setLoading(false);
       }
     };
 
     fetchSubscriptions();
-  }, []);
+  }, [dispatch, navigate]);
 
   const lifetimePlans = subscriptionData?.data.lifetime || [];
   const monthlyPlans = subscriptionData?.data.monthly || [];
@@ -44,7 +58,7 @@ export default function BuyCredits() {
   return (
     <div className="bg-gray-50 p-6">
       <div className="mb-8">
-        <h2 className="md:text-2xl text-xl pt-2 sm:pt- font-extrabold text-gray-900">
+        <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-extrabold text-gray-900">
           Buy Credits
         </h2>
         <p className="text-gray-600 text-sm md:text-base">

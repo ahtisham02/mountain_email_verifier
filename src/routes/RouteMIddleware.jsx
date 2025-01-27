@@ -33,11 +33,10 @@ const RouteMiddleware = ({ children, isAuthRequired = false }) => {
           dispatch(removeUserInfo());
           localStorage.removeItem("persist:auth");
       }
-      navigate("/login");
+      navigate("/auth");
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || error.message || "Something went wrong. Please try again."
-      );
+      dispatch(removeUserInfo());
+      toast.success("You have been logged out. Please log in again to continue.");
       console.error("Error:", error);
     }
   }, [dispatch, localStorageToken, navigate]);
@@ -66,7 +65,7 @@ const RouteMiddleware = ({ children, isAuthRequired = false }) => {
 
   if (isAuthRequired) {
     if (!accessToken || !localStorageToken || localStorageToken !== accessToken) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/auth" />;
     }
     return children;
   }

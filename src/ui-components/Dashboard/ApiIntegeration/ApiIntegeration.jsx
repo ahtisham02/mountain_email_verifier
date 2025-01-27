@@ -176,10 +176,10 @@ export default function ApiIntegeration() {
       </div>
 
       <div
-        className="bg-white rounded-lg mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] md:w-full shadow p-4 flex flex-col"
+        className="bg-white rounded-lg mx-auto overflow-x-auto w-[79vw] min-[550px]:w-[85vw] md:w-full shadow p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
-        <div className="flex-grow overflow-x-auto">
+        <div className="flex-grow overflow-x-auto scrollbar-hide">
           <table className="min-w-full table-auto">
             <thead className="bg-slate-100">
               <tr>

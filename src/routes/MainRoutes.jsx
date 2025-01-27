@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../pages/LoginPages/Login/Login";
-import Signup from "../pages/LoginPages/Signup/Signup";
 import ForgotPass from "../pages/LoginPages/ForgotPass/ForgotPass";
 import UserDashboard from "../pages/AdminPages/Dashboard/Dashboard";
 import EmailVerification from "../pages/AdminPages/EmailVerification/EmailVerification";
@@ -17,24 +16,17 @@ import Faq from "../pages/AdminPages/Faq/Faq";
 import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration";
 import PaymentForm from "../ui-components/Dashboard/BuyCredits/Payment";
 import RouteMiddleware from "./RouteMIddleware";
+import Api from "../pages/AdminPages/Api/ApiPAge";
 
 const MainRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route
-          path="/login"
+          path="/auth"
           element={
             <RouteMiddleware isAuthRequired={false}>
               <Login />
-            </RouteMiddleware>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <RouteMiddleware isAuthRequired={false}>
-              <Signup />
             </RouteMiddleware>
           }
         />
@@ -117,6 +109,14 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={true}>
                 <Affiliate />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/api"
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <Api />
               </RouteMiddleware>
             }
           />

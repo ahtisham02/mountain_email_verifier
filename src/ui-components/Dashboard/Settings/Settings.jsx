@@ -205,7 +205,7 @@ export default function Settings() {
             onSubmit={formikPassword.handleSubmit}
             className="grid grid-cols-1 gap-4"
           >
-            <div className="relative">
+            <div>
               <input
                 type="password"
                 placeholder="Current Password"

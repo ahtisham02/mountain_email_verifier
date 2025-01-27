@@ -12,6 +12,7 @@ import {
   ScrollText,
   CodeXml,
 } from "lucide-react";
+import { MdOutlineVpnKey } from "react-icons/md";
 
 const Sidebar = ({ isOpen, onToggleSidebar }) => {
   const [activeItem, setActiveItem] = useState("Dashboard");
@@ -24,6 +25,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
       { icon: MailCheck, label: "Email Verification", path: "/emailverification" },
       { icon: IdCard, label: "Task & Results", path: "/tasks" },
       { icon: CodeXml, label: "API & Integerations", path: "/apisettings" },
+      { icon: MdOutlineVpnKey, label: "Api Keys", path: "/api" },
       { icon: PieChart, label: "Credits History", path: "/creditshistory" },
       { icon: Zap, label: "Buy Credits", path: "/buycredits" },
       { icon: UserRoundPen, label: "My Profile", path: "/settings" },

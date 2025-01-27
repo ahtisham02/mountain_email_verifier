@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Worm } from "lucide-react";
-import img from "../../../assets/img/bg.svg";
-import { useDispatch } from "react-redux";
-import apiRequest from "../../../utils/apiRequest";
-import { setUserInfo } from "../../../auth/authSlice";
+import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
-import gimg from "../../../assets/gimg.jpeg";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../../auth/authSlice";
+import apiRequest from "../../../utils/apiRequest";
 import loaderGif from "../../../assets/loader1.gif";
+import gimg from "../../../assets/gimg.jpeg";
 
-export default function Login() {
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,6 +21,11 @@ export default function Login() {
     setPasswordVisible(!passwordVisible);
   };
 
+  const toggleForm = (formType) => {
+    setIsLogin(formType === "login");
+    formik.resetForm();
+  };
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")
@@ -28,22 +33,49 @@ export default function Login() {
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
+    ...(isLogin
+      ? {}
+      : {
+          password_confirmation: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
+            .required("Confirm Password is required"),
+        }),
   });
+
+  const handleGoogleLogin = () => {
+    const clientId = "1047481348543-flpdfk65g3p6r0c9nfuul17ku28ld5pi.apps.googleusercontent.com";
+    const redirectUri = "http://localhost:3000/";
+    const scope = "profile email";
+    const responseType = "code";
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    
+    window.location.href = googleAuthUrl;
+  };
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      password_confirmation: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const response = await apiRequest("post", "/api/login", values);
+        const response = await apiRequest(
+          "post",
+          isLogin ? "/api/login" : "/api/signup",
+          values
+        );
         if (response.data.status === "success") {
-          dispatch(setUserInfo(response.data));
           toast.success(response.data.message);
-          navigate("/");
+          if (isLogin) {
+            dispatch(setUserInfo(response.data));
+            navigate("/");
+          } else {
+            setIsLogin(true);
+            formik.resetForm();
+          }
         }
       } catch (error) {
         toast.error(
@@ -57,40 +89,54 @@ export default function Login() {
   });
 
   return (
-    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-      <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-        <div className="flex flex-col overflow-y-auto md:flex-row">
-          <div className="flex flex-col justify-center items-start py-5 md:w-1/2 bg-gray-50">
-            <div className="flex items-center space-x-2 ml-6">
-              <div className="flex items-center justify-center bg-purple-600 rounded-full p-2">
-                <Worm size={20} className="text-white" />
-              </div>
-              <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-                Mountain Email Verifier
-              </h1>
-            </div>
-            <p className="my-3 text-md px-8 text-gray-700 dark:text-gray-400">
-              The most precise email verification service that filters out
-              invalid, temporary, and unsafe email addresses.
-            </p>
-            <img
-              aria-hidden="true"
-              className="object-contain w-full h-auto mt-4 dark:hidden"
-              src={img}
-              alt="Office"
-            />
-            <p className="text-sm -mt-4 pl-8 text-gray-700 dark:text-gray-400">
-              Trusted by thousands of professionals for its precision, this
-              easy-to-use tool ensures your emails connect with real people,
-              boosting the success of your email campaigns.
-            </p>
-          </div>
-
-          <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+    <div className="flex items-center min-h-screen p-5 bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 h-full max-w-[460px] mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div className="flex flex-col overflow-y-auto">
+          <div className="flex items-center justify-center p-6 sm:px-12 sm:py-8 w-full">
             <div className="w-full">
-              <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                Login
+              <h1 className="mb-1 text-3xl font-semibold text-gray-700 dark:text-gray-200 text-center">
+                {isLogin ? "Welcome Back!" : "Create Account"}
               </h1>
+
+              <p className="mb-4 text-sm text-gray-500 dark:text-gray-400 text-center">
+                {isLogin
+                  ? "Great to see you again"
+                  : "Start your journey with us"}
+              </p>
+              <div className="flex justify-center mb-5 rounded-lg bg-gray-100 p-1">
+                <button
+                  className={`w-full h-9 text-[16px] font-semibold rounded-lg ${
+                    isLogin
+                      ? "bg-purple-600 text-white"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                  onClick={() => toggleForm("login")}
+                >
+                  Login
+                </button>
+                <button
+                  className={`w-full h-9 text-[16px] font-semibold rounded-lg ${
+                    !isLogin
+                      ? "bg-purple-600 text-white"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                  onClick={() => toggleForm("signup")}
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              <button onClick={handleGoogleLogin} className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray">
+                <img alt="img" src={gimg} className="mr-1 h-[20px] w-10" />
+                Log in with Google
+              </button>
+              <div className="flex items-center mb-5 mt-6">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="mx-4 text-center text-gray-600">
+                  or continue with email
+                </span>
+                <hr className="flex-grow border-t border-gray-300" />
+              </div>
               <form onSubmit={formik.handleSubmit}>
                 <label className="block text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
@@ -110,7 +156,7 @@ export default function Login() {
                     onBlur={formik.handleBlur}
                   />
                   {formik.touched.email && formik.errors.email && (
-                    <span className="text-red-500 text-sm">
+                    <span className="text-red-500 text-xs">
                       {formik.errors.email}
                     </span>
                   )}
@@ -134,35 +180,59 @@ export default function Login() {
                     onBlur={formik.handleBlur}
                   />
                   <span
-                    className={`absolute right-3 text-gray-800 ${formik.touched.password && formik.errors.password ? "top-[52%]" : "top-[70%]"}  transform -translate-y-1/2 cursor-pointer`}
+                    className={`absolute right-3 ${
+                      formik.touched.password && formik.errors.password
+                        ? "top-[41%]"
+                        : "top-[50%]"
+                    } transform top-[50%] text-gray-800 cursor-pointer`}
                     onClick={togglePasswordVisibility}
                   >
                     {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
                   </span>
                   {formik.touched.password && formik.errors.password && (
-                    <span className="text-red-500 text-sm">
+                    <span className="text-red-500 text-xs">
                       {formik.errors.password}
                     </span>
                   )}
                 </label>
 
-                <div className="flex justify-between items-center mt-2.5">
-                  <div className="flex items-center">
+                {!isLogin && (
+                  <label className="block mt-4 text-sm relative">
+                    <span className="text-gray-700 dark:text-gray-400">
+                      Confirm Password
+                    </span>
                     <input
-                      type="checkbox"
-                      className="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      type="password"
+                      name="password_confirmation"
+                      className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                        formik.touched.password_confirmation &&
+                        formik.errors.password_confirmation
+                          ? "border-red-500"
+                          : ""
+                      }`}
+                      placeholder="Confirm Password"
+                      value={formik.values.password_confirmation}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                     />
-                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-400">
-                      Remember me
+                    {formik.touched.password_confirmation &&
+                      formik.errors.password_confirmation && (
+                        <span className="text-red-500 text-xs">
+                          {formik.errors.password_confirmation}
+                        </span>
+                      )}
+                  </label>
+                )}
+                {isLogin && (
+                  <div className="flex justify-between items-center mt-2.5">
+                    <span
+                      className="text-sm cursor-pointer font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                      onClick={() => navigate("/forgotpassword")}
+                    >
+                      Forgot password?
                     </span>
                   </div>
-                  <span
-                    className="text-sm cursor-pointer font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                    onClick={() => navigate("/forgotpassword")}
-                  >
-                    Forgot password?
-                  </span>
-                </div>
+                )}
 
                 <button
                   type="submit"
@@ -174,28 +244,13 @@ export default function Login() {
                       alt="Loading..."
                       className="mx-auto h-14 w-[74px] -mt-[18px]"
                     />
-                  ) : (
+                  ) : isLogin ? (
                     "Log in"
+                  ) : (
+                    "Create account"
                   )}
                 </button>
               </form>
-
-              <hr className="my-8" />
-
-              <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray">
-                <img alt="img" src={gimg} className="mr-1 h-[22px] w-10" />
-                Log in with Google
-              </button>
-
-              <p className="mt-4 text-center text-sm">
-                Not registered?{" "}
-                <span
-                  className="font-medium cursor-pointer text-purple-600 dark:text-purple-400 hover:underline"
-                  onClick={() => navigate("/signup")}
-                >
-                  Create account
-                </span>
-              </p>
             </div>
           </div>
         </div>
