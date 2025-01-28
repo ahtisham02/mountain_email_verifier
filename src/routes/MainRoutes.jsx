@@ -149,4 +149,5 @@ const MainRoutes = () => {
     </Router>
   );
 };
+
 export default MainRoutes;
