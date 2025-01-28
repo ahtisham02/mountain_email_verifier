@@ -30,9 +30,6 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   const handleLogout = async () => {
     try {
-      if (!token) {
-        throw new Error("No token found");
-      }
       const parsedToken = token.replace(/^"|"$/g, "");
       const response = await apiRequest("post", "/api/logout", {}, parsedToken);
 
@@ -42,10 +39,9 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         navigate("/auth");
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.message ||
-          error.message ||
-          "Something went wrong. Please try again."
+      dispatch(removeUserInfo());
+      toast.success(
+        "You have been logged out. Please log in again to continue."
       );
       console.error("Error:", error);
     }
@@ -93,7 +89,12 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
           </div>
         </div>
       </div>
-      <button onClick={()=>{navigate('/buycredits')}} className="w-[132px] md:flex items-center justify-center absolute right-56 hidden bg-btnBackground text-white py-1.5 rounded-lg hover:bg-btnBackgroundhover transition duration-200">
+      <button
+        onClick={() => {
+          navigate("/buycredits");
+        }}
+        className="w-[132px] md:flex items-center justify-center absolute right-48 hidden bg-btnBackground text-white py-1.5 rounded-lg hover:bg-btnBackgroundhover transition duration-200"
+      >
         <Zap className="text-white w-4 h-4 mr-2" />
         <span>Buy Credits</span>
       </button>
@@ -108,7 +109,11 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
           className="sm:w-8 sm:h-8 w-7 h-7 rounded-full"
         />
         <span className="sm:ml-3 min-[450px]:flex hidden ml-2 sm:text-base text-sm font-medium items-center">
-          {Fname ? Fname : "Unknown"} {Lname ? Lname : ""}
+          {Fname
+            ? Fname.length > 10
+              ? `${Fname.slice(0, 10)}...`
+              : Fname
+            : "Unknown"}
           <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />
         </span>
         <span className="sm:ml-3 min-[450px]:ml-2 ml-0.5 sm:text-base text-sm font-medium min-[450px]:hidden flex items-center">
@@ -122,7 +127,12 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             ref={dropdownRef}
             className="absolute right-3 lg:right-5 top-14 w-52 bg-white border rounded-lg shadow-lg px-4 py-2 space-y-1"
           >
-            <div onClick={()=>{navigate('/buycredits')}} className="flex items-center md:hidden space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100">
+            <div
+              onClick={() => {
+                navigate("/buycredits");
+              }}
+              className="flex items-center md:hidden space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
+            >
               <Zap className="text-gray-600 w-4 h-4 mr-1" />
               <button className="text-sm text-gray-800">Buy Credits</button>
             </div>

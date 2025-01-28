@@ -38,6 +38,7 @@ const RouteMiddleware = ({ children, isAuthRequired = false }) => {
       dispatch(removeUserInfo());
       toast.success("You have been logged out. Please log in again to continue.");
       console.error("Error:", error);
+      navigate("/auth");
     }
   }, [dispatch, localStorageToken, navigate]);
 
