@@ -11,6 +11,7 @@ import {
 import img from "../../../../assets/img/American_Express.webp";
 import { useNavigate } from "react-router-dom";
 import { removeUserInfo } from "../../../../auth/authSlice";
+import { setProfile } from "../../../../auth/profileSlice";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import apiRequest from "../../../../utils/apiRequest";
@@ -22,7 +23,42 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
   const dropdownRef = useRef(null);
   const token = useSelector((state) => state?.auth?.userToken);
   const Fname = useSelector((state) => state?.auth?.userInfo?.first_name);
+  const Name = useSelector((state) => state?.auth?.userInfo?.name);
   const Lname = useSelector((state) => state?.auth?.userInfo?.last_name);
+  const Profile = useSelector((state) => state.profile.profile);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      dispatch(setProfile());
+      try {
+        const response = await apiRequest(
+          "get",
+          "/api/profile",
+          {},
+          token
+        );
+        if (response.data.status === "success") {
+          dispatch(setProfile(response.data.data));
+        } else {
+          console.error("API Error:", response.data.message);
+          dispatch(removeUserInfo());
+          toast.success(
+            "You have been logged out. Please log in again to continue."
+          );
+          navigate("/auth");
+        }
+      } catch (error) {
+        console.error("Error fetching subscriptions:", error);
+        dispatch(removeUserInfo());
+        toast.success(
+          "You have been logged out. Please log in again to continue."
+        );
+        navigate("/auth");
+      }
+    };
+
+    fetchProfile();
+  }, [dispatch, navigate, token]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -66,7 +102,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 flex items-center justify-between min-[400px]:px-8 px-1.5 py-4 shadow-md bg-white ${
+      className={`fixed top-0 right-0 flex items-center justify-between z-50 min-[400px]:px-8 px-1.5 py-4 shadow-md bg-white ${
         isOpen ? "lg:left-64 left-0" : "left-0 lg:left-16"
       }`}
     >
@@ -80,7 +116,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
           <div className="flex items-center text-sm bg-[#EFF6FF] rounded-full sm:px-4 px-2 sm:py-1 py-0.5 mr-2">
             <ZapIcon className="text-[#7E69E1] sm:w-4 sm:h-4 w-3 h-3 mr-1" />
             <span className="text-[#7E69E1] font-medium text-sm">
-              Credits: 0
+              Credits: {Math.ceil(Profile?.credits?.credits)}
             </span>
           </div>
           <div className="flex items-center text-sm bg-[#FAF5FF] rounded-full sm:px-4 px-2 sm:py-1 py-0.5">
@@ -113,12 +149,19 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             ? Fname.length > 10
               ? `${Fname.slice(0, 10)}...`
               : Fname
+            : Name
+            ? Name.length > 10
+              ? `${Name.slice(0, 10)}...`
+              : Name
             : "Unknown"}
           <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />
         </span>
         <span className="sm:ml-3 min-[450px]:ml-2 ml-0.5 sm:text-base text-sm font-medium min-[450px]:hidden flex items-center">
-          {Fname ? Fname.charAt(0) : "U"}
-          {Lname ? Lname.charAt(0) : "N"}
+          {Name
+            ? Name.replace(/\s/g, "").slice(0, 2)
+            : `${Fname ? Fname.charAt(0) : "U"}${
+                Lname ? Lname.charAt(0) : "N"
+              }`}
           <ChevronDown className="sm:ml-2 ml-0.5 w-4 h-4 text-gray-600" />
         </span>
 

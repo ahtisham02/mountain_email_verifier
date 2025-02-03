@@ -9,17 +9,70 @@ import { setUserInfo } from "../../../auth/authSlice";
 import apiRequest from "../../../utils/apiRequest";
 import loaderGif from "../../../assets/loader1.gif";
 import gimg from "../../../assets/gimg.jpeg";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadings, setLoadings] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      const { access_token } = codeResponse;
+
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+              Accept: "application/json",
+            },
+          }
+        );
+
+        const profileData = response.data;
+
+        const values = {
+          name: profileData.name,
+          email: profileData.email,
+        };
+
+        setLoadings(true);
+        try {
+          const authResponse = await apiRequest(
+            "post",
+            "/api/google/auth",
+            values
+          );
+          if (authResponse.data.status === "success") {
+            toast.success(authResponse.data.message);
+            dispatch(setUserInfo(authResponse.data));
+            navigate("/");
+          } else {
+            setIsLogin(true);
+          }
+        } catch (error) {
+          console.log("Auth request error:", error);
+        } finally {
+          setLoadings(false);
+        }
+      } catch (error) {
+        console.log("Profile fetch error:", error);
+      }
+    },
+    onError: (error) => {
+      console.log("Login Failed:", error);
+    },
+  });
 
   const toggleForm = (formType) => {
     setIsLogin(formType === "login");
@@ -42,16 +95,6 @@ export default function AuthPage() {
         }),
   });
 
-  const handleGoogleLogin = () => {
-    const clientId = "1047481348543-flpdfk65g3p6r0c9nfuul17ku28ld5pi.apps.googleusercontent.com";
-    const redirectUri = "http://localhost:3000/";
-    const scope = "profile email";
-    const responseType = "code";
-    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
-    
-    window.location.href = googleAuthUrl;
-  };
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -62,10 +105,15 @@ export default function AuthPage() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
+        let name = "";
+        if (!isLogin && values.email) {
+          name = values.email.split("@")[0];
+        }
+        const payload = isLogin ? values : { ...values, name };
         const response = await apiRequest(
           "post",
           isLogin ? "/api/login" : "/api/signup",
-          values
+          payload
         );
         if (response.data.status === "success") {
           toast.success(response.data.message);
@@ -73,7 +121,7 @@ export default function AuthPage() {
             dispatch(setUserInfo(response.data));
             navigate("/");
           } else {
-            setIsLogin(true);
+            navigate("/otp");
             formik.resetForm();
           }
         }
@@ -126,9 +174,22 @@ export default function AuthPage() {
                 </button>
               </div>
 
-              <button onClick={handleGoogleLogin} className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray">
-                <img alt="img" src={gimg} className="mr-1 h-[20px] w-10" />
-                Log in with Google
+              <button
+                onClick={handleGoogleLogin}
+                className="flex items-center justify-center h-10 w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-[#f4f4f4] transition-colors duration-150 border border-gray-600 rounded-lg active:bg-transparent hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline-gray"
+              >
+                {!loadings ? (
+                  <>
+                    <img alt="img" src={gimg} className="mr-1 h-[20px] w-10" />
+                    Log in with Google
+                  </>
+                ) : (
+                  <img
+                    src={loaderGif}
+                    alt="Loading..."
+                    className="mx-auto h-10 w-[74px]"
+                  />
+                )}
               </button>
               <div className="flex items-center mb-5 mt-6">
                 <hr className="flex-grow border-t border-gray-300" />

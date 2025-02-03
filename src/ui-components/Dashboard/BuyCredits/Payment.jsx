@@ -1,8 +1,204 @@
 import React, { useState, useEffect } from "react";
-import { FaCreditCard, FaCalendarAlt, FaEye, FaLock } from "react-icons/fa";
+import { FaCreditCard, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Calendar } from "lucide-react";
+import apiRequest from "../../../utils/apiRequest";
 
 const PaymentForm = () => {
   const [deliveryTime, setDeliveryTime] = useState("");
+  const [showCvc, setShowCvc] = useState(false);
+  const location = useLocation();
+  const { selectedPlan } = location.state || {};
+  const navigate = useNavigate();
+  const user = useSelector((state) => state?.auth?.userInfo.email);
+  const Name = useSelector((state) => state?.auth?.userInfo.name);
+  const token = useSelector((state) => state?.auth?.userToken);
+
+  const getUserIP = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error("Failed to fetch IP address", error);
+      return null;
+    }
+  };
+
+  const getCountryName = async (ip) => {
+    try {
+      const response = await fetch(`https://ipapi.co/${ip}/json/`);
+      const data = await response.json();
+      return data.country_code.toLowerCase();
+    } catch (error) {
+      console.error("Failed to fetch country name", error);
+      return null;
+    }
+  };
+
+  const generateUUID = () => {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
+  };
+
+  const handleCardNumberChange = (event) => {
+    let value = event.target.value.replace(/\D/g, "").substring(0, 19);
+    value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
+    formik.setFieldValue("cardNumber", value);
+  };
+
+  const handleExpirationChange = (date) => {
+    if (date) {
+      const expMonth = String(date.getMonth() + 1).padStart(2, "0");
+      const expYear = String(date.getFullYear()).slice(-2);
+      const formattedDate = `${expMonth}/${expYear}`;
+      formik.setFieldValue("expiration", formattedDate);
+    }
+  };
+
+  const handleCVCChange = (event) => {
+    let value = event.target.value.replace(/\D/g, "").substring(0, 4);
+    formik.setFieldValue("cvc", value);
+  };
+
+  const validationSchema = Yup.object({
+    cardNumber: Yup.string()
+      .required("Card Number is required")
+      .matches(
+        /^\d{4} ?\d{4} ?\d{4} ?\d{1,7}$/,
+        "Card Number must be between 13 to 19 digits"
+      ),
+    expiration: Yup.string().required("Expiration Date is required"),
+    cvc: Yup.string()
+      .required("CVC is required")
+      .matches(/^[0-9]{3,4}$/, "CVC must be 3 or 4 digits"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      cardNumber: "",
+      expiration: "",
+      cvc: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const { cardNumber, expiration, cvc } = values;
+        const [expMonth, expYear] = expiration.split("/");
+
+        const ip = await getUserIP();
+        if (!ip) {
+          toast.error("Failed to fetch IP address.");
+          return;
+        }
+
+        const countryName = await getCountryName(ip);
+        if (!countryName) {
+          toast.error("Failed to fetch country information.");
+          return;
+        }
+
+        const muid = generateUUID();
+        const sid = generateUUID();
+        const guid = generateUUID();
+
+        const paymentPayload = new URLSearchParams({
+          type: "card",
+          "card[number]": cardNumber.replace(/\s+/g, ""),
+          "card[cvc]": cvc,
+          "card[exp_month]": expMonth,
+          "card[exp_year]": expYear,
+          "billing_details[name]": Name,
+          "billing_details[email]": user,
+          "billing_details[address][country]": countryName,
+          muid: muid,
+          sid: sid,
+          guid: guid,
+          payment_user_agent:
+            "stripe.js/c93000e12a; stripe-js-v3/c93000e12a; checkout",
+        });
+
+        const response = await axios.post(
+          "https://api.stripe.com/v1/payment_methods",
+          paymentPayload,
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_PUBLIC_STRIPE_API}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+
+        if (!response.data.id) {
+          toast.error("Failed to create payment method.");
+          return;
+        }
+
+        const paymentMethodId = response.data.id;
+
+        const paymentIntentResponse = await axios.post(
+          "https://api.stripe.com/v1/payment_intents",
+          new URLSearchParams({
+            amount: selectedPlan.price * 100,
+            currency: "usd",
+            payment_method: paymentMethodId,
+            confirm: "true",
+            return_url: "http://localhost:3000/buycredits",
+          }),
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_SECRET_STRIPE_API}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+
+        if (paymentIntentResponse.data.status === "succeeded") {
+          const formData = {
+            subscription_id: selectedPlan?.id,
+            price: selectedPlan?.price,
+            discount: selectedPlan?.discount,
+            payment_method: "stripe",
+            date: Date.now(),
+            credits: selectedPlan?.credits,
+            credits_per_day: selectedPlan?.credits_per_day,
+            credits_per_month: selectedPlan?.credits_per_month,
+            txt: paymentIntentResponse.data.id,
+          };
+
+          const response = await apiRequest(
+            "post",
+            "/api/profile/update",
+            formData,
+            token
+          );
+          if (response.data.status === "success") {
+            toast.success("Payment successful!");
+            navigate("/buycredits");
+            formik.resetForm();
+          }
+        } else {
+          toast.error("Payment failed, please try again.");
+        }
+      } catch (error) {
+        toast.error("Something went wrong. Please try again.");
+        console.error(error);
+      }
+    },
+  });
 
   useEffect(() => {
     const now = new Date();
@@ -17,14 +213,6 @@ const PaymentForm = () => {
 
     setDeliveryTime(formattedTime);
   }, []);
-
-  const selectedPlan = {
-    title: "Pro Plan",
-    duration: "Monthly",
-    price: 49.99,
-    discount: 10,
-    credits: 100,
-  };
 
   return (
     <div className="bg-[#f7f9fb] p-6">
@@ -44,7 +232,7 @@ const PaymentForm = () => {
               Payment Method
             </h2>
 
-            <form className="space-y-5">
+            <form onSubmit={formik.handleSubmit} className="space-y-5">
               <div className="relative w-full">
                 <label
                   htmlFor="cardNumber"
@@ -55,11 +243,19 @@ const PaymentForm = () => {
                 <div className="flex items-center border-2 border-gray-300 rounded-lg p-3 w-full">
                   <input
                     id="cardNumber"
+                    type="text"
                     className="w-full outline-none"
-                    placeholder="1234 5678 9012 3456"
+                    placeholder="1234 5678 1234 5678"
+                    onChange={handleCardNumberChange}
+                    value={formik.values.cardNumber}
                   />
                   <FaCreditCard className="text-gray-400 text-lg ml-2" />
                 </div>
+                {formik.errors.cardNumber && formik.touched.cardNumber && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.cardNumber}
+                  </div>
+                )}
               </div>
 
               <div className="flex space-x-6">
@@ -68,35 +264,76 @@ const PaymentForm = () => {
                     htmlFor="expiration"
                     className="text-sm text-gray-600 mb-2 block"
                   >
-                    Expiration Date
+                    Expiration Date (MM/YY)
                   </label>
                   <div className="flex items-center border-2 border-gray-300 rounded-lg p-3 w-full">
-                    <input
+                    <DatePicker
                       id="expiration"
-                      className="w-full outline-none"
-                      placeholder="MM/YY"
+                      selected={
+                        formik.values.expiration
+                          ? new Date(
+                              `20${formik.values.expiration.split("/")[1]}`,
+                              formik.values.expiration.split("/")[0] - 1
+                            )
+                          : null
+                      }
+                      onChange={handleExpirationChange}
+                      dateFormat="MM/yy"
+                      placeholderText="MM/YY"
+                      showMonthYearPicker
+                      minDate={new Date()}
+                      className="w-full outline-none bg-white text-gray-700"
+                      calendarClassName="custom-calendar-size"
                     />
-                    <FaCalendarAlt className="text-gray-400 text-lg ml-2" />
+
+                    <Calendar
+                      size={20}
+                      className="text-gray-400 text-lg ml-2 right-4 absolute"
+                    />
                   </div>
+                  {formik.errors.expiration && formik.touched.expiration && (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.expiration}
+                    </div>
+                  )}
                 </div>
 
                 <div className="relative w-1/2">
                   <label
-                    htmlFor="cvv"
+                    htmlFor="cvc"
                     className="text-sm text-gray-600 mb-2 block"
                   >
-                    CVV
+                    CVC
                   </label>
                   <div className="flex items-center border-2 border-gray-300 rounded-lg p-3 w-full">
                     <input
-                      id="cvv"
+                      id="cvc"
+                      type={showCvc ? "text" : "password"}
                       className="w-full outline-none"
                       placeholder="123"
+                      onChange={handleCVCChange}
+                      value={formik.values.cvc}
                     />
-                    <FaEye className="text-gray-400 text-lg ml-2" />
+                    {showCvc ? (
+                      <FaEye
+                        className="text-gray-400 text-lg ml-2 cursor-pointer"
+                        onClick={() => setShowCvc(false)}
+                      />
+                    ) : (
+                      <FaEyeSlash
+                        className="text-gray-400 text-lg ml-2 cursor-pointer"
+                        onClick={() => setShowCvc(true)}
+                      />
+                    )}{" "}
                   </div>
+                  {formik.errors.cvc && formik.touched.cvc && (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.cvc}
+                    </div>
+                  )}
                 </div>
               </div>
+
               <div className="flex items-center space-x-2">
                 <FaLock className="text-black text-lg" />
                 <span className="text-black font-semibold">
@@ -104,9 +341,8 @@ const PaymentForm = () => {
                 </span>
               </div>
               <button
-                type="button"
-                className="w-full py-3 bg-background text-white font-semibold rounded-lg hover:bg-hover"
-                disabled
+                type="submit"
+                className="w-full py-3 bg-btnBackground cursor-pointer hover:bg-btnBackgroundhover text-white font-semibold rounded-lg hover:bg-hover"
               >
                 Pay
               </button>
@@ -132,66 +368,73 @@ const PaymentForm = () => {
             </form>
           </div>
 
-          <div className="w-full lg:w-[35%] p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <div className="flex justify-between items-center bg-background text-white p-4 rounded-t-lg">
-              <div>
-                <h3 className="text-xl font-bold">{selectedPlan.title}</h3>
-                <p className="text-sm text-gray-200">
-                  Billed {selectedPlan.duration}
+          {selectedPlan ? (
+            <div className="w-full lg:w-[35%] p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="flex justify-between items-center bg-btnBackground text-white p-4 rounded-t-lg">
+                <div>
+                  <h3 className="text-xl font-bold">
+                    {selectedPlan.name} Plan
+                  </h3>
+                  <p className="text-sm text-gray-200">
+                    Billed {selectedPlan.duration}
+                  </p>
+                </div>
+                <div className="bg-hover px-4 py-2 rounded-md font-semibold text-sm">
+                  USD
+                </div>
+              </div>
+
+              <div className="p-4 space-y-2 text-gray-700 border-b">
+                <div className="flex justify-between">
+                  <span className="text-sm mt-0.5 font-semibold text-gray-500">
+                    ${selectedPlan.price} USD
+                    <span className="text-xs ml-2">
+                      × 1{" "}
+                      {selectedPlan.duration === "month" ? "month" : "lifetime"}
+                    </span>
+                  </span>
+                  <span className="font-semibold">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(selectedPlan.price)}
+                  </span>
+                </div>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  You're purchasing a subscription. Your billing will be
+                  adjusted based on your selected plan and renewal terms.
                 </p>
               </div>
-              <div className="bg-hover px-4 py-2 rounded-md font-semibold text-sm">
-                USD
-              </div>
-            </div>
 
-            <div className="p-4 space-y-2 text-gray-700 border-b">
-              <div className="flex justify-between">
-                <span className="text-sm mt-0.5 font-semibold text-gray-500">
+              <div className="p-2 min-[380px]:p-4 space-y-2 text-gray-700 text-sm min-[380px]:text-base">
+                <div className="flex justify-between">
+                  <span>Time:</span>
+                  <span>{deliveryTime}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Duration:</span>
+                  <span>{selectedPlan.duration}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Discount:</span>
+                  <span>{selectedPlan.discount}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Credits:</span>
+                  <span>{Math.floor(selectedPlan.credits)}</span>
+                </div>
+              </div>
+
+              <div className="flex justify-between p-4 text-lg font-bold border-t">
+                <span>Due today</span>
+                <span className="text-green-600">
                   ${selectedPlan.price} USD
-                  <span className="text-xs ml-2">
-                    × 1 member × 1{" "}
-                    {selectedPlan.duration === "Monthly" ? "month" : "year"}
-                  </span>
-                </span>
-                <span className="font-semibold">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(selectedPlan.price)}
                 </span>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                You're upgrading for every active member of your team. If new
-                people join or inactive members become active, they'll be added
-                to your next bill.
-              </p>
             </div>
-
-            <div className="p-2 min-[380px]:p-4 space-y-2 text-gray-700 text-sm min-[380px]:text-base">
-              <div className="flex justify-between">
-                <span>Time:</span>
-                <span>{deliveryTime}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Duration:</span>
-                <span>{selectedPlan.duration}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Discount:</span>
-                <span>{selectedPlan.discount}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Credits:</span>
-                <span>{selectedPlan.credits}</span>
-              </div>
-            </div>
-
-            <div className="flex justify-between p-4 text-lg font-bold border-t">
-              <span>Due today</span>
-              <span className="text-green-600">${selectedPlan.price} USD</span>
-            </div>
-          </div>
+          ) : (
+            <p>No plan selected.</p>
+          )}
         </div>
       </div>
     </div>

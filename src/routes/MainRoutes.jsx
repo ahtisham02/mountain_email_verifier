@@ -17,6 +17,9 @@ import ApiIntegeration from "../pages/AdminPages/ApiIntegeration/ApiIntegeration
 import PaymentForm from "../ui-components/Dashboard/BuyCredits/Payment";
 import RouteMiddleware from "./RouteMIddleware";
 import Api from "../pages/AdminPages/Api/ApiPAge";
+import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
+import ForgorPass from "../ui-components/Authentication/Reset/ForgotPass";
+import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
 
 const MainRoutes = () => {
   return (
@@ -27,6 +30,30 @@ const MainRoutes = () => {
           element={
             <RouteMiddleware isAuthRequired={false}>
               <Login />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/otp"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <OtpPage />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/forgotpassword"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <ForgorPass />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/confirmreset"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <ConfirmReset />
             </RouteMiddleware>
           }
         />

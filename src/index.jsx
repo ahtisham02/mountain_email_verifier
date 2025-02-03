@@ -8,10 +8,14 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor, store } from "./store/store";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const clientId = "1047481348543-flpdfk65g3p6r0c9nfuul17ku28ld5pi.apps.googleusercontent.com";
+
 root.render(
+  <GoogleOAuthProvider clientId={clientId}>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <MainRoutes />
@@ -22,4 +26,5 @@ root.render(
       />
     </PersistGate>
   </Provider>
+  </GoogleOAuthProvider>
 );

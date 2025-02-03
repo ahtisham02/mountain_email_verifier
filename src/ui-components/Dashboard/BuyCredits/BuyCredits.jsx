@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 import { Calendar, CreditCard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../../utils/apiRequest";
 import { useDispatch } from "react-redux";
 import { removeUserInfo } from "../../../auth/authSlice";
 import { toast } from "react-toastify";
-
-// eslint-disable-next-line
-const stripePromise = loadStripe(
-  "pk_test_51Qhdn0HGEuCTQqD7ZhH98KpgNo3XC451VnVs2hf76TtYzPwKx5wxq10mj0ZRF756FLCSvTKgyCKax6pFCZqiXl8500qI2Emgn3"
-);
 
 export default function BuyCredits() {
   const [rangeValue, setRangeValue] = useState(0);
@@ -101,11 +95,11 @@ export default function BuyCredits() {
                 <p className="text-gray-600 text-lg mb-6">
                   Get{" "}
                   <span className="font-bold text-gray-900">
-                    {selectedMonthlyPlan.credits_per_month}
+                    {Math.floor(selectedMonthlyPlan.credits_per_month)}
                   </span>{" "}
                   credits per month with a daily limit of{" "}
                   <span className="font-bold">
-                    {selectedMonthlyPlan.credits_per_day}
+                    {Math.floor(selectedMonthlyPlan.credits_per_day)}
                   </span>{" "}
                   credits/day.
                 </p>
@@ -129,7 +123,14 @@ export default function BuyCredits() {
                   Adjust the slider to customize your credit range.
                 </p>
                 <button
-                  onClick={() => navigate("/payment")}
+                  onClick={() =>
+                    navigate("/payment", {
+                      state: {
+                        selectedPlan: selectedMonthlyPlan,
+                        planType: "monthly",
+                      },
+                    })
+                  }
                   className="mt-6 w-full py-3 bg-indigo-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition"
                 >
                   Subscribe Now
@@ -151,7 +152,7 @@ export default function BuyCredits() {
                 <p className="text-gray-600 text-lg mb-6">
                   Purchase{" "}
                   <span className="font-bold text-gray-900">
-                    {selectedLifetimePlan.credits}
+                    {Math.floor(selectedLifetimePlan.credits)}
                   </span>{" "}
                   credits with lifetime access. Credits never expire!
                 </p>
@@ -175,7 +176,14 @@ export default function BuyCredits() {
                   Adjust the slider to find your perfect credit package.
                 </p>
                 <button
-                  onClick={() => navigate("/payment")}
+                  onClick={() =>
+                    navigate("/payment", {
+                      state: {
+                        selectedPlan: selectedLifetimePlan,
+                        planType: "lifetime",
+                      },
+                    })
+                  }
                   className="mt-6 w-full py-3 bg-purple-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-purple-700 transition"
                 >
                   Buy Now

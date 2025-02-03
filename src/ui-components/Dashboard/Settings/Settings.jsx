@@ -8,7 +8,9 @@ import { setUserInfo } from "../../../auth/authSlice";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function Settings() {
-  const user = useSelector((state) => state?.auth?.userInfo);
+  const user = useSelector((state) => state?.auth?.userInfo);  
+  const FNAME = useSelector((state) => state?.auth?.userInfo?.given_name);
+  const LNAME = useSelector((state) => state?.auth?.userInfo?.family_name);
   const token = useSelector((state) => state?.auth?.userToken);
   const dispatch = useDispatch();
 
@@ -17,8 +19,8 @@ export default function Settings() {
 
   const formik = useFormik({
     initialValues: {
-      first_name: user?.first_name || "",
-      last_name: user?.last_name || "",
+      first_name: user?.first_name || FNAME,
+      last_name: user?.last_name || LNAME,
       phone: user?.phone || "",
       address: user?.address || "",
       city: user?.city || "",
@@ -120,7 +122,6 @@ export default function Settings() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 items-stretch">
-        {/* General Information Section */}
         <div className="bg-white p-6 rounded-lg shadow-md lg:w-[50%] flex flex-col">
           <div className="flex items-center mb-4">
             <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">

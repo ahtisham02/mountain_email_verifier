@@ -10,6 +10,20 @@
   }
 }
 
+.custom-calendar-size .react-datepicker__month {
+  font-size: 1.05rem;
+}
+
+.custom-calendar-size .react-datepicker__day {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.custom-calendar-size .react-datepicker__month-year-select {
+  font-size: 1.25rem;
+}
+
 :root {
   --btnBackground: rgb(30,58,138);
   --btnBackgroundhover: rgb(30,64,175);
