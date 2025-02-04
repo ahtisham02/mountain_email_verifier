@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import apiRequest from "../../../utils/apiRequest";
 import { useDispatch } from "react-redux";
 import { removeUserInfo } from "../../../auth/authSlice";
-import { toast } from "react-toastify";
 
 export default function BuyCredits() {
   const [rangeValue, setRangeValue] = useState(0);
@@ -23,17 +22,11 @@ export default function BuyCredits() {
         } else {
           console.error("API Error:", response.data.message);
           dispatch(removeUserInfo());
-          toast.success(
-            "You have been logged out. Please log in again to continue."
-          );
           navigate("/auth");
         }
       } catch (error) {
         console.error("Error fetching subscriptions:", error);
         dispatch(removeUserInfo());
-        toast.success(
-          "You have been logged out. Please log in again to continue."
-        );
         navigate("/auth");
       } finally {
         setLoading(false);

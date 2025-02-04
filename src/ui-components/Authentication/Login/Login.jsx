@@ -109,12 +109,21 @@ export default function AuthPage() {
         if (!isLogin && values.email) {
           name = values.email.split("@")[0];
         }
-        const payload = isLogin ? values : { ...values, name };
+
+        const formData = new FormData();
+        Object.entries({ ...values, ...(isLogin ? {} : { name }) }).forEach(
+          ([key, value]) => {
+            formData.append(key, value);
+          }
+        );
+
         const response = await apiRequest(
           "post",
           isLogin ? "/api/login" : "/api/signup",
-          payload
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
+
         if (response.data.status === "success") {
           toast.success(response.data.message);
           if (isLogin) {
@@ -122,14 +131,20 @@ export default function AuthPage() {
             navigate("/");
           } else {
             navigate("/otp");
+            localStorage.setItem("userEmail", response.data.data.email);
+            localStorage.setItem("userPassword", values.password);
+            alert(response.data.code);
             formik.resetForm();
           }
         }
       } catch (error) {
-        toast.error(
-          error.response?.data?.message ||
-            "Something went wrong. Please try again."
-        );
+        const errorData = error.response?.data || {};
+        if (typeof errorData === "object") {
+          const messages = Object.values(errorData).flat().join("\n");
+          toast.error(messages);
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
       } finally {
         setLoading(false);
       }

@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 import { removeUserInfo } from "../../../auth/authSlice";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import apiRequest from "../../../utils/apiRequest";
@@ -38,17 +37,11 @@ export default function CreditsHistory() {
         } else {
           console.error("API Error:", response.data.message);
           dispatch(removeUserInfo());
-          toast.success(
-            "You have been logged out. Please log in again to continue."
-          );
           navigate("/auth");
         }
       } catch (error) {
         console.error("Error fetching subscriptions:", error);
         dispatch(removeUserInfo());
-        toast.success(
-          "You have been logged out. Please log in again to continue."
-        );
         navigate("/auth");
       } finally {
         setLoading(false);

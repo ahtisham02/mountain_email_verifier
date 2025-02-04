@@ -7,7 +7,7 @@ import {
   ZapIcon,
   ChevronDown,
   Zap,
-  User2,
+  CircleUser,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { removeUserInfo } from "../../../../auth/authSlice";
@@ -37,17 +37,11 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         } else {
           console.error("API Error:", response.data.message);
           dispatch(removeUserInfo());
-          toast.success(
-            "You have been logged out. Please log in again to continue."
-          );
           navigate("/auth");
         }
       } catch (error) {
         console.error("Error fetching subscriptions:", error);
         dispatch(removeUserInfo());
-        toast.success(
-          "You have been logged out. Please log in again to continue."
-        );
         navigate("/auth");
       }
     };
@@ -71,10 +65,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
       }
     } catch (error) {
       dispatch(removeUserInfo());
-      toast.success(
-        "You have been logged out. Please log in again to continue."
-      );
-      console.error("Error:", error);
+      navigate("/auth");
     }
   };
 
@@ -134,8 +125,8 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         className="flex items-center cursor-pointer"
         onClick={toggleDropdown}
       >
-        <div className="sm:w-8 sm:h-8 w-7 h-7 bg-gray-300 rounded-full flex items-center justify-center">
-          <User2 className="text-white text-sm" />
+        <div className="sm:w-8 sm:h-8 w-7 h-7 bg-[#EFF6FF] rounded-full flex items-center justify-center">
+          <CircleUser className="text-[#7E69E1] text-sm" />
         </div>
         <span className="sm:ml-3 min-[450px]:flex hidden ml-2 sm:text-base text-sm font-medium items-center">
           {Fname

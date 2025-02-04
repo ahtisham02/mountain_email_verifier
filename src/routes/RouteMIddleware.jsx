@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { removeUserInfo } from "../auth/authSlice";
 
 const RouteMiddleware = ({ children, isAuthRequired = false }) => {
@@ -36,8 +35,6 @@ const RouteMiddleware = ({ children, isAuthRequired = false }) => {
       navigate("/auth");
     } catch (error) {
       dispatch(removeUserInfo());
-      toast.success("You have been logged out. Please log in again to continue.");
-      console.error("Error:", error);
       navigate("/auth");
     }
   }, [dispatch, localStorageToken, navigate]);
