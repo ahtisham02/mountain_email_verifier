@@ -7,8 +7,8 @@ import {
   ZapIcon,
   ChevronDown,
   Zap,
+  User2,
 } from "lucide-react";
-import img from "../../../../assets/img/American_Express.webp";
 import { useNavigate } from "react-router-dom";
 import { removeUserInfo } from "../../../../auth/authSlice";
 import { setProfile } from "../../../../auth/profileSlice";
@@ -31,12 +31,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
     const fetchProfile = async () => {
       dispatch(setProfile());
       try {
-        const response = await apiRequest(
-          "get",
-          "/api/profile",
-          {},
-          token
-        );
+        const response = await apiRequest("get", "/api/profile", {}, token);
         if (response.data.status === "success") {
           dispatch(setProfile(response.data.data));
         } else {
@@ -139,11 +134,9 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         className="flex items-center cursor-pointer"
         onClick={toggleDropdown}
       >
-        <img
-          src={img}
-          alt="Profile"
-          className="sm:w-8 sm:h-8 w-7 h-7 rounded-full"
-        />
+        <div className="sm:w-8 sm:h-8 w-7 h-7 bg-gray-300 rounded-full flex items-center justify-center">
+          <User2 className="text-white text-sm" />
+        </div>
         <span className="sm:ml-3 min-[450px]:flex hidden ml-2 sm:text-base text-sm font-medium items-center">
           {Fname
             ? Fname.length > 10

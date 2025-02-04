@@ -52,7 +52,7 @@ export default function PlugIn() {
       </div>
 
       <p className="text-gray-600 text-center mt-8">
-        You can search for "Reoon Email Verifier" on the WordPress plugin
+        You can search for "Mountain Email Verifier" on the WordPress plugin
         directory and install our plugin.
       </p>
       <p className="text-gray-600 text-center mb-6">

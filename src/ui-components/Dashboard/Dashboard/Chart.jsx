@@ -64,7 +64,7 @@ export default function Chart() {
           </p>
         </div>
         <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm flex flex-col items-center justify-center p-4 lg:col-span-1">
-          <p className="text-lg font-medium">Reoon Lead Generator (B2B)</p>
+          <p className="text-lg font-medium">Mountain Lead Generator (B2B)</p>
           <p className="text-sm text-gray-600 text-center mt-2">
             Get thousands of local business leads from online directories
             (including emails and phone numbers).

@@ -15,4 +15,10 @@ module.exports = {
     },
   },
   plugins: [],
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.devtool = false;
+    }
+    return config;
+  },
 }
