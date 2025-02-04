@@ -48,7 +48,7 @@ export default function Chart() {
 
   return (
     <div className="bg-gray-50">
-      <h2 className="px-6 md:text-2xl text-xl font-semibold text-gray-700 dark:text-gray-200">
+      <h2 className="px-6 md:text-2xl text-xl font-semibold text-gray-700">
         Combined Timeline Chart
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[58%_40%] 2xl:grid-cols-[58%_41%] lg:gap-3 gap-6 p-6">

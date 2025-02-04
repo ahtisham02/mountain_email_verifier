@@ -134,7 +134,7 @@ export default function Dashboard() {
 
   return (
     <div className="bg-gray-50 px-6">
-      <h2 className="pt-6 pb-2 md:text-2xl text-xl font-semibold text-gray-700 dark:text-gray-200">
+      <h2 className="pt-6 pb-2 md:text-2xl text-xl font-semibold text-gray-700">
         Result Details
       </h2>
       <button
@@ -187,7 +187,7 @@ export default function Dashboard() {
       <div className="grid md:grid-cols-2 gap-6 pb-8">
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 flex flex-col sm:flex-row">
           <div className="flex-1 flex flex-col">
-            <h4 className="mb-4 text-lg whitespace-nowrap font-semibold text-gray-800 dark:text-gray-300">
+            <h4 className="mb-4 text-lg whitespace-nowrap font-semibold text-gray-800">
               <CheckCircle className="inline-block text-btnBackgroundhover mr-2 w-5 h-5 mb-0.5" />
               Results Analysis
             </h4>

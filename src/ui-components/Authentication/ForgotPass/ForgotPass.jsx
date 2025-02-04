@@ -5,24 +5,24 @@ export default function ForgotPass() {
   const navigate = useNavigate();
 
   return (
-    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-      <div class="flex-1 h-full max-w-lg mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div class="flex items-center min-h-screen p-6 bg-gray-50">
+      <div class="flex-1 h-full max-w-lg mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
         <div class="flex flex-col overflow-y-auto md:flex-row">
           <div class="flex items-center justify-center p-4 sm:p-8">
             <div class="w-full">
-              <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              <h1 class="mb-4 text-xl font-semibold text-gray-700">
                 Reset Password
               </h1>
-              <p class="mt-2 mb-5 text-sm text-gray-500 dark:text-gray-400">
+              <p class="mt-2 mb-5 text-sm text-gray-500">
                 Lost your password? Just type in your email address below and we
                 will send you a password reset link to your email, if it has a
                 valid account!
               </p>
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400">Email</span>
+                <span className="text-gray-700">Email</span>
                 <input
                   type="email"
-                  className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2"
+                  className="block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-[1.5px] border-gray-300 rounded-md p-2"
                   placeholder="Email"
                   required
                 />

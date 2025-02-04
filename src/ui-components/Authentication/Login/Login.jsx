@@ -152,16 +152,16 @@ export default function AuthPage() {
   });
 
   return (
-    <div className="flex items-center min-h-screen p-5 bg-gray-50 dark:bg-gray-900">
-      <div className="flex-1 h-full max-w-[460px] mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div className="flex items-center min-h-screen p-5 bg-gray-50">
+      <div className="flex-1 h-full max-w-[460px] mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
         <div className="flex flex-col overflow-y-auto">
           <div className="flex items-center justify-center p-6 sm:px-12 sm:py-8 w-full">
             <div className="w-full">
-              <h1 className="mb-1 text-3xl font-semibold text-gray-700 dark:text-gray-200 text-center">
+              <h1 className="mb-1 text-3xl font-semibold text-gray-700 text-center">
                 {isLogin ? "Welcome Back!" : "Create Account"}
               </h1>
 
-              <p className="mb-4 text-sm text-gray-500 dark:text-gray-400 text-center">
+              <p className="mb-4 text-sm text-gray-500 text-center">
                 {isLogin
                   ? "Great to see you again"
                   : "Start your journey with us"}
@@ -215,13 +215,13 @@ export default function AuthPage() {
               </div>
               <form onSubmit={formik.handleSubmit}>
                 <label className="block text-sm">
-                  <span className="text-gray-700 dark:text-gray-400">
+                  <span className="text-gray-700">
                     Email
                   </span>
                   <input
                     type="email"
                     name="email"
-                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                    className={`block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-[1.5px] border-gray-300 rounded-md p-2 ${
                       formik.touched.email && formik.errors.email
                         ? "border-red-500"
                         : ""
@@ -239,13 +239,13 @@ export default function AuthPage() {
                 </label>
 
                 <label className="block mt-4 text-sm relative">
-                  <span className="text-gray-700 dark:text-gray-400">
+                  <span className="text-gray-700">
                     Password
                   </span>
                   <input
                     type={passwordVisible ? "text" : "password"}
                     name="password"
-                    className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                    className={`block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-[1.5px] border-gray-300 rounded-md p-2 ${
                       formik.touched.password && formik.errors.password
                         ? "border-red-500"
                         : ""
@@ -274,13 +274,13 @@ export default function AuthPage() {
 
                 {!isLogin && (
                   <label className="block mt-4 text-sm relative">
-                    <span className="text-gray-700 dark:text-gray-400">
+                    <span className="text-gray-700">
                       Confirm Password
                     </span>
                     <input
                       type="password"
                       name="password_confirmation"
-                      className={`block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray border-[1.5px] border-gray-300 rounded-md p-2 ${
+                      className={`block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-[1.5px] border-gray-300 rounded-md p-2 ${
                         formik.touched.password_confirmation &&
                         formik.errors.password_confirmation
                           ? "border-red-500"
@@ -302,7 +302,7 @@ export default function AuthPage() {
                 {isLogin && (
                   <div className="flex justify-between items-center mt-2.5">
                     <span
-                      className="text-sm cursor-pointer font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                      className="text-sm cursor-pointer font-medium text-purple-600 hover:underline"
                       onClick={() => navigate("/forgotpassword")}
                     >
                       Forgot password?
