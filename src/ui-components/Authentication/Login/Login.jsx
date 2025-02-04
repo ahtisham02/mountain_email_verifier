@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../../auth/authSlice";
 import apiRequest from "../../../utils/apiRequest";
-import loaderGif from "../../../assets/loader1.gif";
+import loaderGif from "../../../assets/loadernew1.gif";
 import gimg from "../../../assets/gimg.jpeg";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
@@ -125,15 +125,15 @@ export default function AuthPage() {
         );
 
         if (response.data.status === "success") {
-          toast.success(response.data.message);
           if (isLogin) {
+            toast.success(response.data.message);
             dispatch(setUserInfo(response.data));
             navigate("/");
           } else {
             navigate("/otp");
             localStorage.setItem("userEmail", response.data.data.email);
             localStorage.setItem("userPassword", values.password);
-            alert(response.data.code);
+            alert(`Your verification code is: ${response.data.code}`);
             formik.resetForm();
           }
         }
@@ -202,7 +202,7 @@ export default function AuthPage() {
                   <img
                     src={loaderGif}
                     alt="Loading..."
-                    className="mx-auto h-10 w-[74px]"
+                    className="mx-auto h-[64px] w-[80px]"
                   />
                 )}
               </button>
@@ -258,7 +258,7 @@ export default function AuthPage() {
                   <span
                     className={`absolute right-3 ${
                       formik.touched.password && formik.errors.password
-                        ? "top-[41%]"
+                        ? "top-[40%]"
                         : "top-[50%]"
                     } transform top-[50%] text-gray-800 cursor-pointer`}
                     onClick={togglePasswordVisibility}
@@ -318,7 +318,7 @@ export default function AuthPage() {
                     <img
                       src={loaderGif}
                       alt="Loading..."
-                      className="mx-auto h-14 w-[74px] -mt-[18px]"
+                      className="mx-auto h-[64px] w-[80px] -mt-[21px]"
                     />
                   ) : isLogin ? (
                     "Log in"

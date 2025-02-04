@@ -131,11 +131,11 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         <span className="sm:ml-3 min-[450px]:flex hidden ml-2 sm:text-base text-sm font-medium items-center">
           {Fname
             ? Fname.length > 10
-              ? `${Fname.slice(0, 10)}...`
+              ? `${Fname.slice(0, 8)}...`
               : Fname
             : Name
             ? Name.length > 10
-              ? `${Name.slice(0, 10)}...`
+              ? `${Name.slice(0, 8)}...`
               : Name
             : "Unknown"}
           <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />

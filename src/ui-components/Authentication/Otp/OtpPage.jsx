@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import loaderGif from "../../../assets/loader1.gif";
+import loaderGif from "../../../assets/loadernew1.gif";
 import apiRequest from "../../../utils/apiRequest";
 import { setUserInfo } from "../../../auth/authSlice";
 
@@ -18,13 +18,21 @@ const OtpPage = () => {
 
   const handleOtpChange = (e, index) => {
     const value = e.target.value.slice(-1);
+    const newOtp = otp.split("");
+
     if (/^\d$/.test(value)) {
-      const newOtp = otp.split("");
       newOtp[index] = value;
       setOtp(newOtp.join(""));
 
       if (index < 4) {
         document.getElementById(`otp-input-${index + 1}`).focus();
+      }
+    } else if (e.nativeEvent.inputType === "deleteContentBackward") {
+      newOtp[index] = "";
+      setOtp(newOtp.join(""));
+
+      if (index > 0) {
+        document.getElementById(`otp-input-${index - 1}`).focus();
       }
     }
   };
@@ -53,8 +61,6 @@ const OtpPage = () => {
       });
 
       if (response.data.status === "success") {
-        toast.success(response.data.message);
-
         const loginResponse = await apiRequest(
           "post",
           "/api/login",
@@ -63,7 +69,7 @@ const OtpPage = () => {
         );
 
         if (loginResponse.data.status === "success") {
-          toast.success("Login successful!");
+          toast.success("User verified & logged in successfully!");
           dispatch(setUserInfo(loginResponse.data));
           navigate("/");
 
@@ -91,8 +97,18 @@ const OtpPage = () => {
     setIsResend(true);
 
     try {
-      await apiRequest("post", "/api/resend-otp", { email });
+      const formData = new FormData();
+      formData.append("email", email);
+
+      const response = await apiRequest("post", "/api/resend-otp", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       toast.success("OTP resent successfully!");
+
+      if (response.data.code) {
+        alert(`Your verification code is: ${response.data.code}`);
+      }
     } catch (error) {
       toast.error("Failed to resend OTP.");
     } finally {
@@ -138,7 +154,11 @@ const OtpPage = () => {
               disabled={loading}
             >
               {loading ? (
-                <img src={loaderGif} alt="Loading..." className="h-6 w-6" />
+                <img
+                  src={loaderGif}
+                  alt="Loading..."
+                  className="mx-auto h-[64px] w-[80px] -mt-[1px]"
+                />
               ) : (
                 "Submit"
               )}
