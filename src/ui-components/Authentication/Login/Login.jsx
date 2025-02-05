@@ -133,7 +133,6 @@ export default function AuthPage() {
             navigate("/otp");
             localStorage.setItem("userEmail", response.data.data.email);
             localStorage.setItem("userPassword", values.password);
-            alert(`Your verification code is: ${response.data.code}`);
             formik.resetForm();
           }
         }

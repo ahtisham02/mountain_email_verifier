@@ -100,15 +100,10 @@ const OtpPage = () => {
       const formData = new FormData();
       formData.append("email", email);
 
-      const response = await apiRequest("post", "/api/resend-otp", formData, {
+      await apiRequest("post", "/api/resend-otp", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
       toast.success("OTP resent successfully!");
-
-      if (response.data.code) {
-        alert(`Your verification code is: ${response.data.code}`);
-      }
     } catch (error) {
       toast.error("Failed to resend OTP.");
     } finally {

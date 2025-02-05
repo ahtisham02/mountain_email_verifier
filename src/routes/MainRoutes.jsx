@@ -19,6 +19,7 @@ import RouteMiddleware from "./RouteMIddleware";
 import Api from "../pages/AdminPages/Api/ApiPAge";
 import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
 import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
+import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
 
 const MainRoutes = () => {
   return (
@@ -41,10 +42,18 @@ const MainRoutes = () => {
           }
         />
         <Route
-          path="/confirmreset"
+          path="/password/reset"
           element={
             <RouteMiddleware isAuthRequired={false}>
               <ConfirmReset />
+            </RouteMiddleware>
+          }
+        />
+        <Route
+          path="/confirm"
+          element={
+            <RouteMiddleware isAuthRequired={false}>
+              <ConfirmationPage />
             </RouteMiddleware>
           }
         />
