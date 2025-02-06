@@ -42,6 +42,14 @@ export default function BuyCredits() {
   const selectedLifetimePlan = lifetimePlans[Math.floor(rangeValue2)] || {};
   const selectedMonthlyPlan = monthlyPlans[Math.floor(rangeValue)] || {};
 
+  const sliderProgress = (rangeValue / (monthlyPlans.length - 1)) * 100;
+
+  const sliderBackground = `linear-gradient(90deg, #4f46e5 ${sliderProgress}%, #ddd ${sliderProgress}%)`;
+
+  const sliderProgress2 = (rangeValue2 / (lifetimePlans.length - 1)) * 100;
+
+  const sliderBackground2 = `linear-gradient(90deg, #9333ea ${sliderProgress2}%, #ddd ${sliderProgress2}%)`;
+
   return (
     <div className="bg-gray-50 p-6">
       <div className="mb-8">
@@ -110,8 +118,13 @@ export default function BuyCredits() {
                   max={monthlyPlans.length - 1}
                   value={rangeValue}
                   onChange={(e) => setRangeValue(Number(e.target.value))}
-                  className="w-full h-2 rounded-full bg-gray-200 focus:ring-2 focus:ring-indigo-600"
+                  className="w-full h-2 rounded-full appearance-none"
+                  style={{
+                    background: sliderBackground,
+                    transition: "background 0.1s ease",
+                  }}
                 />
+
                 <p className="text-sm text-indigo-700 bg-indigo-50 p-3 rounded-lg mt-4">
                   Adjust the slider to customize your credit range.
                 </p>
@@ -163,7 +176,11 @@ export default function BuyCredits() {
                   max={lifetimePlans.length - 1}
                   value={rangeValue2}
                   onChange={(e) => setRangeValue2(Number(e.target.value))}
-                  className="w-full h-2 rounded-full bg-gray-200 focus:ring-2 focus:ring-purple-600"
+                  className="w-full h-2 rounded-full bg-gray-200"
+                  style={{
+                    background: sliderBackground2,
+                    transition: "background 0.1s ease",
+                  }}
                 />
                 <p className="text-sm text-purple-700 bg-purple-50 p-3 rounded-lg mt-4">
                   Adjust the slider to find your perfect credit package.
