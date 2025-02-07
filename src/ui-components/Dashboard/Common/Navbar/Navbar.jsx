@@ -107,23 +107,23 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 flex items-center justify-between z-50 min-[400px]:px-8 px-1.5 py-2 shadow-sm bg-[#e8fedf] lg:bg-white ${isOpen ? "lg:left-60 left-0" : "left-0 lg:left-16"
+      className={`fixed top-0 right-0 flex items-center justify-between z-50 min-[400px]:px-8 px-1.5 py-4 shadow-sm bg-[#e8fedf] lg:bg-white ${isOpen ? "lg:left-60 left-0" : "left-0 lg:left-16"
         }`}
     >
       <div className="flex items-center space-x-4">
         <AlignLeft
           onClick={onToggleSidebar}
           className={`lg:text-[#359F6F] text-black cursor-pointer ${isOpen ? "lg:hidden" : "block"
-            } min-[450px]:-ml-4 mr-4 w-7 h-7 sm:w-8 sm:h-8`}
+            } min-[450px]:-ml-4 mr-4 w-7 h-7`}
         />
         <button
           onClick={() => {
             navigate("/buycredits");
           }}
-          className="w-[136px] md:flex items-center justify-center z-40 hidden bg-black text-white py-1.5 rounded-2xl"
+          className="w-[145px] md:flex items-center justify-center z-40 hidden bg-black text-white py-[7.5px] rounded-2xl"
         >
-          <Zap className="text-white w-4 h-4 mr-2" />
-          <span>Buy Credits</span>
+          <Zap strokeWidth={2.5} className="text-white w-4 h-4 mr-2" />
+          <span className="-mt-[2px] font-medium">Buy Credits</span>
         </button>
       </div>
 

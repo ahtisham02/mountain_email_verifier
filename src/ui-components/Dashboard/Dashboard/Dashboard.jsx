@@ -75,13 +75,16 @@ export default function Dashboard() {
           {
             data: [30, 20, 10, 40, 50, 23, 13],
             backgroundColor: [
-              "#3b82f6",
-              "#14b8a6",
-              "#9333ea",
+              "#0b996f",
               "#10b981",
-              "#f59e0b",
-              "#ef4444",
-              "#6366f1",
+              "#14b8a6",
+              "#1e3a3a",
+              "#2c5e5e",
+              "#3f736e",
+              "#4a857a",
+              "#5e9c86",
+              "#7aada3",
+              "#a3b1b1",
             ],
           },
         ],
@@ -106,12 +109,12 @@ export default function Dashboard() {
           {
             label: "Organic",
             data: [65, 59, 80, 81, 56, 55],
-            backgroundColor: "#14b8a6",
+            backgroundColor: "#0B996F",
           },
           {
             label: "Paid",
             data: [28, 48, 50, 19, 86, 27],
-            backgroundColor: "#9333ea",
+            backgroundColor: "#5b5b78",
           },
         ],
       },
@@ -169,56 +172,56 @@ export default function Dashboard() {
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#3b82f6" }}
+                  style={{ backgroundColor: "#0b996f" }}
                 ></span>
                 Safe: 30
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#14b8a6" }}
+                  style={{ backgroundColor: "#10b981" }}
                 ></span>
                 Disabled: 20
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#9333ea" }}
+                  style={{ backgroundColor: "#14b8a6" }}
                 ></span>
                 Inactive: 10
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#10b981" }}
+                  style={{ backgroundColor: "#1e3a3a" }}
                 ></span>
                 Role: 40
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#f59e0b" }}
+                  style={{ backgroundColor: "#2c5e5e" }}
                 ></span>
                 Catch-All: 23
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#ef4444" }}
+                  style={{ backgroundColor: "#3f736e" }}
                 ></span>
                 Disposable: 80
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#6366f1" }}
+                  style={{ backgroundColor: "#4a857a" }}
                 ></span>
                 Invalid: 50
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#6b7280" }}
+                  style={{ backgroundColor: "#5e9c86" }}
                 ></span>
                 Unknown: 0
               </li>
@@ -238,7 +241,7 @@ export default function Dashboard() {
                 <span>Organic</span>
               </div>
               <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                <span className="inline-block w-3 h-3 mr-1 bg-[#5b5b78] rounded-full"></span>
                 <span>Paid</span>
               </div>
             </div>

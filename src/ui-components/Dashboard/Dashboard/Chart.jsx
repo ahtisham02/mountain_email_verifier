@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import 'chart.js/auto'
+import "chart.js/auto";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,16 +30,16 @@ export default function Chart() {
       {
         label: "Daily Credits",
         data: [0, 5, 20, 15, 10, 15, 20, 20, 10, 5],
-        borderColor: "#4caf50",
-        backgroundColor: "rgba(76, 175, 80, 0.2)",
+        borderColor: "#5b5b78",
+        backgroundColor: "rgb(91,91,120, 0.2)",
         fill: true,
         tension: 0.4,
       },
       {
         label: "Instant Credits",
         data: [0, 10, 30, 25, 35, 30, 20, 10, 5, 0],
-        borderColor: "#f44336",
-        backgroundColor: "rgba(244, 67, 54, 0.2)",
+        borderColor: "#0b996f",
+        backgroundColor: "rgb(11,153,111, 0.2)",
         fill: true,
         tension: 0.4,
       },

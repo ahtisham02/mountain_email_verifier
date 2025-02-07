@@ -53,7 +53,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
         isOpen ? "translate-x-0 w-60 lg:!ml-0" : "-translate-x-full w-16"
       }`}
     >
-      <div className="flex items-center justify-between px-4 my-3">
+      <div className="flex items-center justify-between px-4 mt-[18px] mb-6">
         <h1
           className={`text-[#0b996f] font-bold text-3xl ${
             !isOpen ? "hidden" : ""
@@ -70,13 +70,13 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
         </h1>
         <AlignRight
           onClick={onToggleSidebar}
-          className={`text-[#359F6F] cursor-pointer w-6 h-6 ${
+          className={`text-[#359F6F] cursor-pointer w-7 h-7 ${
             !isOpen ? "hidden" : ""
           }`}
         />
       </div>
 
-      <ul className="space-y-1 overflow-y-auto max-h-[calc(100vh-70px)] scrollbar-hide">
+      <ul className="space-y-2 overflow-y-auto max-h-[calc(100vh-80px)] scrollbar-hide">
         {menuItems.map(({ icon: Icon, label, path }, index) => (
           <li
             key={index}
