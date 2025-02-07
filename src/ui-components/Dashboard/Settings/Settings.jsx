@@ -109,7 +109,7 @@ export default function Settings() {
   });
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
@@ -122,7 +122,7 @@ export default function Settings() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 items-stretch">
-        <div className="bg-white p-6 rounded-lg shadow-md lg:w-[50%] flex flex-col">
+        <div className="bg-white p-6 rounded-2xl border-[1px] border-[#e8e8e8] lg:w-[50%] flex flex-col">
           <div className="flex items-center mb-4">
             <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
               <User className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
@@ -186,14 +186,13 @@ export default function Settings() {
           </div>
           <button
             onClick={formik.handleSubmit}
-            className="mt-auto w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
+            className="mt-auto w-full p-3 rounded-2xl bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
           >
             Save Changes
           </button>
         </div>
 
-        {/* Password Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md lg:w-[40%] flex-1">
+        <div className="bg-white p-6 rounded-2xl border-[1px] border-[#e8e8e8] lg:w-[40%] flex-1">
           <div className="flex items-center mb-4">
             <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
               <Lock className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
@@ -280,7 +279,7 @@ export default function Settings() {
 
             <button
               type="submit"
-              className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
+              className="mt-4 w-full p-3 rounded-2xl bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
             >
               Change Password
             </button>
@@ -288,8 +287,7 @@ export default function Settings() {
         </div>
       </div>
 
-      {/* Address Section */}
-      <div className="bg-white p-6 mt-6 rounded-lg shadow-md">
+      <div className="bg-white p-6 mt-6 rounded-2xl border-[1px] border-[#e8e8e8]">
         <div className="flex items-center mb-4">
           <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-2">
             <MapPin className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
@@ -362,7 +360,7 @@ export default function Settings() {
         </div>
         <button
           onClick={formik.handleSubmit}
-          className="mt-4 w-full p-3 rounded bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
+          className="mt-4 w-full p-3 rounded-2xl bg-btnBackground hover:bg-btnBackgroundhover text-white font-bold"
         >
           Save Address
         </button>

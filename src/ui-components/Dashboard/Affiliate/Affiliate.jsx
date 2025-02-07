@@ -14,7 +14,7 @@ import img from "../../../assets/rb_2148899114.png";
 
 export default function Affiliate() {
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
@@ -26,7 +26,7 @@ export default function Affiliate() {
           </p>
         </div>
       </div>
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
         <div className="flex items-center pb-3 mb-5 border-b border-gray-200">
           <Bell className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
           <h3 className="sm:text-lg text-base font-bold text-gray-800">
@@ -45,7 +45,7 @@ export default function Affiliate() {
         </a>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
           <div className="sm:flex sm:justify-between sm:items-center border-b border-gray-200 pb-4 mb-4">
             <div className="flex items-center mb-4 sm:mb-0">
               <Shapes className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
@@ -95,7 +95,7 @@ export default function Affiliate() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
           <div className="flex items-center pb-4 border-b border-gray-200">
             <HelpCircle className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
             <h3 className="sm:text-lg text-base font-bold text-gray-800">
@@ -113,13 +113,13 @@ export default function Affiliate() {
                 Need help setting up Mountain Email Finder or have any questions
                 about the plugin?
               </p>
-              <button className="bg-btnBackground hover:bg-purple-700 text-white text-sm sm:text-base px-4 py-2 rounded">
+              <button className="bg-btnBackground hover:bg-btnBackgroundhover text-white text-sm sm:text-base px-4 py-2 rounded-2xl">
                 Open a support ticket
               </button>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
           <div className="flex items-center border-b pb-4 border-gray-200 mb-3">
             <UserRoundPlus className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
             <h3 className="sm:text-lg text-base font-bold text-gray-800">
@@ -181,7 +181,7 @@ export default function Affiliate() {
             </tfoot>
           </table>
         </div>
-        <div className="bg-white rounded-lg shadow py-4 px-3 min-[450]::p-6">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] py-4 px-3 min-[450]::p-6">
           <div className="flex items-center border-b mb-4 pb-4 border-gray-200">
             <Banknote className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
             <h3 className="sm:text-lg text-base font-bold text-gray-800">
@@ -198,7 +198,7 @@ export default function Affiliate() {
                 value="https://www.reoon.com/email-verifier/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-2xl whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
                 Copy Link
               </button>
             </div>
@@ -212,7 +212,7 @@ export default function Affiliate() {
                 value="https://emailverifier.reoon.com/register/?inv=g2mgsihm"
                 readOnly
               />
-              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-lg p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-2xl p-1 text-sm sm:text-base sm:px-4 sm:py-2">
                 Copy Link
               </button>
             </div>

@@ -166,7 +166,7 @@ export default function CreditsHistory() {
   };
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6">
         <div className="mb-4 md:mb-0">
           <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
@@ -201,7 +201,7 @@ export default function CreditsHistory() {
         </div>
       ) : (
         <div
-          className="bg-white rounded-lg mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] sm:w-full shadow p-4 flex flex-col"
+          className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] sm:w-full p-4 flex flex-col"
           style={{ minHeight: "400px" }}
         >
           <div className="overflow-x-auto scrollbar-hide max-w-full flex-grow">

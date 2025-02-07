@@ -4,7 +4,7 @@ import BuyCredits from '../../../ui-components/Dashboard/BuyCredits/BuyCredits';
 export default function BuyCreditsPage() {
    return (
      <>
-       <div className="flex-grow bg-gray-50">
+       <div className="flex-grow">
          <BuyCredits />
        </div>
      </>

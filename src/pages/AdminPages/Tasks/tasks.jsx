@@ -4,7 +4,7 @@ import Tasks from "../../../ui-components/Dashboard/Tasks/Tasks";
 const TasksPage = () => {
   return (
     <>
-      <div className="flex-grow bg-gray-50">
+      <div className="flex-grow">
         <Tasks />
       </div>
     </>

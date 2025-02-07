@@ -133,7 +133,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="bg-gray-50 px-6">
+    <div className="px-6">
       <h2 className="pt-6 pb-2 md:text-2xl text-xl font-semibold text-gray-700">
         Result Details
       </h2>
@@ -143,7 +143,7 @@ export default function Dashboard() {
       >
         <ArrowLeftCircle className="w-5 h-5 mr-2" /> Back to the results
       </button>
-      <div className="bg-white rounded-lg border border-gray-300 shadow-md p-6 mb-6">
+      <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 mb-6">
         <h3 className="text-lg font-bold text-gray-900 flex items-center">
           <Bookmark className="inline-block text-btnBackgroundhover mr-2 w-5 h-5 mb-0.5" />
           Task: arbfghtcukio
@@ -185,7 +185,7 @@ export default function Dashboard() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 pb-8">
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 flex flex-col sm:flex-row">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 flex flex-col sm:flex-row">
           <div className="flex-1 flex flex-col">
             <h4 className="mb-4 text-lg whitespace-nowrap font-semibold text-gray-800">
               <CheckCircle className="inline-block text-btnBackgroundhover mr-2 w-5 h-5 mb-0.5" />
@@ -261,8 +261,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Right Card */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 flex flex-col justify-between">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 flex flex-col justify-between">
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             <CloudDownload className="inline-block text-btnBackgroundhover mr-2 w-5 h-5 mb-0.5" />
             Download Categorized Results

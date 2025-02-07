@@ -12,6 +12,9 @@ module.exports = {
         completed: "var(--completed)",
         inprogress: "var(--inprogress)",
       },
+      fontFamily: {
+        "plus-jakarta": ['"Plus Jakarta Sans"', "sans-serif"],
+      },
     },
   },
   plugins: [],
@@ -21,4 +24,5 @@ module.exports = {
     }
     return config;
   },
+  safelist: ["font-plus-jakarta"],
 }

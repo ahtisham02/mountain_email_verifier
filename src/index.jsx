@@ -13,6 +13,14 @@ import { IntercomProvider } from "react-use-intercom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const link = document.createElement("link");
+link.href = "/fonts/PlusJakartaSans-Light.ttf";
+link.rel = "preload";
+link.as = "font";
+link.type = "font/ttf";
+link.crossOrigin = "anonymous";
+document.head.appendChild(link);
+
 root.render(
   <IntercomProvider appId={process.env.REACT_APP_INTERCOM_APP_ID}>
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENTID}>

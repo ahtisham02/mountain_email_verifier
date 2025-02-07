@@ -4,7 +4,7 @@ import EmailVerification from "../../../ui-components/Dashboard/EmailVerificatio
 const EmailVerificationPage = () => {
   return (
     <>
-      <div className="flex-grow bg-gray-50">
+      <div className="flex-grow">
         <EmailVerification />
       </div>
     </>

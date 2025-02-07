@@ -19,7 +19,7 @@ const SuccessModal = ({ open, onClose, onNavigate }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-[#F3F6F8] rounded-lg shadow-lg pt-10 max-w-[400px] h-[450px] w-full p-6 flex flex-col justify-between text-center">
+      <div className="bg-[#F3F6F8] rounded-2xl border-[1px] border-[#e8e8e8] pt-10 max-w-[400px] h-[450px] w-full p-6 flex flex-col justify-between text-center">
         <div>
           <img
             src={showGif ? loaderGif : loaderStatic}

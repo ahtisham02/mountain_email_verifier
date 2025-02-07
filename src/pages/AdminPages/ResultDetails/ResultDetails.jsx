@@ -4,7 +4,7 @@ import ResultDetails from '../../../ui-components/Dashboard/ResultDetails/Result
 export default function ResultDetailsPage() {
    return (
      <>
-       <div className="flex-grow bg-gray-50">
+       <div className="flex-grow">
          <ResultDetails />
        </div>
      </>

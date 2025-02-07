@@ -66,7 +66,7 @@ export default function Faqs() {
   ];
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="mb-8">
         <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">Frequently Asked Questions</h2>
         <p className="text-gray-600 text-sm md:text-base">Find the answers to the mostly asked questions below.</p>
@@ -75,7 +75,7 @@ export default function Faqs() {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="flex items-start p-4 border border-gray-200 rounded-lg bg-white"
+            className="flex items-start p-4 rounded-2xl border-[1px] border-[#e8e8e8] bg-white"
           >
             <div className="mr-4">
               <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center">

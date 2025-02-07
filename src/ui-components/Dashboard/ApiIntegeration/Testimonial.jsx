@@ -85,7 +85,7 @@ export default function TestimonialTwo() {
   };
 
   return (
-    <div className="bg-white m-6 p-4 flex flex-col rounded-2xl shadow-md w-[82vw] min-[550px]:w-auto">
+    <div className="bg-white m-6 p-4 flex flex-col rounded-2xl border-[1px] border-[#e8e8e8] w-[82vw] min-[550px]:w-auto">
       <div className="flex flex-col lg:flex-row w-full gap-4">
         <div className="w-full lg:w-1/2 order-2 lg:order-2">
           <div className="rounded-lg">
@@ -115,14 +115,12 @@ export default function TestimonialTwo() {
           </div>
         </div>
 
-        {/* Sidebar Content */}
         <div className="w-full lg:w-1/2 order-1 lg:order-1">
           <div className="text-left">
             <h2 className="sm:text-2xl text-lg text-gray-800 font-bold">
               API Documentation (Single & Bulk API Validation)
             </h2>
             <div className="mt-8">
-              {/* Domain Search API Section */}
               <div
                 onClick={() => toggleSection("DomainSearch")}
                 className={`cursor-pointer flex justify-between items-center ${

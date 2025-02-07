@@ -99,7 +99,7 @@ export default function SingleTask() {
   
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">
@@ -121,7 +121,7 @@ export default function SingleTask() {
       </div>
 
       <div
-        className="bg-white rounded-lg shadow p-4 flex flex-col"
+        className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
         <div className="flex-grow overflow-x-auto">

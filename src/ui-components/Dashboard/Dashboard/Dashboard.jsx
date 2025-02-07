@@ -146,12 +146,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-white">
       <h2 className="p-6 md:text-2xl text-xl font-semibold text-gray-700">
         Dashboard
       </h2>
       <div className="grid lg:gap-3 gap-6 pb-8 md:grid-cols-2 px-6">
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-auto p-4 gap-6 flex flex-col sm:flex-row">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] w-full h-auto p-4 gap-6 flex flex-col sm:flex-row">
           <div className="flex-1 flex flex-col">
             <h4 className="mb-4 font-semibold text-gray-800">
               Lifetime Usage Statistics
@@ -226,7 +226,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border-[1px] border-[#F1F1F2] shadow-sm w-full h-[350px]">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] w-full h-[350px]">
           <div className="min-w-0 p-4">
             <h4 className="mb-4 font-semibold text-gray-800">
               Verification Activity

@@ -4,7 +4,7 @@ import Credits from "../../../ui-components/Dashboard/CreditsHistory/CreditsHist
 export default function CreditsHistory() {
   return (
     <>
-      <div className="flex-grow bg-gray-50">
+      <div className="flex-grow">
         <Credits />
       </div>
     </>

@@ -16,7 +16,6 @@ export default function EmailVerification() {
 
   return (
     <>
-    <div className="bg-gray-50">
       <h2 className="px-6 pt-6 pb-1 md:text-2xl text-xl font-bold text-gray-800">
         Bulk Email Verification
       </h2>
@@ -25,7 +24,7 @@ export default function EmailVerification() {
         minimal effort.
       </p>
       <div className="grid grid-cols-1 lg:gap-6 gap-4 pb-6 px-6">
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col lg:flex-row">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 w-full flex flex-col">
             <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-4">
               <CheckCircle className="inline-block text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
@@ -55,7 +54,7 @@ export default function EmailVerification() {
             </div>
             <button
               onClick={() => setModalOpen(true)}
-              className="w-full mt-4 bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover"
+              className="w-full mt-4 bg-btnBackground text-white py-2 rounded-2xl hover:bg-btnBackgroundhover"
             >
               Start Verification
             </button>
@@ -70,7 +69,7 @@ export default function EmailVerification() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6 flex flex-col lg:flex-row">
+        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 w-full flex justify-center items-center">
             <img
               src={img}
@@ -101,14 +100,13 @@ export default function EmailVerification() {
             </div>
             <button
               onClick={() => setModalOpen(true)}
-              className="w-full bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover mt-auto"
+              className="w-full bg-btnBackground text-white py-2 rounded-2xl hover:bg-btnBackgroundhover mt-auto"
             >
               Start Verification
             </button>
           </div>
         </div>
       </div>
-    </div>
     <SuccessModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}

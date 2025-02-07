@@ -29,7 +29,7 @@ const DashboardPage = () => {
   }, [user.id, user.name, user.email, user.createdAt]);
 
   return (
-    <div className="flex-grow bg-gray-50">
+    <div className="flex-grow">
       <Dashboard />
       <Chart />
     </div>

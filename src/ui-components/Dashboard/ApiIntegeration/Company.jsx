@@ -27,7 +27,7 @@ export default function Company() {
   const imagesRow2 = isWideScreen ? [img5, img6, img7] : [img6, img7];
 
   return (
-    <div className="bg-white p-8 m-6 rounded-2xl shadow-md w-[82vw] min-[610px]:w-auto">
+    <div className="bg-white p-8 m-6 rounded-2xl border-[1px] border-[#e8e8e8] w-[82vw] min-[610px]:w-auto">
       <h2 className="sm:text-2xl text-xl font-bold text-center text-gray-800 mb-4">
         Trusted By Companies
       </h2>
@@ -40,7 +40,7 @@ export default function Company() {
           {imagesRow1.map((image, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-lg shadow-md w-24 h-24 flex items-center justify-center"
+              className="rounded-lg shadow-md w-24 h-24 flex items-center justify-center"
             >
               <img
                 src={image}
@@ -71,7 +71,7 @@ export default function Company() {
         <p className="text-gray-600 text-center mb-4 text-sm sm:text-base">
           superior accuracy for businesses everywhere.
         </p>
-        <button className="px-6 py-2 text-sm sm:text-base rounded-md text-white bg-btnBackground hover:bg-btnBackgroundhover">
+        <button className="px-6 py-2 text-sm sm:text-base rounded-2xl text-white bg-btnBackground hover:bg-btnBackgroundhover">
           Learn More
         </button>
       </div>

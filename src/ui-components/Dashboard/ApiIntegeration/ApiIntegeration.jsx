@@ -155,7 +155,7 @@ export default function ApiIntegeration() {
   };
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="flex justify-between items-center mb-6 flex-col sm:flex-row">
         <div>
           <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-bold text-gray-800">
@@ -169,14 +169,14 @@ export default function ApiIntegeration() {
           onClick={() => {
             navigate("/task-single");
           }}
-          className="bg-btnBackground hover:bg-btnBackgroundhover text-sm sm:text-base text-white px-4 py-2 rounded-lg w-full sm:w-auto mt-4 sm:mt-0"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-sm sm:text-base text-white px-4 py-2 rounded-2xl w-full sm:w-auto mt-4 sm:mt-0"
         >
           Create New API Key
         </button>
       </div>
 
       <div
-        className="bg-white rounded-lg mx-auto overflow-x-auto w-[79vw] min-[550px]:w-[85vw] md:w-full shadow p-4 flex flex-col"
+        className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] mx-auto overflow-x-auto w-[79vw] min-[550px]:w-[85vw] md:w-full p-4 flex flex-col"
         style={{ minHeight: "400px" }}
       >
         <div className="flex-grow overflow-x-auto scrollbar-hide">

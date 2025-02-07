@@ -7,7 +7,7 @@ import Company from '../../../ui-components/Dashboard/ApiIntegeration/Company';
 export default function ApiIntegerationPage() {
    return (
      <>
-       <div className="flex-grow bg-gray-50">
+       <div className="flex-grow">
          <ApiIntegeration />
          {/* <PlugIn /> */}
          <Testimonial />

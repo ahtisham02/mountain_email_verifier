@@ -22,7 +22,7 @@ export default function ApiPage() {
     });
   };
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="mb-8">
         <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-extrabold text-gray-900">
           API Keys
@@ -32,7 +32,7 @@ export default function ApiPage() {
         </p>
       </div>
 
-      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+      <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 mb-6">
         <div className="flex items-center mb-4">
           <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-3">
             <Key className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
@@ -46,22 +46,22 @@ export default function ApiPage() {
           Finder API.
         </p>
         <div className="flex space-x-2 mt-4">
-          <button className="flex items-center px-3 py-1.5 border rounded-md text-sm font-medium text-gray-800 border-gray-300 hover:bg-gray-100">
+          <button className="flex items-center px-3 py-1.5 border rounded-2xl text-sm font-medium text-gray-800 border-gray-300 hover:bg-gray-100">
             <FileText className="w-4 h-4 mr-2" />
             API Reference
           </button>
-          <button className="sm:flex hidden items-center px-3 py-1.5 text-white rounded-md text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
+          <button className="sm:flex hidden items-center px-3 py-1.5 text-white rounded-2xl text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
             <ExternalLink className="w-4 h-4 mr-2" />
             API Documentation
           </button>
         </div>
-        <button className="flex mt-3 sm:hidden items-center px-3 py-1.5 text-white rounded-md text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
+        <button className="flex mt-3 sm:hidden items-center px-3 py-1.5 text-white rounded-2xl text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
           <ExternalLink className="w-4 h-4 mr-2" />
           API Documentation
         </button>
       </div>
 
-      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+      <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6 mb-6">
         <div className="flex items-center mb-4">
           <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-3">
             <Lock className="sm:w-5 sm:h-5 w-4 h-4 text-btnBackgroundhover" />
@@ -98,7 +98,7 @@ export default function ApiPage() {
         </div>
       </div>
 
-      <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <div className="rounded-lg bg-[#FAF5FF] sm:p-2 p-1 flex items-center justify-center mr-3">
@@ -108,7 +108,7 @@ export default function ApiPage() {
               Private API Keys
             </h3>
           </div>
-          <button className="flex items-center px-3 py-1.5 text-white rounded-md text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
+          <button className="flex items-center px-3 py-1.5 text-white rounded-2xl text-sm font-medium bg-btnBackground hover:bg-btnBackgroundhover">
             <PlusCircle className="w-4 h-4 mr-2" />
             Create new
           </button>
@@ -120,7 +120,7 @@ export default function ApiPage() {
           and our service ensures accuracy and reliability in every search.
         </p>
         <div className="bg-white w-[64vw] min-[420px]:w-[70vw] min-[460px]:w-[75vw] min-[500px]:w-[77vw] min-[550px]:w-[79vw] min-[650px]:w-full py-4 flex flex-col">
-          <div className="rounded-lg border border-gray-200 flex-grow overflow-x-auto scrollbar-hide">
+          <div className="rounded-2xl border-[1px] border-[#e8e8e8] flex-grow overflow-x-auto scrollbar-hide">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100 text-center">

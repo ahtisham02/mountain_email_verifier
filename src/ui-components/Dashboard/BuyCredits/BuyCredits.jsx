@@ -51,7 +51,7 @@ export default function BuyCredits() {
   const sliderBackground2 = `linear-gradient(90deg, #9333ea ${sliderProgress2}%, #ddd ${sliderProgress2}%)`;
 
   return (
-    <div className="bg-gray-50 p-6">
+    <div className="p-6">
       <div className="mb-8">
         <h2 className="md:text-2xl text-xl pt-2 sm:pt-0 font-extrabold text-gray-900">
           Buy Credits
@@ -61,7 +61,7 @@ export default function BuyCredits() {
         </p>
       </div>
 
-      <div className="bg-gray-50 py-16 px-6">
+      <div className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900">
@@ -81,7 +81,7 @@ export default function BuyCredits() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+              <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-100 text-indigo-600 text-sm font-semibold rounded-lg">
                   Most Popular
                 </div>
@@ -143,7 +143,7 @@ export default function BuyCredits() {
                 </button>
               </div>
 
-              <div className="bg-white rounded-xl shadow-lg p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+              <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div className="absolute top-4 right-4 px-3 py-1 bg-purple-100 text-purple-600 text-sm font-semibold rounded-lg">
                   Lifetime Deal
                 </div>

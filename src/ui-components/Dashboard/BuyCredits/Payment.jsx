@@ -215,7 +215,7 @@ const PaymentForm = () => {
   }, []);
 
   return (
-    <div className="bg-[#f7f9fb] p-6">
+    <div className="p-6">
       <div className="mb-8">
         <h2 className="md:text-2xl text-xl pt-2 sm:pt- font-extrabold text-gray-900">
           Complete Your Purchase
@@ -227,7 +227,7 @@ const PaymentForm = () => {
 
       <div className="flex justify-center items-center">
         <div className="flex flex-col lg:flex-row w-full lg:space-x-6 space-y-6 lg:space-y-0">
-          <div className="w-full lg:w-[65%] p-4 min-[380px]:p-7 sm:py-8 sm:px-28 bg-white rounded-lg shadow-lg">
+          <div className="w-full lg:w-[65%] p-4 min-[380px]:p-7 sm:py-8 sm:px-28 bg-white rounded-2xl border-[1px] border-[#e8e8e8]">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Payment Method
             </h2>
@@ -369,7 +369,7 @@ const PaymentForm = () => {
           </div>
 
           {selectedPlan ? (
-            <div className="w-full lg:w-[35%] p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+            <div className="w-full lg:w-[35%] p-6 bg-white rounded-2xl border-[1px] border-[#e8e8e8]">
               <div className="flex justify-between items-center bg-btnBackground text-white p-4 rounded-t-lg">
                 <div>
                   <h3 className="text-xl font-bold">

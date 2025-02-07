@@ -8,14 +8,14 @@ const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen text-black">
+    <div className="flex h-screen text-black font-plus-jakarta">
       <Sidebar
         isOpen={isSidebarOpen}
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />
       <div
         className={`flex flex-col transition-all duration-300 ${
-          isSidebarOpen ? "lg:ml-64" : "ml-0"
+          isSidebarOpen ? "lg:ml-60" : "ml-0"
         } w-full lg:ml-16 `}
       >
         <DashboardNavbar

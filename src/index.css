@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-@layer base {
-  * {
-    font-family: 'Roboto', sans-serif;
-  }
-}
-
 .custom-calendar-size .react-datepicker__month {
   font-size: 1.05rem;
 }
@@ -25,8 +17,8 @@
 }
 
 :root {
-  --btnBackground: rgb(30,58,138);
-  --btnBackgroundhover: rgb(30,64,175);
+  --btnBackground: black;
+  --btnBackgroundhover: rgb(32, 31, 31);
   --pending: rgb(239 68 68 / var(--tw-bg-opacity, 1));
   --completed: #1A6F1E;
   --inprogress:  rgb(234 179 8 / var(--tw-bg-opacity, 1));
@@ -42,12 +34,12 @@ body {
 }
 
 .scrollbar-hide::-webkit-scrollbar-thumb {
-  background-color: rgb(99,102,241);
+  background-color: rgb(54,171,135);
   border-radius: 4px;
 }
 
 .scrollbar-hide::-webkit-scrollbar-track {
-  background-color: rgb(239,246,255);
+  background-color: rgb(215,254,200);
   border-radius: 4px;
 }
 
@@ -81,4 +73,39 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
