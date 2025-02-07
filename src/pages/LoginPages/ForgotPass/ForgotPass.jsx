@@ -4,7 +4,7 @@ import ForgotPage from "../../../ui-components/Authentication/ForgotPass/ForgotP
 const Forgot = () => {
   return (
     <>
-      <div className="flex-grow">
+      <div className="flex-grow font-plus-jakarta">
         <ForgotPage />
       </div>
     </>

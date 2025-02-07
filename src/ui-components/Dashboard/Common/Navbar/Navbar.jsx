@@ -205,10 +205,10 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
         className="flex items-center cursor-pointer"
         onClick={toggleDropdown}
       >
-        <div className="sm:w-8 sm:h-8 w-7 h-7 bg-[#d7fec8] lg:bg-[#EFF6FF] rounded-full flex items-center justify-center">
-          <CircleUser className="lg:text-[#7E69E1] text-black text-sm" />
+        <div className="sm:w-8 sm:h-8 w-7 h-7 rounded-full flex items-center justify-center">
+          <CircleUser className="text-black text-sm" />
         </div>
-        <span className="sm:ml-3 min-[450px]:flex hidden ml-1.5 sm:text-base text-sm font-medium items-center">
+        <span className="sm:ml-2 min-[450px]:flex hidden ml-1.5 sm:text-base text-sm font-semibold items-center">
           {Fname
             ? Fname.length > 10
               ? `${Fname.slice(0, 7)}...`

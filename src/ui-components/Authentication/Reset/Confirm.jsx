@@ -6,7 +6,7 @@ import { Worm } from "lucide-react";
 const ConfirmationPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-between bg-white font-plus-jakarta">
       <header className="w-full text-center py-6">
         <div className="mx-auto h-12 w-12 bg-btnBackground rounded-full flex items-center justify-center">
           <Worm className="h-7 w-7 text-white" />
@@ -26,7 +26,7 @@ const ConfirmationPage = () => {
         </p>
         <button
           onClick={() => navigate("/auth")}
-          className="px-6 py-3 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-lg font-semibold focus:outline-none"
+          className="px-8 py-2.5 bg-black text-sm text-white rounded-2xl font-semibold focus:outline-none"
         >
           Back to login
         </button>
