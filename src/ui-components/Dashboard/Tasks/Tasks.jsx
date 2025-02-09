@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, Clock, HelpCircle } from "lucide-react";
+import { CheckCircle, HelpCircle } from "lucide-react";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaCircleCheck } from "react-icons/fa6";
+import { GoClockFill } from "react-icons/go";
+import { IoWarning } from "react-icons/io5";
 
 export default function Tasks() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +20,7 @@ export default function Tasks() {
       status: "Completed",
       totalEmails: 1500,
       currentProgress: "100%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "002",
@@ -26,7 +29,7 @@ export default function Tasks() {
       status: "In Progress",
       totalEmails: 2000,
       currentProgress: "75%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "003",
@@ -35,7 +38,7 @@ export default function Tasks() {
       status: "Pending",
       totalEmails: 500,
       currentProgress: "10%",
-      action: "Start Now",
+      action: "View",
     },
     {
       taskId: "004",
@@ -44,7 +47,7 @@ export default function Tasks() {
       status: "Completed",
       totalEmails: 1800,
       currentProgress: "100%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "005",
@@ -53,7 +56,7 @@ export default function Tasks() {
       status: "In Progress",
       totalEmails: 2200,
       currentProgress: "65%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "006",
@@ -62,7 +65,7 @@ export default function Tasks() {
       status: "Pending",
       totalEmails: 450,
       currentProgress: "15%",
-      action: "Start Now",
+      action: "View",
     },
     {
       taskId: "007",
@@ -71,7 +74,7 @@ export default function Tasks() {
       status: "Completed",
       totalEmails: 2000,
       currentProgress: "100%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "008",
@@ -80,7 +83,7 @@ export default function Tasks() {
       status: "In Progress",
       totalEmails: 2400,
       currentProgress: "50%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "009",
@@ -89,7 +92,7 @@ export default function Tasks() {
       status: "Pending",
       totalEmails: 600,
       currentProgress: "20%",
-      action: "Start Now",
+      action: "View",
     },
     {
       taskId: "010",
@@ -98,7 +101,7 @@ export default function Tasks() {
       status: "Completed",
       totalEmails: 1600,
       currentProgress: "100%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "011",
@@ -107,7 +110,7 @@ export default function Tasks() {
       status: "In Progress",
       totalEmails: 2200,
       currentProgress: "30%",
-      action: "View Report",
+      action: "View",
     },
     {
       taskId: "012",
@@ -116,7 +119,7 @@ export default function Tasks() {
       status: "Pending",
       totalEmails: 700,
       currentProgress: "0%",
-      action: "Start Now",
+      action: "View",
     },
   ];
 
@@ -143,22 +146,22 @@ export default function Tasks() {
       case "Completed":
         return {
           style:
-            "bg-completed text-white py-0.5 text-green-50 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
+            "bg-completed text-[#3c7b36] font-semibold py-1 border-[1px] border-[#3c7b36] px-2 rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
           icon: (
-            <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />
+            <FaCircleCheck className="w-[14px] h-[14px] text-[#3c7b36]" />
           ),
         };
       case "In Progress":
         return {
           style:
-            "bg-inprogress text-white py-0.5 px-2 rounded-full text-yellow-50 w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <Clock className="w-[14px] h-[14px] text-yellow-50" />,
+            "bg-inprogress text-[#cc5960] font-semibold py-1 px-2 border-[1px] border-[#cc5960] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <IoWarning className="w-[15px] h-[15px] text-[#cc5960]" />,
         };
       case "Pending":
         return {
           style:
-            "bg-pending text-white py-0.5 px-2 rounded-full w-28 text-red-50 text-xs text-center flex items-center justify-center gap-1",
-          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4 text-red-50" />,
+            "bg-pending text-[#ac7a31] font-semibold py-1 px-2 border-[1px] border-[#ac7a31] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <GoClockFill className="w-[14px] h-[14px] text-[#ac7a31]" />,
         };
       default:
         return {
@@ -174,16 +177,16 @@ export default function Tasks() {
     if (progressValue > 75) {
       return (
         <div className="flex items-center justify-center space-x-2">
-          <div className="text-green-500">
+          <div className="text-[#3c7b36]">
             <CheckCircle className="w-4 h-4" />
           </div>
-          <span className="text-green-600">{progress}</span>
+          <span className="text-[#3c7b36]">{progress}</span>
         </div>
       );
     } else if (progressValue > 50) {
       return (
         <div className="flex items-center justify-center space-x-2 -ml-2">
-          <div className="text-yellow-500">
+          <div className="text-yellow-600">
             <FaArrowTrendUp className="w-4 h-4" />
           </div>
           <span className="text-yellow-600">{progress}</span>
@@ -195,7 +198,7 @@ export default function Tasks() {
           <div className="text-red-500">
             <XCircle className="w-4 h-4" />
           </div>
-          <span className="text-red-600">{progress}</span>
+          <span className="text-red-500">{progress}</span>
         </div>
       );
     }
@@ -264,7 +267,7 @@ export default function Tasks() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {task.taskName}
                   </td>
-                  <td className="p-2 flex justify-center text-center">
+                  <td className="p-2 flex justify-start text-center">
                     <div className={getStatusStyle(task.status).style}>
                       {getStatusStyle(task.status).icon}
                       {task.status}
@@ -277,8 +280,10 @@ export default function Tasks() {
                   <td className="px-4 py-2 text-center text-gray-600">
                     {getProgressIcon(task.currentProgress)}
                   </td>
-                  <td className="px-4 py-2 text-center text-[#7E3AF2]">
-                    {task.action}
+                  <td>
+                    <div className="w-14 py-0.5 rounded-lg text-center font-medium bg-gray-100 text-black mx-auto">
+                      {task.action}
+                    </div>
                   </td>
                 </tr>
               ))}

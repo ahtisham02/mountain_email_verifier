@@ -8,7 +8,6 @@ import {
   MessageCircle,
   Shapes,
   Twitter,
-  UserRoundPlus,
 } from "lucide-react";
 import img from "../../../assets/rb_2148899114.png";
 
@@ -119,126 +118,64 @@ export default function Affiliate() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-6">
-          <div className="flex items-center border-b pb-4 border-gray-200 mb-3">
-            <UserRoundPlus className="text-btnBackground mr-2 w-5 h-5 sm:w-6 sm:h-6" />
-            <h3 className="sm:text-lg text-base font-bold text-gray-800">
-              Latest Registered Affiliates
-            </h3>
-          </div>
-          <table className="w-full border-collapse text-sm sm:text-base">
-            <thead className="bg-slate-100">
-              <tr>
-                <th className="py-2 px-4 text-center">Affiliate</th>
-                <th className="py-2 px-4 text-center">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="py-2 px-4 text-center">Mathew Herrera</td>
-                <td className="py-2 px-4 text-center">
-                  <span className="bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Active
-                  </span>
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 px-4 text-center">Mathew Herrera</td>
-                <td className="py-2 px-4 text-center">
-                  <span className="bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Active
-                  </span>
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 px-4 text-center">Malika Smith</td>
-                <td className="py-2 px-4 text-center">
-                  <span className="bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Active
-                  </span>
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 px-4 text-center">Malika Smith</td>
-                <td className="py-2 px-4 text-center">
-                  <span className="bg-red-100 text-red-700 px-2 py-1 rounded">
-                    InActive
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot className="bg-slate-100">
-              <tr>
-                <td colSpan="2" className="py-2 px-4 text-center">
-                  <a
-                    href="/"
-                    className="text-btnBackgroundhover hover:underline inline-block"
-                  >
-                    View all affiliates →
-                  </a>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+      </div>
+      <div className="bg-white rounded-2xl mt-6 border-[1px] border-[#e8e8e8] py-4 px-3 min-[450]::p-6">
+        <div className="flex items-center border-b mb-4 pb-4 border-gray-200">
+          <Banknote className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
+          <h3 className="sm:text-lg text-base font-bold text-gray-800">
+            Your Affiliate Links
+          </h3>
         </div>
-        <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] py-4 px-3 min-[450]::p-6">
-          <div className="flex items-center border-b mb-4 pb-4 border-gray-200">
-            <Banknote className="text-btnBackgroundhover mr-2 w-5 h-5 sm:w-6 sm:h-6" />
-            <h3 className="sm:text-lg text-base font-bold text-gray-800">
-              Your Affiliate Links
-            </h3>
-          </div>
-          <div className="mb-4">
-            <label className="block mb-1 text-sm sm:text-base font-semibold text-gray-700">
-              Product Description Page
-            </label>
-            <div className="flex items-center mb-4">
-              <input
-                className="flex-1 border border-gray-300 rounded-lg sm:p-2 p-1.5 text-sm sm:text-base text-gray-800"
-                value="https://www.reoon.com/email-verifier/?inv=g2mgsihm"
-                readOnly
-              />
-              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-2xl whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
-                Copy Link
-              </button>
-            </div>
-
-            <label className="block mb-1 text-sm sm:text-base font-semibold text-gray-700">
-              Registration Page
-            </label>
-            <div className="flex items-center mb-4">
-              <input
-                className="flex-1 border border-gray-300 rounded-lg sm:p-2 p-1.5 text-sm sm:text-base text-gray-800"
-                value="https://emailverifier.reoon.com/register/?inv=g2mgsihm"
-                readOnly
-              />
-              <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-2xl p-1 text-sm sm:text-base sm:px-4 sm:py-2">
-                Copy Link
-              </button>
-            </div>
+        <div className="mb-4">
+          <label className="block mb-1 text-sm sm:text-base font-semibold text-gray-700">
+            Product Description Page
+          </label>
+          <div className="flex items-center mb-4">
+            <input
+              className="flex-1 border border-gray-300 rounded-lg sm:p-2 p-1.5 text-sm sm:text-base text-gray-800"
+              value="https://www.reoon.com/email-verifier/?inv=g2mgsihm"
+              readOnly
+            />
+            <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover text-white rounded-2xl whitespace-nowrap p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              Copy Link
+            </button>
           </div>
 
-          <p className="text-center font-semibold text-gray-700 my-3">
-            Share the Links with Your Friends
-          </p>
-          <div className="flex justify-center sm:space-x-4 flex-wrap">
-            <button className="flex items-center bg-blue-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
-              <Facebook className="w-5 h-5 mr-2" />
-              Facebook
-            </button>
-            <button className="flex items-center bg-blue-400 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
-              <Twitter className="w-5 h-5 mr-2" />
-              Twitter
-            </button>
-            <button className="flex items-center md:mt-2 min-[1225px]:mt-0 bg-blue-600 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
-              <Linkedin className="w-5 h-5 mr-2" />
-              LinkedIn
-            </button>
-            <button className="flex items-center sm:mt-2 min-[660px]:mt-0 md:mt-2 min-[1400px]:mt-0 bg-green-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
-              <MessageCircle className="w-5 h-5 mr-2" />
-              WhatsApp
+          <label className="block mb-1 text-sm sm:text-base font-semibold text-gray-700">
+            Registration Page
+          </label>
+          <div className="flex items-center mb-4">
+            <input
+              className="flex-1 border border-gray-300 rounded-lg sm:p-2 p-1.5 text-sm sm:text-base text-gray-800"
+              value="https://emailverifier.reoon.com/register/?inv=g2mgsihm"
+              readOnly
+            />
+            <button className="ml-0.5 min-[450px]:ml-2 bg-btnBackground hover:bg-btnBackgroundhover whitespace-nowrap text-white rounded-2xl p-1 text-sm sm:text-base sm:px-4 sm:py-2">
+              Copy Link
             </button>
           </div>
+        </div>
+
+        <p className="text-center font-semibold text-gray-700 my-3">
+          Share the Links with Your Friends
+        </p>
+        <div className="flex justify-center sm:space-x-4 flex-wrap">
+          <button className="flex items-center bg-blue-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
+            <Facebook className="w-5 h-5 mr-2" />
+            Facebook
+          </button>
+          <button className="flex items-center bg-blue-400 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
+            <Twitter className="w-5 h-5 mr-2" />
+            Twitter
+          </button>
+          <button className="flex items-center bg-blue-600 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
+            <Linkedin className="w-5 h-5 mr-2" />
+            LinkedIn
+          </button>
+          <button className="flex items-center bg-green-500 text-white rounded-full px-4 py-2 w-full sm:w-auto mb-2 sm:mb-0">
+            <MessageCircle className="w-5 h-5 mr-2" />
+            WhatsApp
+          </button>
         </div>
       </div>
     </div>

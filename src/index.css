@@ -19,9 +19,9 @@
 :root {
   --btnBackground: black;
   --btnBackgroundhover: rgb(32, 31, 31);
-  --pending: rgb(239 68 68 / var(--tw-bg-opacity, 1));
-  --completed: #1A6F1E;
-  --inprogress:  rgb(234 179 8 / var(--tw-bg-opacity, 1));
+  --pending: #feefcb;
+  --completed: #e9f0e9;
+  --inprogress: #ffecee;
 }
 
 body {

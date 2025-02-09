@@ -342,7 +342,7 @@ const PaymentForm = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-btnBackground cursor-pointer hover:bg-btnBackgroundhover text-white font-semibold rounded-lg hover:bg-hover"
+                className="w-full py-2.5 bg-btnBackground cursor-pointer hover:bg-btnBackgroundhover text-white font-semibold rounded-2xl hover:bg-hover"
               >
                 Pay
               </button>

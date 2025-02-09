@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, Clock, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
+import { FaCircleCheck } from "react-icons/fa6";
+import { IoWarning } from "react-icons/io5";
+import { GoClockFill } from "react-icons/go";
 
 export default function ApiIntegeration() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,7 +18,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 1",
       apiKey: "APIKEY001",
       validTempInvalid: "1400-100-0",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-08",
@@ -23,7 +26,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 2",
       apiKey: "APIKEY002",
       validTempInvalid: "1800-150-50",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-07",
@@ -31,7 +34,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Discovery API - Weekly Check",
       apiKey: "APIKEY003",
       validTempInvalid: "400-50-50",
-      actions: "Start Now",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-06",
@@ -39,7 +42,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 3",
       apiKey: "APIKEY004",
       validTempInvalid: "1700-100-0",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-05",
@@ -47,7 +50,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Discovery API - Batch 4",
       apiKey: "APIKEY005",
       validTempInvalid: "2100-50-50",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-04",
@@ -55,7 +58,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 5",
       apiKey: "APIKEY006",
       validTempInvalid: "450-100-0",
-      actions: "Start Now",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-03",
@@ -63,7 +66,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Discovery API - Batch 6",
       apiKey: "APIKEY007",
       validTempInvalid: "2000-300-0",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-02",
@@ -71,7 +74,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 7",
       apiKey: "APIKEY008",
       validTempInvalid: "2200-100-100",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-01",
@@ -79,7 +82,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Discovery API - Weekly Check 2",
       apiKey: "APIKEY009",
       validTempInvalid: "500-0-0",
-      actions: "Start Now",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-01",
@@ -87,7 +90,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 8",
       apiKey: "APIKEY010",
       validTempInvalid: "1600-0-0",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-01",
@@ -95,7 +98,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Discovery API - Batch 9",
       apiKey: "APIKEY011",
       validTempInvalid: "2000-50-150",
-      actions: "View Report",
+      actions: "View",
     },
     {
       dateCreated: "2025-01-01",
@@ -103,7 +106,7 @@ export default function ApiIntegeration() {
       apiTitle: "Email Verification API - Batch 10",
       apiKey: "APIKEY012",
       validTempInvalid: "700-0-0",
-      actions: "Start Now",
+      actions: "View",
     },
   ];
 
@@ -130,20 +133,20 @@ export default function ApiIntegeration() {
       case "Completed":
         return {
           style:
-            "bg-completed text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1" />,
+            "bg-completed text-[#3c7b36] font-semibold py-1 border-[1px] border-[#3c7b36] px-2 rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <FaCircleCheck className="w-[14px] h-[14px] text-[#3c7b36]" />,
         };
       case "In Progress":
         return {
           style:
-            "bg-inprogress text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <Clock className="w-[14px] h-[14px]" />,
+            "bg-inprogress text-[#cc5960] font-semibold py-1 px-2 border-[1px] border-[#cc5960] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <IoWarning className="w-[15px] h-[15px] text-[#cc5960]" />,
         };
       case "Pending":
         return {
           style:
-            "bg-pending text-white py-0.5 px-2 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4" />,
+            "bg-pending text-[#ac7a31] font-semibold py-1 px-2 border-[1px] border-[#ac7a31] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <GoClockFill className="w-[14px] h-[14px] text-[#ac7a31]" />,
         };
       default:
         return {
@@ -207,7 +210,7 @@ export default function ApiIntegeration() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {task.dateCreated}
                   </td>
-                  <td className="p-2 flex items-center justify-center">
+                  <td className="p-2 flex items-center justify-start">
                     <div className={getStatusStyle(task.status).style}>
                       {getStatusStyle(task.status).icon}
                       {task.status}
@@ -222,8 +225,10 @@ export default function ApiIntegeration() {
                   <td className="px-4 py-2 text-center text-gray-600">
                     {task.validTempInvalid}
                   </td>
-                  <td className="px-4 py-2 text-center text-[#7E3AF2]">
-                    {task.actions}
+                  <td>
+                    <div className="w-14 py-0.5 rounded-lg text-center font-medium bg-gray-100 text-black mx-auto">
+                      {task.actions}
+                    </div>
                   </td>
                 </tr>
               ))}

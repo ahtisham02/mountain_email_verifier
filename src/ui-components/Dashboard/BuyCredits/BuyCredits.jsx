@@ -76,18 +76,18 @@ export default function BuyCredits() {
           {loading ? (
             <div className="flex items-center justify-center h-[30vh]">
               <div className="text-center">
-                <div className="w-16 h-16 border-4 border-indigo-600 border-dashed rounded-full animate-spin mt-28"></div>
+                <div className="w-16 h-16 border-4 border-[#36ab87] border-dashed rounded-full animate-spin mt-28"></div>
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-100 text-indigo-600 text-sm font-semibold rounded-lg">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#d7fec8] text-[#0b9973] text-sm font-semibold rounded-lg">
                   Most Popular
                 </div>
                 <div className="flex items-center mb-4">
-                  <div className="rounded-lg bg-indigo-100 p-3 flex items-center justify-center">
-                    <Calendar className="w-6 h-6 text-indigo-600" />
+                  <div className="rounded-lg bg-[#d7fec8] p-3 flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-[#0b9973]" />
                   </div>
                   <h3 className="ml-4 text-2xl font-semibold text-gray-900">
                     Monthly Subscription
@@ -106,9 +106,9 @@ export default function BuyCredits() {
                 </p>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xl text-gray-700 font-medium">
-                    Save {selectedMonthlyPlan.discount}%!
+                    Save <span className="text-[#0b9973]">{selectedMonthlyPlan.discount}%!</span>
                   </p>
-                  <p className="text-4xl font-bold text-indigo-600">
+                  <p className="text-4xl font-bold text-[#0b9973]">
                     ${selectedMonthlyPlan.price}
                   </p>
                 </div>
@@ -125,7 +125,7 @@ export default function BuyCredits() {
                   }}
                 />
 
-                <p className="text-sm text-indigo-700 bg-indigo-50 p-3 rounded-lg mt-4">
+                <p className="text-sm text-[#0b9973] bg-[#d7fec8] p-3 rounded-lg mt-4">
                   Adjust the slider to customize your credit range.
                 </p>
                 <button
@@ -137,19 +137,19 @@ export default function BuyCredits() {
                       },
                     })
                   }
-                  className="mt-6 w-full py-3 bg-indigo-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition"
+                  className="mt-6 w-full py-2.5 bg-black text-white text-lg font-semibold rounded-2xl shadow-md transition"
                 >
                   Subscribe Now
                 </button>
               </div>
 
               <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                <div className="absolute top-4 right-4 px-3 py-1 bg-purple-100 text-purple-600 text-sm font-semibold rounded-lg">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#efeefc] text-[#6358DE] text-sm font-semibold rounded-lg">
                   Lifetime Deal
                 </div>
                 <div className="flex items-center mb-4">
-                  <div className="rounded-lg bg-purple-100 p-3 flex items-center justify-center">
-                    <CreditCard className="w-6 h-6 text-purple-600" />
+                  <div className="rounded-lg bg-[#efeefc] p-3 flex items-center justify-center">
+                    <CreditCard className="w-6 h-6 text-[#6358DE]" />
                   </div>
                   <h3 className="ml-4 text-2xl font-semibold text-gray-900">
                     Instant Credits Plan
@@ -164,9 +164,9 @@ export default function BuyCredits() {
                 </p>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xl text-gray-700 font-medium">
-                    Save {selectedLifetimePlan.discount}%!
+                    Save <span className="text-[#6358DE]">{selectedLifetimePlan.discount}%!</span>
                   </p>
-                  <p className="text-4xl font-bold text-purple-600">
+                  <p className="text-4xl font-bold text-[#6358DE]">
                     ${selectedLifetimePlan.price}
                   </p>
                 </div>
@@ -182,7 +182,7 @@ export default function BuyCredits() {
                     transition: "background 0.1s ease",
                   }}
                 />
-                <p className="text-sm text-purple-700 bg-purple-50 p-3 rounded-lg mt-4">
+                <p className="text-sm text-[#6358DE] bg-[#efeefc] p-3 rounded-lg mt-4">
                   Adjust the slider to find your perfect credit package.
                 </p>
                 <button
@@ -194,7 +194,7 @@ export default function BuyCredits() {
                       },
                     })
                   }
-                  className="mt-6 w-full py-3 bg-purple-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-purple-700 transition"
+                  className="mt-6 w-full py-2.5 bg-black text-white text-lg font-semibold rounded-2xl shadow-md transition"
                 >
                   Buy Now
                 </button>

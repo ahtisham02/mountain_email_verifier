@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { CheckCircle, ChevronLeft, ChevronRight, Clock, HelpCircle } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  HelpCircle,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { FaCircleCheck } from "react-icons/fa6";
+import { GoClockFill } from "react-icons/go";
+import { IoWarning } from "react-icons/io5";
 
 export default function SingleTask() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +21,7 @@ export default function SingleTask() {
       verificationMethod: "API Verification",
       resultStatus: "Verified",
       timeTaken: 1.2,
-      action: "View Details",
+      action: "View",
     },
     {
       dateVerified: "2025-01-08",
@@ -30,7 +37,7 @@ export default function SingleTask() {
       verificationMethod: "API Verification",
       resultStatus: "Verified",
       timeTaken: 0.8,
-      action: "View Details",
+      action: "View",
     },
     {
       dateVerified: "2025-01-06",
@@ -38,7 +45,7 @@ export default function SingleTask() {
       verificationMethod: "Single Verification",
       resultStatus: "Pending",
       timeTaken: "-",
-      action: "Verify Now",
+      action: "Verify",
     },
     {
       dateVerified: "2025-01-05",
@@ -46,7 +53,7 @@ export default function SingleTask() {
       verificationMethod: "Bulk Verification",
       resultStatus: "Verified",
       timeTaken: 3.1,
-      action: "View Details",
+      action: "View",
     },
   ];
 
@@ -73,20 +80,20 @@ export default function SingleTask() {
       case "Verified":
         return {
           style:
-            "bg-completed text-white py-0.5 px-2 text-green-50 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <CheckCircle className="w-[14px] h-[14px] -ml-1 text-green-50" />,
+            "bg-completed text-[#3c7b36] font-semibold py-1 border-[1px] border-[#3c7b36] px-2 rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <FaCircleCheck className="w-[14px] h-[14px] text-[#3c7b36]" />,
         };
       case "Pending":
         return {
           style:
-            "bg-inprogress text-white py-0.5 px-2 text-yellow-50 rounded-full w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <Clock className="w-[14px] h-[14px] text-yellow-50" />,
+            "bg-pending text-[#ac7a31] font-semibold py-1 px-2 border-[1px] border-[#ac7a31] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <GoClockFill className="w-[14px] h-[14px] text-[#ac7a31]" />,
         };
       case "Failed":
         return {
           style:
-            "bg-pending text-white py-0.5 px-2 rounded-full text-red-50 w-28 text-xs text-center flex items-center justify-center gap-1",
-          icon: <HelpCircle className="w-[14px] h-[14px] -ml-4 text-red-50" />,
+            "bg-inprogress text-[#cc5960] font-semibold py-1 px-2 border-[1px] border-[#cc5960] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <IoWarning className="w-[15px] h-[15px] text-[#cc5960]" />,
         };
       default:
         return {
@@ -96,7 +103,6 @@ export default function SingleTask() {
         };
     }
   };
-  
 
   return (
     <div className="p-6">
@@ -114,7 +120,7 @@ export default function SingleTask() {
           onClick={() => {
             navigate("/tasks");
           }}
-          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-lg"
+          className="bg-btnBackground hover:bg-btnBackgroundhover text-white px-4 py-2 rounded-2xl"
         >
           Check Bulk Verification Results
         </button>
@@ -138,7 +144,7 @@ export default function SingleTask() {
                   Verification Method
                 </th>
                 <th className="px-4 py-2 text-center text-gray-600">
-                  Result Status
+                  Status
                 </th>
                 <th className="px-4 py-2 text-center text-gray-600">
                   Time Taken (Sec)
@@ -160,7 +166,7 @@ export default function SingleTask() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {record.verificationMethod}
                   </td>
-                  <td className="px-4 py-2 flex justify-center text-center">
+                  <td className="px-4 py-2 flex justify-start text-center">
                     <div className={getStatusStyle(record.resultStatus).style}>
                       {getStatusStyle(record.resultStatus).icon}
                       {record.resultStatus}
@@ -169,8 +175,10 @@ export default function SingleTask() {
                   <td className="px-4 py-2 text-center text-gray-800">
                     {record.timeTaken}
                   </td>
-                  <td className="px-4 py-2 text-center text-[#7E3AF2]">
-                    {record.action}
+                  <td>
+                    <div className="w-14 py-0.5 rounded-lg text-center font-medium bg-gray-100 text-black mx-auto">
+                      {record.action}
+                    </div>
                   </td>
                 </tr>
               ))}
