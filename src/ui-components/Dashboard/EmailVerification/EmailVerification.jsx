@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UploadCloud, CheckCircle, Upload } from "lucide-react";
-import img from "../../../assets/3129492.jpg";
-import img1 from "../../../assets/4957160.jpg";
+import img from "../../../assets/m1.jpg";
+import img1 from "../../../assets/m3.jpg";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./SuccessModal";
 

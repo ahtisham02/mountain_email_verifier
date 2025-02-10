@@ -44,11 +44,11 @@ export default function BuyCredits() {
 
   const sliderProgress = (rangeValue / (monthlyPlans.length - 1)) * 100;
 
-  const sliderBackground = `linear-gradient(90deg, #4f46e5 ${sliderProgress}%, #ddd ${sliderProgress}%)`;
+  const sliderBackground = `linear-gradient(90deg, #0d9a74 ${sliderProgress}%, #ddd ${sliderProgress}%)`;
 
   const sliderProgress2 = (rangeValue2 / (lifetimePlans.length - 1)) * 100;
 
-  const sliderBackground2 = `linear-gradient(90deg, #9333ea ${sliderProgress2}%, #ddd ${sliderProgress2}%)`;
+  const sliderBackground2 = `linear-gradient(90deg, #6358de ${sliderProgress2}%, #ddd ${sliderProgress2}%)`;
 
   return (
     <div className="p-6">
@@ -106,7 +106,10 @@ export default function BuyCredits() {
                 </p>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xl text-gray-700 font-medium">
-                    Save <span className="text-[#0b9973]">{selectedMonthlyPlan.discount}%!</span>
+                    Save{" "}
+                    <span className="text-[#0b9973]">
+                      {selectedMonthlyPlan.discount}%!
+                    </span>
                   </p>
                   <p className="text-4xl font-bold text-[#0b9973]">
                     ${selectedMonthlyPlan.price}
@@ -164,7 +167,10 @@ export default function BuyCredits() {
                 </p>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xl text-gray-700 font-medium">
-                    Save <span className="text-[#6358DE]">{selectedLifetimePlan.discount}%!</span>
+                    Save{" "}
+                    <span className="text-[#6358DE]">
+                      {selectedLifetimePlan.discount}%!
+                    </span>
                   </p>
                   <p className="text-4xl font-bold text-[#6358DE]">
                     ${selectedLifetimePlan.price}

@@ -9,11 +9,13 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Calendar } from "lucide-react";
+import loaderGif from "../../../assets/loadernew1.gif";
 import apiRequest from "../../../utils/apiRequest";
 
 const PaymentForm = () => {
   const [deliveryTime, setDeliveryTime] = useState("");
   const [showCvc, setShowCvc] = useState(false);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const { selectedPlan } = location.state || {};
   const navigate = useNavigate();
@@ -96,6 +98,7 @@ const PaymentForm = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const { cardNumber, expiration, cvc } = values;
         const [expMonth, expYear] = expiration.split("/");
 
@@ -189,6 +192,7 @@ const PaymentForm = () => {
             toast.success("Payment successful!");
             navigate("/buycredits");
             formik.resetForm();
+            setLoading(false);
           }
         } else {
           toast.error("Payment failed, please try again.");
@@ -196,6 +200,7 @@ const PaymentForm = () => {
       } catch (error) {
         toast.error("Something went wrong. Please try again.");
         console.error(error);
+        setLoading(false);
       }
     },
   });
@@ -342,9 +347,17 @@ const PaymentForm = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2.5 bg-btnBackground cursor-pointer hover:bg-btnBackgroundhover text-white font-semibold rounded-2xl hover:bg-hover"
+                className="w-full h-14 bg-btnBackground cursor-pointer hover:bg-btnBackgroundhover text-white font-semibold rounded-2xl hover:bg-hover"
               >
-                Pay
+                {loading ? (
+                  <img
+                    src={loaderGif}
+                    alt="Loading..."
+                    className="mx-auto h-[70px] w-[86px] -mt-[9px]"
+                  />
+                ) : (
+                  "Pay"
+                )}
               </button>
 
               <div className="mt-4 text-sm text-gray-600">
