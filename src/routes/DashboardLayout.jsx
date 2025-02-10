@@ -3,6 +3,7 @@ import DashboardNavbar from "../ui-components/Dashboard/Common/Navbar/Navbar";
 import Sidebar from "../ui-components/Dashboard/Common/Sidebar/sidebar";
 import Footer from "../ui-components/Dashboard/Common/Footer/Footer";
 import { Outlet } from "react-router-dom";
+import SuccessModal from "../ui-components/Dashboard/Common/Alert/AlertModal";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -24,6 +25,7 @@ const DashboardLayout = () => {
         />
 
         <main className="flex-grow flex mt-16">
+          <SuccessModal />
           <Outlet />
         </main>
         <Footer />

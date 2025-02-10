@@ -43,13 +43,13 @@ const SuccessModal = ({ open, onClose, onNavigate }) => {
         <div className="flex justify-center gap-4 mt-auto">
           <button
             onClick={onNavigate}
-            className="bg-btnBackground text-white px-6 py-2 rounded-lg hover:bg-btnBackgroundhover transition"
+            className="bg-btnBackground text-white px-6 py-2 rounded-2xl hover:bg-btnBackgroundhover transition"
           >
             Go to Task Details
           </button>
           <button
             onClick={onClose}
-            className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition"
+            className="bg-gray-200 text-gray-700 px-6 py-2 rounded-2xl hover:bg-gray-300 transition"
           >
             Stay Here
           </button>

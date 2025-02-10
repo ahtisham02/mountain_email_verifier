@@ -94,7 +94,10 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdown2Ref.current && !dropdown2Ref.current.contains(event.target)) {
+      if (
+        dropdown2Ref.current &&
+        !dropdown2Ref.current.contains(event.target)
+      ) {
         setIsOpens(false);
       }
     };
@@ -107,14 +110,16 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 flex items-center justify-between z-50 min-[400px]:px-8 px-1.5 py-4 shadow-sm bg-[#e8fedf] lg:bg-white ${isOpen ? "lg:left-60 left-0" : "left-0 lg:left-16"
-        }`}
+      className={`fixed top-0 right-0 flex items-center justify-between z-50 min-[400px]:px-8 px-1.5 py-4 shadow-sm bg-[#e8fedf] lg:bg-white ${
+        isOpen ? "lg:left-60 left-0" : "left-0 lg:left-16"
+      }`}
     >
       <div className="flex items-center space-x-4">
         <AlignLeft
           onClick={onToggleSidebar}
-          className={`lg:text-[#359F6F] text-black cursor-pointer ${isOpen ? "lg:hidden" : "block"
-            } min-[450px]:-ml-4 mr-4 w-7 h-7`}
+          className={`lg:text-[#359F6F] text-black cursor-pointer ${
+            isOpen ? "lg:hidden" : "block"
+          } min-[450px]:-ml-4 mr-4 w-7 h-7`}
         />
         <button
           onClick={() => {
@@ -130,13 +135,20 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
       <div className="items-center justify-end inline-block absolute z-10 min-[510px]:right-[180px] min-[450px]:right-[138px] right-[98px] sm:px-2 px-1 py-[5px]">
         <div
           onClick={toggleDropdown2}
-          className={`flex items-center hover:text-[#6358DE] ${isOpens ? "!text-[#6358DE] !bg-[#dbd9f7]" : ""} cursor-pointer hover:bg-[#efeefc] text-sm text-black rounded-2xl px-3 py-3 min-[510px]:py-2 mr-2`}
+          className={`flex items-center hover:text-[#6358DE] ${
+            isOpens ? "!text-[#6358DE] !bg-[#dbd9f7]" : ""
+          } cursor-pointer hover:bg-[#efeefc] text-sm text-black rounded-2xl px-3 py-3 min-[510px]:py-2 mr-2`}
         >
           <Activity strokeWidth={3} className="sm:w-4 sm:h-4 w-3 h-3 mr-1" />
-          <span className="font-semibold min-[510px]:block hidden text-[16px]">Credits and usage</span>
+          <span className="font-semibold min-[510px]:block hidden text-[16px]">
+            Credits and usage
+          </span>
         </div>
         {isOpens && (
-          <div ref={dropdown2Ref} className="absolute top-12 min-[650px]:right-[20px] min-[570px]:-right-[115px] min-[500px]:-right-[100px] -right-[90px] min-[570px]:w-[430px] min-[410px]:w-[380px] w-[290px] bg-white shadow-md rounded-2xl border-[1px] border-gray-200 px-5 py-4">
+          <div
+            ref={dropdown2Ref}
+            className="absolute top-12 min-[650px]:right-[20px] min-[570px]:-right-[115px] min-[500px]:-right-[100px] -right-[90px] min-[570px]:w-[430px] min-[410px]:w-[380px] w-[290px] bg-white shadow-md rounded-2xl border-[1px] border-gray-200 px-5 py-4"
+          >
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-lg">Credits usage and plan</h3>
               <button
@@ -148,22 +160,17 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             </div>
 
             <div className="mt-3">
-              <h4 className="font-semibold mb-4">Free plan</h4>
+              <h4 className="font-semibold mb-4">
+                {Profile?.active_subscription?.subscription.name} Plan
+              </h4>
               <p className="text-sm text-gray-700">
+                Daily Limits of{" "}
                 {Math.ceil(
-                  Profile?.credits?.credits ? Profile?.credits?.credits : ""
+                  Profile?.active_subscription?.credits_per_month
+                    ? Profile?.active_subscription?.credits_per_month
+                    : ""
                 )}{" "}
-                credits left until{" "}
-                {Profile?.active_subscription?.date
-                  ? new Date(
-                    new Date(Profile.active_subscription.date).setMonth(
-                      new Date(Profile.active_subscription.date).getMonth() +
-                      1
-                    )
-                  )
-                    .toISOString()
-                    .split("T")[0]
-                  : ""}
+                credits.
               </p>
               <span
                 onClick={() => {
@@ -177,8 +184,24 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             </div>
 
             <div className="mt-4">
-              <h4 className="font-semibold mb-3">Emails prepaid credits</h4>
-              <p className="text-sm text-gray-700">0 credits left</p>
+              <h4 className="font-semibold mb-3">Remaining Credits</h4>
+              <p className="text-sm text-gray-700">
+                {" "}
+                {Math.ceil(
+                  Profile?.credits?.credits ? Profile?.credits?.credits : ""
+                )}{" "}
+                credits left until{" "}
+                {Profile?.active_subscription?.date
+                  ? new Date(
+                      new Date(Profile.active_subscription.date).setMonth(
+                        new Date(Profile.active_subscription.date).getMonth() +
+                          1
+                      )
+                    )
+                      .toISOString()
+                      .split("T")[0]
+                  : ""}
+              </p>
               <span
                 onClick={() => {
                   navigate("/buycredits");
@@ -214,17 +237,18 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
               ? `${Fname.slice(0, 7)}...`
               : Fname
             : Name
-              ? Name.length > 10
-                ? `${Name.slice(0, 7)}...`
-                : Name
-              : "Unknown"}
+            ? Name.length > 10
+              ? `${Name.slice(0, 7)}...`
+              : Name
+            : "Unknown"}
           <ChevronDown className="ml-2 w-4 h-4 text-gray-600" />
         </span>
         <span className="sm:ml-3 min-[450px]:ml-2 ml-0.5 sm:text-base text-sm font-medium min-[450px]:hidden flex items-center">
           {Name
             ? Name.replace(/\s/g, "").slice(0, 2)
-            : `${Fname ? Fname.charAt(0) : "U"}${Lname ? Lname.charAt(0) : "N"
-            }`}
+            : `${Fname ? Fname.charAt(0) : "U"}${
+                Lname ? Lname.charAt(0) : "N"
+              }`}
           <ChevronDown className="sm:ml-2 ml-0.5 w-4 h-4 text-gray-600" />
         </span>
 
@@ -243,7 +267,10 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
               <button className="text-sm text-gray-800">Buy Credits</button>
             </div>
             <div className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100">
-              <User strokeWidth={2.5} className="text-gray-600 w-[18px] h-[18px] mr-1" />
+              <User
+                strokeWidth={2.5}
+                className="text-gray-600 w-[18px] h-[18px] mr-1"
+              />
               <button
                 onClick={handlenavigate}
                 className="text-sm text-gray-800 font-medium"
@@ -255,8 +282,13 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
               onClick={handleLogout}
               className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
             >
-              <LogOut strokeWidth={2.5} className="text-gray-600 w-[18px] h-[18px] mr-1" />
-              <button className="text-sm font-medium text-gray-800">Log out</button>
+              <LogOut
+                strokeWidth={2.5}
+                className="text-gray-600 w-[18px] h-[18px] mr-1"
+              />
+              <button className="text-sm font-medium text-gray-800">
+                Log out
+              </button>
             </div>
           </div>
         )}

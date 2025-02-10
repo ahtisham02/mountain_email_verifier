@@ -304,10 +304,10 @@ export default function Dashboard() {
           </div>
 
           <div className="flex space-x-4">
-            <button className="w-full bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover mt-auto">
+            <button className="w-full bg-btnBackground text-white py-2 rounded-2xl hover:bg-btnBackgroundhover mt-auto">
               Download CSV
             </button>
-            <button className="w-full bg-btnBackground text-white py-2 rounded-lg hover:bg-btnBackgroundhover mt-auto">
+            <button className="w-full bg-btnBackground text-white py-2 rounded-2xl hover:bg-btnBackgroundhover mt-auto">
               Download XLSX
             </button>
           </div>
