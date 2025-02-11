@@ -20,11 +20,14 @@ import Api from "../pages/AdminPages/Api/ApiPAge";
 import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
 import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
 import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
+import HomePage from "../pages/LandingPages/Home/Home";
+import Layout from "./LandingPageLayout";
 
 const MainRoutes = () => {
   return (
     <Router>
       <Routes>
+        {/* Auth Routes */}
         <Route
           path="/auth"
           element={
@@ -168,6 +171,17 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={true}>
                 <PaymentForm />
+              </RouteMiddleware>
+            }
+          />
+        </Route>
+        {/* LandingPage Routes */}
+        <Route element={<Layout />}>
+          <Route
+            path="/Home"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <HomePage />{" "}
               </RouteMiddleware>
             }
           />

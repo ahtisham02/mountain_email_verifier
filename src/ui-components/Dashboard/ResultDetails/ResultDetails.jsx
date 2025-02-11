@@ -22,8 +22,12 @@ import {
   Clock,
   Timer,
   ChevronDown,
+  HelpCircle,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { FaCircleCheck } from "react-icons/fa6";
+import { IoWarning } from "react-icons/io5";
+import { GoClockFill } from "react-icons/go";
 
 Chart.register(
   ArcElement,
@@ -102,15 +106,16 @@ export default function Dashboard() {
           {
             data: [30, 20, 10, 40, 50, 23, 13],
             backgroundColor: [
-              "#22c55e",
-              "#a3e635",
-              "#facc15",
-              "#f97316",
-              "#eab308",
-              "#db2777",
-              "#64748b",
-              "#ef4444",
-              "#94a3b8",
+              "#0b996f",
+              "#10b981",
+              "#14b8a6",
+              "#1e3a3a",
+              "#2c5e5e",
+              "#3f736e",
+              "#4a857a",
+              "#5e9c86",
+              "#7aada3",
+              "#a3b1b1",
             ],
           },
         ],
@@ -131,6 +136,35 @@ export default function Dashboard() {
       pieChart.destroy();
     };
   }, []);
+
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case "Completed":
+        return {
+          style:
+            "bg-completed text-[#3c7b36] font-semibold py-1 border-[1px] border-[#3c7b36] px-2 rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <FaCircleCheck className="w-[14px] h-[14px] text-[#3c7b36]" />,
+        };
+      case "In Progress":
+        return {
+          style:
+            "bg-inprogress text-[#cc5960] font-semibold py-1 px-2 border-[1px] border-[#cc5960] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <IoWarning className="w-[15px] h-[15px] text-[#cc5960]" />,
+        };
+      case "Pending":
+        return {
+          style:
+            "bg-pending text-[#ac7a31] font-semibold py-1 px-2 border-[1px] border-[#ac7a31] rounded-full inline-block text-xs text-center flex items-center justify-center gap-1",
+          icon: <GoClockFill className="w-[14px] h-[14px] text-[#ac7a31]" />,
+        };
+      default:
+        return {
+          style:
+            "bg-gray-500 text-white py-0.5 px-2 rounded-full text-sm text-center flex items-center justify-center gap-1",
+          icon: <HelpCircle className="w-[14px] h-[14px]" />,
+        };
+    }
+  };
 
   return (
     <div className="px-6">
@@ -156,10 +190,11 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center">
             <CheckCircle className="mr-2 w-4 h-4 mb-0.5 text-green-500" />
-            <strong className="text-gray-600">Status:</strong>
-            <span className="ml-2 inline-flex items-center px-2 py-0.5 bg-green-500 text-white rounded-full text-[12px]">
+            <strong className="text-gray-600 mr-2">Status:</strong>{" "}
+            <div className={getStatusStyle("Completed").style}>
+              {getStatusStyle("Completed").icon}
               Completed
-            </span>
+            </div>
           </div>
           <div className="flex items-center">
             <BarChart className="mr-2 w-4 h-4 mb-0.5 text-gray-600" />
@@ -204,49 +239,49 @@ export default function Dashboard() {
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#3b82f6" }}
+                  style={{ backgroundColor: "#0b996f" }}
                 ></span>
                 Safe: 30
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#14b8a6" }}
+                  style={{ backgroundColor: "#10b981" }}
                 ></span>
                 Disabled: 20
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#9333ea" }}
+                  style={{ backgroundColor: "#14b8a6" }}
                 ></span>
                 Inactive: 10
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#10b981" }}
+                  style={{ backgroundColor: "#1e3a3a" }}
                 ></span>
                 Role: 40
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#f59e0b" }}
+                  style={{ backgroundColor: "#2c5e5e" }}
                 ></span>
                 Catch-All: 23
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#ef4444" }}
+                  style={{ backgroundColor: "#3f736e" }}
                 ></span>
                 Disposable: 80
               </li>
               <li className="flex items-center">
                 <span
                   className="inline-block w-3 h-3 mr-2 rounded-full"
-                  style={{ backgroundColor: "#6366f1" }}
+                  style={{ backgroundColor: "#5e9c86" }}
                 ></span>
                 Invalid: 50
               </li>
@@ -313,11 +348,9 @@ export default function Dashboard() {
           </div>
           <p className="text-xs text-gray-500 mt-4">
             Want to delete the files permanently from our servers?{" "}
-            <span className="text-blue-500 underline">
-              Click Here
-            </span>
-            . All files get deleted automatically after 15 days of verification
-            by default.
+            <span className="text-blue-500 underline">Click Here</span>. All
+            files get deleted automatically after 15 days of verification by
+            default.
           </p>
         </div>
       </div>

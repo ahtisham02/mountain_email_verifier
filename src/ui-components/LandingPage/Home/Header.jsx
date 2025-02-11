@@ -1,0 +1,30 @@
+import React from "react";
+import img1 from "../../../assets/Landing/h1.webp";
+
+export default function Header() {
+    return (
+      <div className="bg-[#d7fec8] px-6 py-12 md:py-20 md:px-16 rounded-br-[70px] md:rounded-br-[120px] flex flex-col md:flex-row items-center md:justify-center text-center md:text-left md:h-[89vh] 2xl:h-[100vh]">
+        <div className="max-w-lg w-full">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+            Elevate Your Business <br /> with our Powerful Tools
+          </h1>
+          <p className="text-gray-700 mt-4">
+            We provide different software solutions and professional tools to
+            support your business.
+          </p>
+          <button className="mt-6 px-5 py-4 bg-[#006a43] shadow-md text-white rounded-2xl text-lg font-medium">
+            Check Our Services
+          </button>
+        </div>
+  
+        <div className="mt-8 md:mt-0 md:ml-10 max-w-xl">
+          <img
+            src={img1}
+            alt="HeaderImage"
+            className="rounded-br-[0px] h-[350px] w-[500px]"
+          />
+        </div>
+      </div>
+    );
+  }
+  

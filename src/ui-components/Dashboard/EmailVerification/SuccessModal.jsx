@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import loaderGif from "../../../assets/Animation - 1737810675532.gif";
-import loaderStatic from "../../../assets/img.png";
+import loaderGif from "../../../assets/Animation - 1739285972764.gif";
+import loaderStatic from "../../../assets/Screenshot 2025-02-11 200433.png";
 
 const SuccessModal = ({ open, onClose, onNavigate }) => {
   const [showGif, setShowGif] = useState(true);
@@ -24,9 +24,9 @@ const SuccessModal = ({ open, onClose, onNavigate }) => {
           <img
             src={showGif ? loaderGif : loaderStatic}
             alt="Loading..."
-            className="mx-auto mb-10"
+            className={`mx-auto mb-10 ${!showGif ? "pl-2  pb-1" : ""}`}
             style={{
-              width: showGif ? "150px" : "210px",
+              width: showGif ? "150px" : "250px",
               height: "150px",
             }}
           />
