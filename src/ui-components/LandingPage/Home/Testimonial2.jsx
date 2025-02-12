@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import img1 from "../../../assets/Landing/m1.webp";
-import img2 from "../../../assets/Landing/m2.webp";
-import img3 from "../../../assets/Landing/m3.webp";
-import img4 from "../../../assets/Landing/m4.webp";
+import img1 from "../../../assets/Landing/Mimg1.jpg";
+import img2 from "../../../assets/Landing/Mimg2.jpg";
+import img3 from "../../../assets/Landing/Mimg3.jpg";
+import img4 from "../../../assets/Landing/Mimg4.jpg";
 
 const features = [
   {
@@ -73,7 +73,7 @@ export default function MarketingFeatures() {
           <img
             src={features[activeIndex].image}
             alt="Feature Visual"
-            className="w-full max-w-md"
+            className="w-full max-w-md h-[400px] rounded-2xl border border-[#0b996e]"
           />
         </div>
       </div>

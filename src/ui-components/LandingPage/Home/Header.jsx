@@ -1,5 +1,5 @@
 import React from "react";
-import img1 from "../../../assets/Landing/h1.webp";
+import img1 from "../../../assets/Landing/Mimg5.jpg";
 
 export default function Header() {
     return (
@@ -21,7 +21,7 @@ export default function Header() {
           <img
             src={img1}
             alt="HeaderImage"
-            className="rounded-br-[0px] h-[350px] w-[500px]"
+            className="rounded-2xl border border-[#0b996e] h-[330px] w-[400px]"
           />
         </div>
       </div>
