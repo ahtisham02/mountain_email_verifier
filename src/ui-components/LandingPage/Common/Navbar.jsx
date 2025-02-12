@@ -46,8 +46,15 @@ function Navbar() {
       "/Blog": "Blog",
       "/Pricing": "Pricing",
     };
-    setActiveItem(pathMap[location.pathname] || "Main");
-  }, [location.pathname]);
+  
+    const currentPath = location.pathname.toLowerCase();
+  
+    const matchedKey = Object.keys(pathMap).find(
+      (key) => key.toLowerCase() === currentPath
+    );
+  
+    setActiveItem(matchedKey ? pathMap[matchedKey] : "Main");
+  }, [location.pathname]);  
 
   const navItems = [
     { label: "Home", icon: <Home className="size-5 transition-all" /> },
