@@ -21,6 +21,8 @@ import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
 import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
 import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
 import HomePage from "../pages/LandingPages/Home/Home";
+import BlogPage from "../pages/LandingPages/Blog/Blog";
+import ContactPage from "../pages/LandingPages/Contact/Contact";
 import Layout from "./LandingPageLayout";
 
 const MainRoutes = () => {
@@ -181,7 +183,23 @@ const MainRoutes = () => {
             path="/Home"
             element={
               <RouteMiddleware isAuthRequired={false}>
-                <HomePage />{" "}
+                <HomePage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/Blog"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <BlogPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/Contact"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <ContactPage />
               </RouteMiddleware>
             }
           />

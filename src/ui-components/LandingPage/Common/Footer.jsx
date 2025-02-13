@@ -1,5 +1,5 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Youtube, X } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,7 +8,6 @@ export default function Footer() {
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-[#0b996e]">Mountain</h2>
           <div className="flex space-x-4">
-            <X className="w-5 h-5" />
             <Linkedin className="w-5 h-5" />
             <Instagram className="w-5 h-5" />
             <Youtube className="w-5 h-5" />

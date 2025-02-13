@@ -46,15 +46,15 @@ function Navbar() {
       "/Blog": "Blog",
       "/Pricing": "Pricing",
     };
-  
+
     const currentPath = location.pathname.toLowerCase();
-  
+
     const matchedKey = Object.keys(pathMap).find(
       (key) => key.toLowerCase() === currentPath
     );
-  
+
     setActiveItem(matchedKey ? pathMap[matchedKey] : "Main");
-  }, [location.pathname]);  
+  }, [location.pathname]);
 
   const navItems = [
     { label: "Home", icon: <Home className="size-5 transition-all" /> },
@@ -155,7 +155,10 @@ function Navbar() {
                 My Account Dashboard
               </h1>
             </button>
-            <button className="hidden z-[1050] sm:flex sm:items-center text-[#006a43] border-2 border-[#006a43] rounded-xl shadow-md px-1 py-1.5 min-[1090px]:mb-1">
+            <button
+              onClick={() => navigate("/contact")}
+              className="hidden z-[1050] sm:flex sm:items-center text-[#006a43] border-2 border-[#006a43] rounded-xl shadow-md px-1 py-1.5 min-[1090px]:mb-1"
+            >
               <h1 className="font-medium px-3">Contact Us</h1>
             </button>
           </div>
