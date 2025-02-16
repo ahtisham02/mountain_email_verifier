@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { persistor, store } from "./store/store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { IntercomProvider } from "react-use-intercom";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -26,12 +27,14 @@ root.render(
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENTID}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <MainRoutes />
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-          />
+          <BrowserRouter>
+            <MainRoutes />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+            />
+          </BrowserRouter>
         </PersistGate>
       </Provider>
     </GoogleOAuthProvider>

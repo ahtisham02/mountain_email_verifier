@@ -73,7 +73,7 @@ const OtpPage = () => {
         if (loginResponse.data.status === "success") {
           toast.success("User verified & logged in successfully!");
           dispatch(setUserInfo(loginResponse.data));
-          navigate("/");
+          navigate("/home");
 
           localStorage.removeItem("userEmail");
           localStorage.removeItem("userPassword");

@@ -368,11 +368,11 @@ const PaymentForm = () => {
                 </p>
                 <p className="mt-2">
                   By submitting this form, you confirm that you agree to our{" "}
-                  <a href="/" className="text-blue-500">
+                  <a href="/home" className="text-blue-500">
                     Terms of Service
                   </a>{" "}
                   and{" "}
-                  <a href="/" className="text-blue-500">
+                  <a href="/home" className="text-blue-500">
                     Privacy Policy
                   </a>
                   .

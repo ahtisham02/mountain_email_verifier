@@ -37,7 +37,7 @@ export default function Affiliate() {
           eligible.
         </p>
         <a
-          href="/"
+          href="/home"
           className="text-btnBackgroundhover hover:underline mt-2 inline-block text-sm sm:text-base"
         >
           Preview affiliate payments

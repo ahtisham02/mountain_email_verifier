@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "../pages/LoginPages/Login/Login";
 import ForgotPass from "../pages/LoginPages/ForgotPass/ForgotPass";
 import UserDashboard from "../pages/AdminPages/Dashboard/Dashboard";
@@ -23,11 +23,14 @@ import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
 import HomePage from "../pages/LandingPages/Home/Home";
 import BlogPage from "../pages/LandingPages/Blog/Blog";
 import ContactPage from "../pages/LandingPages/Contact/Contact";
+import AboutPage from "../pages/LandingPages/About/About";
 import Layout from "./LandingPageLayout";
+import ScrollToTop from "../utils/ScrollToTop";
 
 const MainRoutes = () => {
   return (
-    <Router>
+    <>
+      <ScrollToTop />
       <Routes>
         {/* Auth Routes */}
         <Route
@@ -70,10 +73,11 @@ const MainRoutes = () => {
             </RouteMiddleware>
           }
         />
+
         {/* Dashboard Routes */}
         <Route element={<DashboardLayout />}>
           <Route
-            path="/"
+            path="/home"
             element={
               <RouteMiddleware isAuthRequired={true}>
                 <UserDashboard />
@@ -177,10 +181,11 @@ const MainRoutes = () => {
             }
           />
         </Route>
-        {/* LandingPage Routes */}
+
+        {/* Landing Page Routes */}
         <Route element={<Layout />}>
           <Route
-            path="/Home"
+            path="/"
             element={
               <RouteMiddleware isAuthRequired={false}>
                 <HomePage />
@@ -188,7 +193,7 @@ const MainRoutes = () => {
             }
           />
           <Route
-            path="/Blog"
+            path="/blog"
             element={
               <RouteMiddleware isAuthRequired={false}>
                 <BlogPage />
@@ -196,16 +201,25 @@ const MainRoutes = () => {
             }
           />
           <Route
-            path="/Contact"
+            path="/contact"
             element={
               <RouteMiddleware isAuthRequired={false}>
                 <ContactPage />
               </RouteMiddleware>
             }
           />
+          <Route
+            path="/aboutus"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <AboutPage />
+              </RouteMiddleware>
+            }
+          />
         </Route>
       </Routes>
-    </Router>
+    </>
   );
 };
+
 export default MainRoutes;

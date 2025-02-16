@@ -18,7 +18,7 @@ const testimonials = [
   {
     date: "Dec 20, 2024",
     location: "Talent Acquisition at GlobalCorp",
-    heading: "Best Time to Send an Email: Day, Hour, Industry [New Data]",
+    heading: "Best Time to Send an Email: Day, Hour, Industry...",
     feedback:
       "The platform delivers impressive speed, highly accurate results, and an intuitive UI/UX that makes the experience seamless.",
     image: mainimg2,
@@ -26,7 +26,7 @@ const testimonials = [
   {
     date: "Jan 12, 2025",
     location: "Marketing Manager at Growth Inc.",
-    heading: "11 Best Email Marketing Platforms for Small Business (2024)",
+    heading: "11 Best Email Marketing Platforms for Small Business...",
     feedback:
       "One of the standout features of Mountain Email Finder is its in-depth email analysis. It provides detailed insights into email accounts.",
     image: mainimg3,
@@ -85,7 +85,7 @@ export default function Slider() {
   return (
     <div className="relative max-w-6xl mx-auto pt-20 pb-12 px-6 text-center">
       <h1 className="text-3xl font-bold text-gray-900 mb-4">Latest Blog</h1>
-      <h2 className="text-gray-700 mb-12">
+      <h2 className="text-gray-800 mb-12">
         Check our recent blog posts about different technologies and keep
         yourself up-to-date with the tech world.
       </h2>
@@ -97,7 +97,7 @@ export default function Slider() {
           {displayedTestimonials.map((testimonial, index) => (
             <div
               key={index}
-              className={`bg-[#e8fedf] rounded-t-3xl rounded-b-3xl hover:border hover:border-gray-500 transition-transform transform hover:scale-105 duration-300 shadow-md min-[400px]:w-full w-[260px] max-w-md flex flex-col justify-between h-[450px] ${
+              className={`group rounded-t-3xl rounded-b-3xl bg-slate-50 border border-gray-300 transition-transform transform hover:scale-105 duration-300 shadow-md min-[400px]:w-full w-[260px] max-w-md flex flex-col justify-between h-[450px] ${
                 transitioning ? "" : "show"
               }`}
             >
@@ -108,14 +108,14 @@ export default function Slider() {
               />
               <div className="p-6">
                 <div className="flex items-center text-gray-500 text-sm mb-2">
-                  <Calendar className="w-4 h-4 mr-2 text-[#0b996e]" />
+                  <Calendar className="w-4 h-4 mr-2 group-hover: text-[#0b996e]" />
                   <span> {testimonial.date}</span>
                 </div>
                 <p className="text-xs text-[#0b996e] font-semibold mb-1 uppercase tracking-wide">
                   {testimonial.location}
                 </p>
-                <h3 className="text-lg font-bold text-gray-900 leading-snug hover:text-[#0b996e] transition-colors duration-200">
-                  Rules of Retail: 8 Retail Marketing Trends...
+                <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-[#0b996e] transition-colors duration-200">
+                  {testimonial.heading}
                 </h3>
                 <p className="text-sm text-gray-600 mt-3 leading-relaxed">
                   {testimonial.feedback}

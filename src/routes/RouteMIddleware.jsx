@@ -68,8 +68,16 @@ const RouteMiddleware = ({ children, isAuthRequired = false }) => {
     return children;
   }
 
-  if (accessToken && localStorageToken && localStorageToken === accessToken) {
-    return <Navigate to="/" />;
+  if (isAuthRequired === false && accessToken && window.location.pathname.startsWith("/auth")) {
+    return <Navigate to="/home" />;
+  }
+
+  if (isAuthRequired === false) {
+    return children;
+  }
+
+  if (isAuthRequired && (!accessToken || !localStorageToken || localStorageToken !== accessToken)) {
+    return <Navigate to="/auth" />;
   }
 
   return children;

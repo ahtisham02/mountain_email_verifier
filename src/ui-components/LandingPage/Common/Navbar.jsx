@@ -1,13 +1,11 @@
+import { useState, useEffect, useMemo } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   AlignRight,
   ChevronDown,
-  DollarSign,
   LayoutDashboard,
+  Users2,
   X,
-} from "lucide-react";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import {
   BookOpen,
   GraduationCap,
   Calendar,
@@ -29,56 +27,62 @@ import {
   Home,
   ShoppingBag,
 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState(null);
+  const token = useSelector((state) => state?.auth?.userToken);
   const navigate = useNavigate();
   const location = useLocation();
 
+  const navItems = useMemo(
+    () => [
+      {
+        label: "Home",
+        path: "/",
+        icon: <Home className="size-5 transition-all" />,
+      },
+      {
+        label: "Products",
+        path: "/products",
+        icon: <ShoppingBag className="size-5 transition-all" />,
+      },
+      {
+        label: "Blog",
+        path: "/blog",
+        icon: <BookOpen className="size-5 transition-all" />,
+      },
+      {
+        label: "AboutUs",
+        path: "/aboutus",
+        icon: <Users2 className="size-5 transition-all" />,
+      },
+      {
+        label: "Contact",
+        path: "/contact",
+        icon: <Mail className="size-5 transition-all" />,
+        hiddenOnSmall: true,
+      },
+      {
+        label: "Dashboard",
+        path: "/dashboard",
+        icon: <LayoutDashboard className="size-5 transition-all" />,
+        hiddenOnSmall: true,
+      },
+    ],
+    []
+  );
+
   useEffect(() => {
-    const pathMap = {
-      "/Home": "Home",
-      "/Products": "Products",
-      "/Articles": "Articles",
-      "/Blog": "Blog",
-      "/Pricing": "Pricing",
-    };
-
     const currentPath = location.pathname.toLowerCase();
-
-    const matchedKey = Object.keys(pathMap).find(
-      (key) => key.toLowerCase() === currentPath
+    const matchedItem = navItems.find(
+      (item) => item.path.toLowerCase() === currentPath
     );
-
-    setActiveItem(matchedKey ? pathMap[matchedKey] : "Main");
-  }, [location.pathname]);
-
-  const navItems = [
-    { label: "Home", icon: <Home className="size-5 transition-all" /> },
-    {
-      label: "Products",
-      icon: <ShoppingBag className="size-5 transition-all" />,
-    },
-    { label: "Articles", icon: <FileText className="size-5 transition-all" /> },
-    { label: "Blog", icon: <BookOpen className="size-5 transition-all" /> },
-    {
-      label: "Pricing",
-      icon: <DollarSign className="size-5 transition-all" />,
-    },
-    {
-      label: "Contact",
-      icon: <Mail className="size-5 transition-all" />,
-      hiddenOnSmall: true,
-    },
-    {
-      label: "Dashboard",
-      icon: <LayoutDashboard className="size-5 transition-all" />,
-      hiddenOnSmall: true,
-    },
-  ];
+    setActiveItem(matchedItem ? matchedItem.label : "");
+  }, [location.pathname, navItems]); // No warning now
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -104,7 +108,12 @@ function Navbar() {
         } border-gray-200 `}
       >
         <div className="flex items-center justify-between px-10 py-4 mr-5 lg:mr-0">
-          <button className="text-[#0b996e] z-[1050] font-bold text-3xl">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="text-[#0b996e] z-[1050] font-bold text-3xl"
+          >
             Mountain
           </button>
           <button
@@ -114,8 +123,15 @@ function Navbar() {
             {isOpen ? <X size={28} /> : <AlignRight size={28} />}
           </button>
           <ul className="hidden custom-lg:flex lg:space-x-8 text-black">
-            {["Home", "Products", "Articles", "Blog", "Pricing"].map(
-              (label) => (
+            {["Home", "Products", "Blog", "AboutUs"].map((label) => {
+              const path =
+                label === "Home"
+                  ? "/"
+                  : label === "AboutUs"
+                  ? "/aboutus"
+                  : `/${label.toLowerCase()}`;
+
+              return (
                 <li
                   key={label}
                   className="relative group"
@@ -127,7 +143,7 @@ function Navbar() {
                   }
                 >
                   <button
-                    onClick={() => navigate("/" + label)}
+                    onClick={() => navigate(path)}
                     className={`relative group flex items-center justify-between w-full px-3 py-2 min-[1090px]:p-0 transition duration-300 ease-in-out ${
                       activeItem === label
                         ? "text-[#0b996e]"
@@ -146,13 +162,17 @@ function Navbar() {
                     <span className="absolute bottom-[-2px] left-0 w-0 h-[2px] bg-[#0b996e] rounded-full transition-all duration-300 group-hover:w-full"></span>
                   </button>
                 </li>
-              )
-            )}
+              );
+            })}
           </ul>
+
           <div className="hidden sm:flex lg:space-x-4">
-            <button className="hidden sm:flex sm:items-center px-1 py-1.5 min-[1090px]:mb-1 rounded text-[#006a43]">
+            <button
+              onClick={() => navigate(token ? "/home" : "/auth")}
+              className="hidden sm:flex sm:items-center px-1 py-1.5 min-[1090px]:mb-1 rounded text-[#006a43]"
+            >
               <h1 className="font-semibold z-[1050] text-[15px] underline px-3">
-                My Account Dashboard
+                {token ? "My Account Dashboard" : "Login"}
               </h1>
             </button>
             <button
@@ -171,11 +191,11 @@ function Navbar() {
         >
           <hr className="mt-2 min-[1090px]:my-0 bg-black min-[1090px]:hidden" />
           <ul className="flex flex-col space-y-3 text-black px-4 py-4">
-            {navItems.map(({ label, icon, hiddenOnSmall }) => (
+            {navItems.map(({ label, path, icon, hiddenOnSmall }) => (
               <li key={label} className={hiddenOnSmall ? "sm:hidden" : ""}>
                 <button
                   onClick={() => {
-                    navigate("/" + label.toLowerCase());
+                    navigate(path);
                     setIsOpen(false);
                   }}
                   className="flex items-center space-x-3 text-lg pl-6 py-2 transition-all hover:text-[#0b996e]"

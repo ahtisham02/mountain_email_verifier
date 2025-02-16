@@ -57,7 +57,7 @@ export default function AuthPage() {
           if (authResponse.data.status === "success") {
             toast.success(authResponse.data.message);
             dispatch(setUserInfo(authResponse.data));
-            navigate("/");
+            navigate("/home");
           } else {
             setIsLogin(true);
           }
@@ -129,7 +129,7 @@ export default function AuthPage() {
           if (isLogin) {
             toast.success(response.data.message);
             dispatch(setUserInfo(response.data));
-            navigate("/");
+            navigate("/home");
           } else {
             navigate("/otp");
             localStorage.setItem("userEmail", response.data.data.email);

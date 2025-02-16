@@ -21,7 +21,7 @@ const Sidebar = ({ isOpen, onToggleSidebar }) => {
 
   const menuItems = useMemo(
     () => [
-      { icon: Home, label: "Dashboard", path: "/" },
+      { icon: Home, label: "Dashboard", path: "/home" },
       {
         icon: MailCheck,
         label: "Email Verification",

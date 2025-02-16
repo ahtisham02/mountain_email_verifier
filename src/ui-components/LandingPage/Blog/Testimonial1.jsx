@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaChevronLeft,
   FaChevronRight,
   FaSearch,
   FaChevronDown,
 } from "react-icons/fa";
+import { useRef } from "react";
 import { Calendar } from "lucide-react";
 import mainimg11 from "../../../assets/Landing/b1.webp";
 import mainimg10 from "../../../assets/Landing/b2.webp";
@@ -32,22 +33,80 @@ const images = [
   mainimg11,
 ];
 
-const blogPosts = Array.from({ length: 24 }, (_, i) => ({
-  id: i + 1,
-  date: `Jan ${i + 1}, 2025`,
-  category: i % 2 === 0 ? "Email Marketing" : "Sales Strategy",
-  heading:
-    i % 2 === 0
-      ? `Boost Your Email Open Rates with These Strategies`
-      : `Maximizing Sales Conversions Effectively`,
-  feedback:
-    i % 2 === 0
-      ? "Learn the best practices to improve your email marketing campaigns and ensure better engagement. Discover new techniques to personalize contents."
-      : "Explore proven techniques to enhance your sales funnel and increase customer acquisition. Understand how data-driven strategies and effective follow-up.",
-  image: images[i % images.length],
-}));
+const categories = [
+  "All",
+  "Email Marketing",
+  "Sales Strategy",
+  "Lead Generation",
+  "Customer Retention",
+];
 
-const categories = ["All", "Email Marketing", "Sales Strategy"];
+const blogPosts = Array.from({ length: 24 }, (_, i) => {
+  const categoryIndex = i % 4;
+  const category =
+    categoryIndex === 0
+      ? "Email Marketing"
+      : categoryIndex === 1
+      ? "Sales Strategy"
+      : categoryIndex === 2
+      ? "Lead Generation"
+      : "Customer Retention";
+
+  return {
+    id: i + 1,
+    date: `Jan ${i + 3}, 2025`,
+    category,
+    heading:
+      i % 12 === 0
+        ? "Boost Your Email Open Rates with These Strategies"
+        : i % 12 === 1
+        ? "Maximizing Sales Conversions Effectively"
+        : i % 12 === 2
+        ? "Crafting the Perfect Subject Line for Higher Engagement"
+        : i % 12 === 3
+        ? "The Psychology of Selling: Persuasion Techniques That Work"
+        : i % 12 === 4
+        ? "Personalization in Email: How to Boost Customer Retention"
+        : i % 12 === 5
+        ? "Building a High-Converting Sales Pipeline"
+        : i % 12 === 6
+        ? "Email A/B Testing: The Key to Higher Click-Through Rates"
+        : i % 12 === 7
+        ? "Closing Deals Faster: Sales Tactics That Drive Success"
+        : i % 12 === 8
+        ? "Email Segmentation: Reaching the Right Audience Every Time"
+        : i % 12 === 9
+        ? "How to Handle Sales Objections and Win More Clients"
+        : i % 12 === 10
+        ? "Automating Your Email Campaigns for Maximum Efficiency"
+        : "Mastering Follow-Ups: The Secret to Consistent Sales Growth",
+    feedback:
+      i % 12 === 0
+        ? "Learn the best practices to improve your email marketing campaigns and ensure better engagement. Discover new techniques to personalize content."
+        : i % 12 === 1
+        ? "Explore proven techniques to enhance your sales funnel and increase customer acquisition. Understand how data-driven strategies and effective follow-up work."
+        : i % 12 === 2
+        ? "Discover the art of writing compelling subject lines that grab attention and drive email opens. Learn techniques backed by data and psychology."
+        : i % 12 === 3
+        ? "Uncover powerful psychological tactics that top sales professionals use to influence buyers and close deals more effectively."
+        : i % 12 === 4
+        ? "Learn how to leverage personalization in your email campaigns to build stronger customer relationships and drive repeat sales."
+        : i % 12 === 5
+        ? "Master the steps to create a seamless sales pipeline that nurtures leads and converts prospects into loyal customers."
+        : i % 12 === 6
+        ? "Understand how A/B testing in email marketing helps refine messaging, improve engagement, and increase conversion rates."
+        : i % 12 === 7
+        ? "Find out how top sales teams speed up the closing process with strategic negotiations, follow-ups, and trust-building techniques."
+        : i % 12 === 8
+        ? "Learn how to segment your email list effectively to send highly targeted campaigns that increase open rates and conversions."
+        : i % 12 === 9
+        ? "Discover battle-tested strategies to overcome common sales objections and turn hesitant prospects into loyal customers."
+        : i % 12 === 10
+        ? "Explore how automation tools can streamline your email marketing efforts, save time, and boost overall performance."
+        : "Unlock the key to successful sales follow-ups with proven methods that keep prospects engaged and lead to more closed deals.",
+    image: images[i % images.length],
+  };
+});
 
 export default function BlogListing() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,6 +114,7 @@ export default function BlogListing() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 12;
+  const blogRef = useRef(null);
 
   const filteredBlogs = blogPosts.filter(
     (post) =>
@@ -70,8 +130,24 @@ export default function BlogListing() {
     currentPage * postsPerPage
   );
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);  
+  
+  useEffect(() => {
+    blogRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [currentPage]);  
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
-    <div className="max-w-6xl mx-auto py-10 px-6">
+    <div ref={blogRef} className="max-w-6xl mx-auto py-10 px-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <div className="relative w-full md:w-1/2">
           <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
@@ -114,7 +190,7 @@ export default function BlogListing() {
         {displayedBlogs.map((post) => (
           <div
             key={post.id}
-            className="bg-[#e8fedf] rounded-t-3xl rounded-b-3xl hover:border hover:border-gray-500 transition-transform transform hover:scale-105 duration-300 shadow-md flex flex-col justify-between h-[450px]"
+            className="group rounded-t-3xl rounded-b-3xl bg-slate-50 border border-gray-300 transition-transform transform hover:scale-105 duration-300 shadow-md flex flex-col justify-between h-[450px]"
           >
             <img
               src={post.image}
@@ -129,7 +205,7 @@ export default function BlogListing() {
               <p className="text-xs text-green-600 font-semibold uppercase">
                 {post.category}
               </p>
-              <h3 className="text-lg font-bold text-gray-900 leading-snug hover:text-green-600">
+              <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-green-600">
                 {post.heading}
               </h3>
               <p className="text-sm text-gray-600 mt-3 leading-relaxed">
@@ -144,11 +220,12 @@ export default function BlogListing() {
         <button
           className="flex items-center text-gray-500 hover:text-gray-700"
           disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
+          onClick={() => handlePageChange(currentPage - 1)}
         >
           <FaChevronLeft className="mr-2 mt-0.5" />{" "}
           <span className="font-semibold">Back</span>
         </button>
+
         {[...Array(totalPages)].map((_, index) => (
           <button
             key={index}
@@ -157,15 +234,16 @@ export default function BlogListing() {
                 ? "bg-green-700 text-white"
                 : "text-black hover:text-gray-700"
             }`}
-            onClick={() => setCurrentPage(index + 1)}
+            onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}
           </button>
         ))}
+
         <button
           className="flex items-center text-gray-500 hover:text-gray-700"
           disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
+          onClick={() => handlePageChange(currentPage + 1)}
         >
           <span className="font-semibold">Next</span>{" "}
           <FaChevronRight className="ml-2 mt-0.5" />

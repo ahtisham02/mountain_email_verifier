@@ -4,7 +4,7 @@ import { Mail, Facebook, MapPin, Worm } from "lucide-react";
 export default function ContactUs() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="max-w-5xl w-full grid md:grid-cols-2 gap-10 bg-slate-50 border border-gray-400 p-4 sm:p-10 rounded-2xl">
+      <div className="max-w-5xl w-full grid md:grid-cols-2 gap-10 bg-slate-50 border border-gray-300 p-4 sm:p-10 rounded-2xl">
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center justify-center space-x-3 text-[#0b996f] font-bold text-2xl w-full mt-12 mb-8">
             <div className="h-10 w-10 bg-[#0b996f] rounded-full hidden min-[450px]:flex items-center justify-center">
@@ -15,7 +15,7 @@ export default function ContactUs() {
           <h2 className="text-3xl font-bold mb-4 text-black">
             Contact Our Support Team
           </h2>
-          <p className="text-gray-700 mb-6">
+          <p className="text-gray-800 mb-6">
             We are here to help! Tell us how we can assist you, and we will get
             in touch as soon as possible.
           </p>
@@ -41,7 +41,7 @@ export default function ContactUs() {
           <h2 className="text-2xl font-bold text-black mb-4">
             Send Us A Message
           </h2>
-          <p className="text-gray-700 mb-6">
+          <p className="text-gray-800 mb-6">
             If you have any questions, please fill out the form below, and our
             team will respond as soon as possible.
           </p>
