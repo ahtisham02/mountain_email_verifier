@@ -7,13 +7,12 @@ export default function SLFooter() {
     <div className="bg-[#d7fec8] text-center py-14 px-5">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-semibold text-gray-900">
-          We Value Your Feedback & Suggestions !
+          Don’t see your question answered here?
         </h2>
         <p className="mt-5">
-          We value our customers’ feedback and have already incorporated many of
-          your suggestions into our software. However, we understand that there
-          is always room for improvement. Please don’t hesitate to share any
-          additional ideas or feedback to help us enhance your experience.
+          We're here to help! If you have any unanswered questions, don’t
+          hesitate to reach out. Our team is happy to provide the information
+          and support you need.
         </p>
         <button
           onClick={() => {
@@ -21,7 +20,7 @@ export default function SLFooter() {
           }}
           className="mt-10 bg-[#006a43] text-white font-semibold px-6 py-4 shadow-md rounded-2xl"
         >
-          Share Your Thoughts With Us
+          Get in Touch
         </button>
       </div>
     </div>

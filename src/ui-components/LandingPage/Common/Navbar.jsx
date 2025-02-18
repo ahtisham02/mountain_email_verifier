@@ -28,6 +28,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useSelector } from "react-redux";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,6 +68,12 @@ function Navbar() {
         hiddenOnSmall: true,
       },
       {
+        label: "Pricing",
+        path: "/pricing",
+        icon: <FaMoneyBill1Wave className="size-5 transition-all" />,
+        hiddenOnSmall: true,
+      },
+      {
         label: "Dashboard",
         path: "/dashboard",
         icon: <LayoutDashboard className="size-5 transition-all" />,
@@ -82,7 +89,7 @@ function Navbar() {
       (item) => item.path.toLowerCase() === currentPath
     );
     setActiveItem(matchedItem ? matchedItem.label : "");
-  }, [location.pathname, navItems]); // No warning now
+  }, [location.pathname, navItems]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -123,10 +130,12 @@ function Navbar() {
             {isOpen ? <X size={28} /> : <AlignRight size={28} />}
           </button>
           <ul className="hidden custom-lg:flex lg:space-x-8 text-black">
-            {["Home", "Products", "Blog", "AboutUs"].map((label) => {
+            {["Home", "Products", "Blog", "AboutUs", "Pricing"].map((label) => {
               const path =
                 label === "Home"
                   ? "/"
+                  : label === "Pricing"
+                  ? "/pricing"
                   : label === "AboutUs"
                   ? "/aboutus"
                   : `/${label.toLowerCase()}`;

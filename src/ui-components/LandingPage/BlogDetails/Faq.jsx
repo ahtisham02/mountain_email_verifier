@@ -53,18 +53,18 @@ export default function Faq() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 my-14">
-      <h2 className="text-3xl font-bold mb-6">Mountain Email Finder FAQ</h2>
+      <h2 className="text-2xl text-center font-bold mb-7">Frequently asked questions</h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-gray-600 pb-4">
             <button
-              className="w-full text-left flex justify-between items-center py-3 text-lg font-medium"
+              className="w-full text-left flex justify-between items-center py-3 text-[17px] font-medium"
               onClick={() => toggleFaq(index)}
             >
               {faq.question}
               {openIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </button>
-            {openIndex === index && <p className="mt-2 text-gray-700">{faq.answer}</p>}
+            {openIndex === index && <p className="mt-2 text-[13.5px] text-gray-700">{faq.answer}</p>}
           </div>
         ))}
       </div>

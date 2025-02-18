@@ -18,6 +18,7 @@ import mainimg8 from "../../../assets/Landing/sl5.webp";
 import mainimg9 from "../../../assets/Landing/sl6.webp";
 import mainimg2 from "../../../assets/Landing/sl7.png";
 import mainimg1 from "../../../assets/Landing/lg1.webp";
+import { useNavigate } from "react-router-dom";
 
 const images = [
   mainimg1,
@@ -136,15 +137,22 @@ export default function BlogListing() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory]);  
-  
+  }, [searchTerm, selectedCategory]);
+
   useEffect(() => {
     blogRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [currentPage]);  
+  }, [currentPage]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleNavigate = (title) => {
+    const formattedTitle = encodeURIComponent(title);
+    navigate(`/blog/details/${formattedTitle}`);
+  };
 
   return (
     <div ref={blogRef} className="max-w-6xl mx-auto py-10 px-6">
@@ -190,7 +198,8 @@ export default function BlogListing() {
         {displayedBlogs.map((post) => (
           <div
             key={post.id}
-            className="group rounded-t-3xl rounded-b-3xl bg-slate-50 border border-gray-300 transition-transform transform hover:scale-105 duration-300 shadow-md flex flex-col justify-between h-[450px]"
+            onClick={() => handleNavigate(post.heading)}
+            className="group rounded-t-3xl cursor-pointer rounded-b-3xl bg-slate-50 border border-gray-300 transition-transform transform hover:scale-105 duration-300 shadow-md flex flex-col justify-between h-[450px]"
           >
             <img
               src={post.image}

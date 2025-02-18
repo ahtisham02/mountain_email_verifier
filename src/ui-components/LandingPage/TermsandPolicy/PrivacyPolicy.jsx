@@ -1,5 +1,5 @@
 import React from "react";
-import { Circle, Dot } from "lucide-react";
+import { Dot } from "lucide-react";
 
 const terms = [
   {

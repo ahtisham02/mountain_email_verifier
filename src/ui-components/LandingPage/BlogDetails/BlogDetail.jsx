@@ -208,12 +208,12 @@ export default function BlogDetail() {
       </h2>
       <p className="text-gray-800 leading-relaxed mb-6">
         Internet service providers (ISPs) like Gmail and Outlook aren’t made for
-        <a href="#" className="text-green-600 underline">
+        <a href="/" className="text-green-600 underline">
           {" "}
           sending newsletters
         </a>{" "}
         and campaigns and will become near impossible after the new
-        <a href="#" className="text-green-600 underline">
+        <a href="/" className="text-green-600 underline">
           {" "}
           Gmail and Yahoo! sender requirements
         </a>
@@ -260,7 +260,7 @@ export default function BlogDetail() {
           <span className="font-normal">
             {" "}
             You can use Mountain's{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               marketing automation
             </a>{" "}
             tools to scale your email marketing with features such as:
@@ -285,7 +285,7 @@ export default function BlogDetail() {
           <span className="font-normal">
             {" "}
             If you need to send{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               transactional emails
             </a>{" "}
             triggered by an activity like account confirmations, order updates,
@@ -299,7 +299,7 @@ export default function BlogDetail() {
           <span className="font-normal">
             {" "}
             Brevo works as a{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               bulk email service
             </a>
             , depending on your goals and needs. It’s just as easy to create
@@ -313,19 +313,19 @@ export default function BlogDetail() {
           <span className="font-normal">
             {" "}
             Multiple channels such as{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               SMS marketing
             </a>
             ,{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               WhatsApp
             </a>
             ,{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               live chat
             </a>
             , and{" "}
-            <a href="#" className="text-green-600 underline">
+            <a href="/" className="text-green-600 underline">
               push notifications
             </a>{" "}
             are all accessible within Mountain's interface.

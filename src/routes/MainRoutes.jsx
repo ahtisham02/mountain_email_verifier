@@ -20,10 +20,14 @@ import Api from "../pages/AdminPages/Api/ApiPAge";
 import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
 import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
 import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
+import TermsPage from "../ui-components/LandingPage/TermsandPolicy/Terms&Condition"
+import PolicyPage from "../ui-components/LandingPage/TermsandPolicy/PrivacyPolicy"
 import HomePage from "../pages/LandingPages/Home/Home";
 import BlogPage from "../pages/LandingPages/Blog/Blog";
 import ContactPage from "../pages/LandingPages/Contact/Contact";
 import AboutPage from "../pages/LandingPages/About/About";
+import BlogDetalsPage from "../pages/LandingPages/BlogDetails/BlogDetails";
+import PricingPage from "../pages/LandingPages/PricingPage/Pricing";
 import Layout from "./LandingPageLayout";
 import ScrollToTop from "../utils/ScrollToTop";
 
@@ -201,6 +205,30 @@ const MainRoutes = () => {
             }
           />
           <Route
+            path="/blog/details/:title"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <BlogDetalsPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <TermsPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/policy"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <PolicyPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
             path="/contact"
             element={
               <RouteMiddleware isAuthRequired={false}>
@@ -213,6 +241,14 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={false}>
                 <AboutPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <PricingPage />
               </RouteMiddleware>
             }
           />

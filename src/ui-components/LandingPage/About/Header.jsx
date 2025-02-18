@@ -4,8 +4,11 @@ import {
   MdOutlineHandshake,
   MdOutlineStar,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutUs() {
+  const navigate = useNavigate();
+
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-between h-auto md:h-[88vh] bg-[#d7fec8] px-6 md:px-12 py-12 md:py-16 text-center md:text-left rounded-br-[60px] md:rounded-br-[120px]">
       <div className="max-w-lg">
@@ -22,10 +25,20 @@ export default function AboutUs() {
           future.
         </p>
         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
-          <button className="px-6 py-3 bg-[#055a3c] text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+            className="px-6 py-3 bg-[#055a3c] text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition"
+          >
             Learn More
           </button>
-          <button className="px-6 py-3 border-2 border-[#055a3c] text-[#055a3c] text-lg font-semibold rounded-lg shadow-lg hover:bg-[#055a3c] hover:text-white transition">
+          <button
+            onClick={() => {
+              navigate("/contact");
+            }}
+            className="px-6 py-3 border-2 border-[#055a3c] text-[#055a3c] text-lg font-semibold rounded-lg shadow-lg hover:bg-[#055a3c] hover:text-white transition"
+          >
             Contact Us
           </button>
         </div>
