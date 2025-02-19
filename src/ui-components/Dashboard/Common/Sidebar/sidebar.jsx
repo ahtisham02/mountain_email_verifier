@@ -13,31 +13,42 @@ import {
   AlignRight,
 } from "lucide-react";
 import { MdOutlineVpnKey } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ isOpen, onToggleSidebar }) => {
   const [activeItem, setActiveItem] = useState("Dashboard");
   const navigate = useNavigate();
   const location = useLocation();
+  const isadmin = useSelector((state) => state?.auth?.userInfo?.role);
 
-  const menuItems = useMemo(
-    () => [
-      { icon: Home, label: "Dashboard", path: "/home" },
-      {
-        icon: MailCheck,
-        label: "Email Verification",
-        path: "/emailverification",
-      },
-      { icon: IdCard, label: "Task & Results", path: "/tasks" },
-      { icon: CodeXml, label: "API & Integerations", path: "/apisettings" },
-      { icon: MdOutlineVpnKey, label: "Api Keys", path: "/api" },
-      { icon: PieChart, label: "Credits History", path: "/creditshistory" },
-      { icon: Zap, label: "Buy Credits", path: "/buycredits" },
-      { icon: UserRoundPen, label: "My Profile", path: "/settings" },
-      { icon: Award, label: "Affiliate Program", path: "/affiliate" },
-      { icon: ScrollText, label: "FAQ", path: "/faqs" },
-    ],
-    []
-  );
+  useEffect(() => {
+    if (isadmin !== "user" && location.pathname !== "/AdminBlogs") {
+      navigate("/AdminBlogs");
+    }
+  }, [isadmin, location.pathname, navigate]);  
+
+  const menuItems = useMemo(() => {
+    if (isadmin === "user") {
+      return [
+        { icon: Home, label: "Dashboard", path: "/home" },
+        {
+          icon: MailCheck,
+          label: "Email Verification",
+          path: "/emailverification",
+        },
+        { icon: IdCard, label: "Task & Results", path: "/tasks" },
+        { icon: CodeXml, label: "API & Integrations", path: "/apisettings" },
+        { icon: MdOutlineVpnKey, label: "Api Keys", path: "/api" },
+        { icon: PieChart, label: "Credits History", path: "/creditshistory" },
+        { icon: Zap, label: "Buy Credits", path: "/buycredits" },
+        { icon: UserRoundPen, label: "My Profile", path: "/settings" },
+        { icon: Award, label: "Affiliate Program", path: "/affiliate" },
+        { icon: ScrollText, label: "FAQ", path: "/faqs" },
+      ];
+    } else {
+      return [{ icon: Home, label: "Blogs", path: "/AdminBlogs" }];
+    }
+  }, [isadmin]);
 
   useEffect(() => {
     const currentPath = location.pathname;

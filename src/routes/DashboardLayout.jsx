@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import DashboardNavbar from "../ui-components/Dashboard/Common/Navbar/Navbar";
 import Sidebar from "../ui-components/Dashboard/Common/Sidebar/sidebar";
 import Footer from "../ui-components/Dashboard/Common/Footer/Footer";
@@ -9,6 +9,7 @@ import { Hourglass } from "react-loader-spinner";
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     setLoading(true);
@@ -18,7 +19,7 @@ const DashboardLayout = () => {
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div className="flex h-screen text-black font-plus-jakarta">
@@ -28,22 +29,28 @@ const DashboardLayout = () => {
       />
       <div
         className={`flex flex-col transition-all duration-300 ${
-          isSidebarOpen ? "lg:ml-60" : "ml-0"
-        } w-full lg:ml-16`}
+          isSidebarOpen ? "lg:ml-60" : "lg:ml-16"
+        } w-full`}
       >
         <DashboardNavbar
           isOpen={isSidebarOpen}
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         />
 
-        <main className="flex-grow flex">
+        <main className="flex-grow w-full pt-16">
           {loading ? (
-            <div className="flex flex-col justify-center items-center h-screen pt-16">
-              <Hourglass height="80" width="80" colors={["#0b996e", "#5abe7f"]} />
-              <p className="mt-4 text-gray-600 text-lg">Loading Blog, please wait...</p>
+            <div className="flex flex-col justify-center items-center h-screen w-full">
+              <Hourglass
+                height="80"
+                width="80"
+                colors={["#0b996e", "#5abe7f"]}
+              />
+              <p className="mt-4 text-gray-600 text-lg">
+                Loading Page, please wait...
+              </p>
             </div>
           ) : (
-            <div className="pt-16">
+            <div className="w-full">
               <SuccessModal />
               <Outlet />
             </div>

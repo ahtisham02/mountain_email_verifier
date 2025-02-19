@@ -17,7 +17,6 @@ import { GoClockFill } from "react-icons/go";
 export default function CreditsHistory() {
   const [currentPage, setCurrentPage] = useState(1);
   const token = useSelector((state) => state?.auth?.userToken);
-  const [loading, setLoading] = useState(true);
   const [subscriptionhistoryData, setSubscriptionhistoryData] = useState(null);
 
   const navigate = useNavigate();
@@ -44,8 +43,6 @@ export default function CreditsHistory() {
         console.error("Error fetching subscriptions:", error);
         dispatch(removeUserInfo());
         navigate("/auth");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -132,13 +129,6 @@ export default function CreditsHistory() {
           </div>
         </div>
       </div>
-      {loading ? (
-        <div className="flex items-center justify-center h-[40vh]">
-          <div className="text-center">
-            <div className="w-16 h-16 border-4 border-[#36ab87] border-dashed rounded-full animate-spin mt-28"></div>
-          </div>
-        </div>
-      ) : (
         <div
           className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] mx-auto overflow-x-auto scrollbar-hide w-[79vw] min-[550px]:w-[85vw] sm:w-full p-4 flex flex-col"
           style={{ minHeight: "400px" }}
@@ -221,7 +211,6 @@ export default function CreditsHistory() {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 }

@@ -9,7 +9,6 @@ export default function BuyCredits() {
   const [rangeValue, setRangeValue] = useState(0);
   const [rangeValue2, setRangeValue2] = useState(0);
   const [subscriptionData, setSubscriptionData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,8 +27,6 @@ export default function BuyCredits() {
         console.error("Error fetching subscriptions:", error);
         dispatch(removeUserInfo());
         navigate("/auth");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -73,13 +70,6 @@ export default function BuyCredits() {
             </p>
           </div>
 
-          {loading ? (
-            <div className="flex items-center justify-center h-[30vh]">
-              <div className="text-center">
-                <div className="w-16 h-16 border-4 border-[#36ab87] border-dashed rounded-full animate-spin mt-28"></div>
-              </div>
-            </div>
-          ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="bg-white rounded-2xl border-[1px] border-[#e8e8e8] p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div className="absolute top-4 right-4 px-3 py-1 bg-[#d7fec8] text-[#0b9973] text-sm font-semibold rounded-lg">
@@ -206,7 +196,6 @@ export default function BuyCredits() {
                 </button>
               </div>
             </div>
-          )}
         </div>
       </div>
     </div>

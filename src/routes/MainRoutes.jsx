@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "../pages/LoginPages/Login/Login";
 import ForgotPass from "../pages/LoginPages/ForgotPass/ForgotPass";
 import UserDashboard from "../pages/AdminPages/Dashboard/Dashboard";
+import AdminBlogs from "../pages/AdminPages/Admin/AdminBlogs/AdminBlogs";
 import EmailVerification from "../pages/AdminPages/EmailVerification/EmailVerification";
 import DashboardLayout from "./DashboardLayout";
 import TasksPage from "../pages/AdminPages/Tasks/tasks";
@@ -27,6 +28,7 @@ import BlogPage from "../pages/LandingPages/Blog/Blog";
 import ContactPage from "../pages/LandingPages/Contact/Contact";
 import AboutPage from "../pages/LandingPages/About/About";
 import BlogDetalsPage from "../pages/LandingPages/BlogDetails/BlogDetails";
+import CreateBlogPage from "../pages/AdminPages/Admin/AdminBlogs/CreateBlogPage";
 import PricingPage from "../pages/LandingPages/PricingPage/Pricing";
 import Layout from "./LandingPageLayout";
 import ScrollToTop from "../utils/ScrollToTop";
@@ -85,6 +87,22 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={true}>
                 <UserDashboard />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/adminblogs"
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <AdminBlogs />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/createblog"
+            element={
+              <RouteMiddleware isAuthRequired={true}>
+                <CreateBlogPage  />
               </RouteMiddleware>
             }
           />

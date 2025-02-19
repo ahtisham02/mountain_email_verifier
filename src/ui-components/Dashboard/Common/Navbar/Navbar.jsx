@@ -28,6 +28,7 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
   const Name = useSelector((state) => state?.auth?.userInfo?.name);
   const Lname = useSelector((state) => state?.auth?.userInfo?.last_name);
   const Profile = useSelector((state) => state.profile.profile);
+  const isadmin = useSelector((state) => state?.auth?.userInfo?.role);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -121,108 +122,119 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             isOpen ? "lg:hidden" : "block"
           } min-[450px]:-ml-4 mr-4 w-7 h-7`}
         />
-        <button
-          onClick={() => {
-            navigate("/buycredits");
-          }}
-          className="w-[145px] md:flex items-center justify-center z-40 hidden bg-black text-white py-[7.5px] rounded-2xl"
-        >
-          <Zap strokeWidth={2.5} className="text-white w-4 h-4 mr-2" />
-          <span className="-mt-[2px] font-medium">Buy Credits</span>
-        </button>
-      </div>
-
-      <div className="items-center justify-end inline-block absolute z-10 min-[510px]:right-[180px] min-[450px]:right-[138px] right-[98px] sm:px-2 px-1 py-[5px]">
-        <div
-          onClick={toggleDropdown2}
-          className={`flex items-center hover:text-[#6358DE] ${
-            isOpens ? "!text-[#6358DE] !bg-[#dbd9f7]" : ""
-          } cursor-pointer hover:bg-[#efeefc] text-sm text-black rounded-2xl px-3 py-3 min-[510px]:py-2 mr-2`}
-        >
-          <Activity strokeWidth={3} className="sm:w-4 sm:h-4 w-3 h-3 mr-1" />
-          <span className="font-semibold min-[510px]:block hidden text-[16px]">
-            Credits and usage
-          </span>
-        </div>
-        {isOpens && (
-          <div
-            ref={dropdown2Ref}
-            className="absolute top-12 min-[650px]:right-[20px] min-[570px]:-right-[115px] min-[500px]:-right-[100px] -right-[90px] min-[570px]:w-[430px] min-[410px]:w-[380px] w-[290px] bg-white shadow-md rounded-2xl border-[1px] border-gray-200 px-5 py-4"
+        {isadmin === "user" ? (
+          <button
+            onClick={() => {
+              navigate("/buycredits");
+            }}
+            className="w-[145px] md:flex items-center justify-center z-40 hidden bg-black text-white py-[7.5px] rounded-2xl"
           >
-            <div className="flex justify-between items-start">
-              <h3 className="font-semibold text-lg">Credits usage and plan</h3>
-              <button
-                onClick={toggleDropdown2}
-                className="text-gray-500 hover:text-black"
-              >
-                ✖
-              </button>
-            </div>
-
-            <div className="mt-3">
-              <h4 className="font-semibold mb-4">
-                {Profile?.active_subscription?.subscription.name} Plan
-              </h4>
-              <p className="text-sm text-gray-700">
-                Daily Limits of{" "}
-                {Math.ceil(
-                  Profile?.active_subscription?.credits_per_month
-                    ? Profile?.active_subscription?.credits_per_month
-                    : ""
-                )}{" "}
-                credits.
-              </p>
-              <span
-                onClick={() => {
-                  navigate("/buycredits");
-                  toggleDropdown2();
-                }}
-                className="cursor-pointer text-black text-sm font-medium hover:text-[#6358DE] underline"
-              >
-                Manage your plan and credits
-              </span>
-            </div>
-
-            <div className="mt-4">
-              <h4 className="font-semibold mb-3">Remaining Credits</h4>
-              <p className="text-sm text-gray-700">
-                {" "}
-                {Math.ceil(
-                  Profile?.credits?.credits ? Profile?.credits?.credits : ""
-                )}{" "}
-                credits left until{" "}
-                {Profile?.active_subscription?.date
-                  ? new Date(
-                      new Date(Profile.active_subscription.date).setMonth(
-                        new Date(Profile.active_subscription.date).getMonth() +
-                          1
-                      )
-                    )
-                      .toISOString()
-                      .split("T")[0]
-                  : ""}
-              </p>
-              <span
-                onClick={() => {
-                  navigate("/buycredits");
-                  toggleDropdown2();
-                }}
-                className="text-black cursor-pointer text-sm font-medium hover:text-[#6358DE] underline"
-              >
-                Get more credits
-              </span>
-            </div>
-
-            <div className="mt-4 p-3 bg-[#EFEEFC] rounded-xl flex items-start">
-              <Info className="w-12 h-12 fill-[#6358DE] text-white mr-2 -mt-3" />
-              <p className="text-[14px] font-medium text-gray-800">
-                Go to Automations, Transactional or Deals to see your plan and
-                credit usage for these features.
-              </p>
-            </div>
-          </div>
+            <Zap strokeWidth={2.5} className="text-white w-4 h-4 mr-2" />
+            <span className="-mt-[2px] font-medium">Buy Credits</span>
+          </button>
+        ) : (
+          ""
         )}
       </div>
+
+      {isadmin === "user" ? (
+        <div className="items-center justify-end inline-block absolute z-10 min-[510px]:right-[180px] min-[450px]:right-[138px] right-[98px] sm:px-2 px-1 py-[5px]">
+          <div
+            onClick={toggleDropdown2}
+            className={`flex items-center hover:text-[#6358DE] ${
+              isOpens ? "!text-[#6358DE] !bg-[#dbd9f7]" : ""
+            } cursor-pointer hover:bg-[#efeefc] text-sm text-black rounded-2xl px-3 py-3 min-[510px]:py-2 mr-2`}
+          >
+            <Activity strokeWidth={3} className="sm:w-4 sm:h-4 w-3 h-3 mr-1" />
+            <span className="font-semibold min-[510px]:block hidden text-[16px]">
+              Credits and usage
+            </span>
+          </div>
+          {isOpens && (
+            <div
+              ref={dropdown2Ref}
+              className="absolute top-12 min-[650px]:right-[20px] min-[570px]:-right-[115px] min-[500px]:-right-[100px] -right-[90px] min-[570px]:w-[430px] min-[410px]:w-[380px] w-[290px] bg-white shadow-md rounded-2xl border-[1px] border-gray-200 px-5 py-4"
+            >
+              <div className="flex justify-between items-start">
+                <h3 className="font-semibold text-lg">
+                  Credits usage and plan
+                </h3>
+                <button
+                  onClick={toggleDropdown2}
+                  className="text-gray-500 hover:text-black"
+                >
+                  ✖
+                </button>
+              </div>
+
+              <div className="mt-3">
+                <h4 className="font-semibold mb-4">
+                  {Profile?.active_subscription?.subscription.name} Plan
+                </h4>
+                <p className="text-sm text-gray-700">
+                  Daily Limits of{" "}
+                  {Math.ceil(
+                    Profile?.active_subscription?.credits_per_month
+                      ? Profile?.active_subscription?.credits_per_month
+                      : ""
+                  )}{" "}
+                  credits.
+                </p>
+                <span
+                  onClick={() => {
+                    navigate("/buycredits");
+                    toggleDropdown2();
+                  }}
+                  className="cursor-pointer text-black text-sm font-medium hover:text-[#6358DE] underline"
+                >
+                  Manage your plan and credits
+                </span>
+              </div>
+
+              <div className="mt-4">
+                <h4 className="font-semibold mb-3">Remaining Credits</h4>
+                <p className="text-sm text-gray-700">
+                  {" "}
+                  {Math.ceil(
+                    Profile?.credits?.credits ? Profile?.credits?.credits : ""
+                  )}{" "}
+                  credits left until{" "}
+                  {Profile?.active_subscription?.date
+                    ? new Date(
+                        new Date(Profile.active_subscription.date).setMonth(
+                          new Date(
+                            Profile.active_subscription.date
+                          ).getMonth() + 1
+                        )
+                      )
+                        .toISOString()
+                        .split("T")[0]
+                    : ""}
+                </p>
+                <span
+                  onClick={() => {
+                    navigate("/buycredits");
+                    toggleDropdown2();
+                  }}
+                  className="text-black cursor-pointer text-sm font-medium hover:text-[#6358DE] underline"
+                >
+                  Get more credits
+                </span>
+              </div>
+
+              <div className="mt-4 p-3 bg-[#EFEEFC] rounded-xl flex items-start">
+                <Info className="w-12 h-12 fill-[#6358DE] text-white mr-2 -mt-3" />
+                <p className="text-[14px] font-medium text-gray-800">
+                  Go to Automations, Transactional or Deals to see your plan and
+                  credit usage for these features.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      ) : (
+        ""
+      )}
 
       <div
         className="flex items-center cursor-pointer"
@@ -257,15 +269,19 @@ export default function Navbar({ onToggleSidebar, isOpen }) {
             ref={dropdownRef}
             className="absolute right-3 lg:right-5 top-14 w-52 bg-white border rounded-lg shadow-md px-2 py-2 space-y-1"
           >
-            <div
-              onClick={() => {
-                navigate("/buycredits");
-              }}
-              className="flex items-center md:hidden space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
-            >
-              <Zap className="text-gray-600 w-4 h-4 mr-1" />
-              <button className="text-sm text-gray-800">Buy Credits</button>
-            </div>
+            {isadmin === "user" ? (
+              <div
+                onClick={() => {
+                  navigate("/buycredits");
+                }}
+                className="flex items-center md:hidden space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
+              >
+                <Zap className="text-gray-600 w-4 h-4 mr-1" />
+                <button className="text-sm text-gray-800">Buy Credits</button>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100">
               <User
                 strokeWidth={2.5}
