@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Mail, Facebook, MapPin, Worm } from "lucide-react";
+import { Mail, Worm, Phone } from "lucide-react";
 import { toast } from "react-toastify";
 import apiRequest from "../../../utils/apiRequest";
 import loaderGif from "../../../assets/loadernew1.gif";
@@ -34,7 +34,7 @@ export default function ContactUs() {
         formData.append("email", values.email);
         formData.append("message", values.message);
 
-        const response = await apiRequest("post", "/api/contact", formData, {
+        const response = await apiRequest("post", "/api/contact-us", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
 
@@ -64,8 +64,8 @@ export default function ContactUs() {
             Contact Our Support Team
           </h2>
           <p className="text-gray-800 mb-6">
-            We are here to help! Tell us how we can assist you, and we will get
-            in touch as soon as possible.
+            Have a question or need assistance? Our team is here to help you get
+            the most out of Mountain Email Verifier.
           </p>
           <h3 className="text-xl font-semibold text-black mb-4">
             Support Options
@@ -73,15 +73,19 @@ export default function ContactUs() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Mail className="text-black" />
-              <span className="text-gray-800">support@yourdomain.com</span>
+              <span className="text-gray-800">
+                support@mountainverifier.com
+              </span>
             </div>
             <div className="flex items-center gap-3">
-              <Facebook className="text-black" />
-              <span className="text-gray-800">Facebook.com/YourPage</span>
+              <Phone className="text-black" />
+              <span className="text-gray-800">+1 (555) 123-4567</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="text-black" />
-              <span className="text-gray-800">Your Address, City, Country</span>
+              {" "}
+              <span className="text-gray-800">
+                We strive to respond within one business day.
+              </span>
             </div>
           </div>
         </div>

@@ -154,7 +154,7 @@ export default function AuthPage() {
   return (
     <div className="flex min-h-screen">
       <div className={`w-full lg:w-1/2 border-r-[1px] border-gray-200 h-screen overflow-y-auto flex flex-col items-center justify-center ${isLogin ? "!pt-7 !pb-1" : "!pt-48 !pb-6"} p-5`}>
-        <div className="flex items-center space-x-3 text-[#0b996f] font-bold text-2xl w-full">
+        <div onClick={()=> {navigate('/')}} className="flex cursor-pointer items-center space-x-3 text-[#0b996f] font-bold text-2xl w-full">
           <div className="h-10 w-10 bg-[#0b996f] rounded-full flex items-center justify-center">
             <Worm className="h-6 w-6 text-white" />
           </div>
@@ -164,12 +164,12 @@ export default function AuthPage() {
           <h1 className="mb-1 text-[25px] font-bold text-gray-900 text-center">
             {isLogin
               ? "Welcome Back!"
-              : "Create your account. No credit card needed."}
+              : "Create Your Account."}
           </h1>
 
           <p className="mb-4 text-[14px] mx-10 font-semibold text-gray-700 text-center">
             {isLogin
-              ? "Great to see you again"
+              ? "Sign In to Mountain Email Verifier."
               : "Send your first emails in a few minutes. Already have an account? Login"}
           </p>
           <div className="flex justify-center mb-5 rounded-lg bg-gray-100 p-1">

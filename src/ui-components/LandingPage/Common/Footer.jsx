@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
   const navigate = useNavigate();
+  const handleComparisonClick = (contentKey) => {
+    navigate(`/comparison/${contentKey}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <footer className="bg-[#f6f9f6] text-[#111] pt-10 pb-6 px-5 md:px-20">
@@ -51,29 +58,35 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-3">COMPARE</h3>
             <ul className="space-y-2.5 text-sm">
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Bulk email service
+              <li onClick={() => handleComparisonClick("Never_Bounce")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs NeverBounce
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Email marketing platforms
+              <li onClick={() => handleComparisonClick("Zero_Bounce")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs ZeroBounce
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Mountain vs Mailchimp
+              <li onClick={() => handleComparisonClick("Brite_Verify")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs BriteVerify
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Mountain vs HubSpot
+              <li onClick={() => handleComparisonClick("Kick_box")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs Kickbox
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Mountain vs Constant Contact
+              <li onClick={() => handleComparisonClick("De_Bounce")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs DeBounce
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Mountain vs Klaviyo
+              <li onClick={() => handleComparisonClick("X_verify")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs Xverify
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                Mailchimp alternatives
+              <li onClick={() => handleComparisonClick("EmailList_Verify")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs EmailListVerify
               </li>
-              <li className="hover:text-[#0b996e] cursor-pointer">
-                HubSpot alternatives
+              <li onClick={() => handleComparisonClick("Clear_out")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs Clearout
+              </li>
+              <li onClick={() => handleComparisonClick("Email_able")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs Emailable
+              </li>
+              <li onClick={() => handleComparisonClick("Verify_Bee")} className="hover:text-[#0b996e] cursor-pointer">
+                Mountain vs VerifyBee
               </li>
             </ul>
           </div>

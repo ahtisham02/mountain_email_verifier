@@ -1,94 +1,151 @@
 import React from "react";
-import { DollarSign, Tag, Clock, AlertTriangle, Shield } from "lucide-react";
+import {
+  User,
+  CreditCard,
+  Globe,
+  FileText,
+  ShieldAlert,
+  Power,
+  Gavel,
+  RefreshCw,
+} from "lucide-react";
 
 const terms = [
   {
-    title: "Pricing",
-    icon: DollarSign,
-    content:
-      "Although we try our best to maintain an error-free website, a small number of the parts on our catalog may be mispriced. If the correct price is lower than the listed price, we will charge you the lower amount and ship out the order. If the part's correct price is higher than our listed price, we will inform you first to see whether the order should be proceed or canceled.",
-  },
-  {
-    title: "Lowest Price Guarantee",
-    icon: Tag,
-    content:
-      "Prior to placing your order, contact us by Phone, Live Chat, or Email and provide us a link to the online retailer we are matching. We will verify the item eligibility by reviewing the online retailer. HondaPartsNow.com will match the price from an online retailer only and has the final decision for matching an online price. If we match an online retailer’s price, it must include shipping charges in the price of the item. The item must be identical and must have the same manufacturer part number. Price matching is not available on previously placed orders and only applies to orders shipped in the United States.",
-  },
-  {
-    title: "Backorders",
-    icon: Clock,
-    content:
-      "In the event of a backorder part (less < 1% ), we will inform the customer and provide him/her with the option to cancel the part or the entire order. If customer is willing to wait, the customer's credit card will not be charged and invoiced until the parts arrive at our warehouse and the order is ready for shipment.",
-  },
-  {
-    title: "Disclaimer",
-    icon: AlertTriangle,
+    title: "Account Requirements",
+    icon: User,
     content: (
       <>
-        Some parts on your order may have updated replacement information. Our
-        parts specialists will verify and ship out the updated replacement at
-        our discretion.
-        <br />
-        In the meantime, the updated replacement part number will usually be
-        provided on the packing list and invoice. Vehicle diagrams displayed on
-        this website are for general illustration purposes only.
-        <br />
-        Vehicles depicted are shown as a sample vehicle of the same model only.
-        Details of a selected vehicle may vary from the vehicle shown, depending
-        on the selected features.
-        <br />
-        The diagrams are used as a point of reference and should not be used as
-        the primary resource when ordering a part. The catalog is provided as a
-        convenience to our customers.
+        Users are responsible for providing accurate, complete, and up-to-date
+        information when creating an account. Any false, misleading, or outdated
+        information may result in the suspension or termination of the account.
         <br />
         <br />
-        We do not guarantee the accuracy of the information provided within this
-        catalog. While we try to maintain a near-perfect catalog, a small number
-        of parts may be listed incorrectly.
-        <br />
-        Our website is a general catalog and does not reflect our actual
-        inventory, please contact us for inventory information. We reserve the
-        right to refuse to process an order for any reason.
-        <br />
-        Your order confirmation is an offer to buy, not a completed sales
-        contract. Order acceptance and the completion of the contract between
-        both the purchasing and seller parties will take place on the shipment
-        of the products ordered.
-        <br />
-        <br />
-        Your receipt of an electronic or other form of order confirmation does
-        not mean our acceptance of your order, nor does it constitute a
-        confirmation of our offer to sell. We reserve the right at any time
-        after the receipt of your order to cancel your order for any reason.
-        <br />
-        <br />
-        If the order is cancelled, the authorization on your card will be voided
-        and no money will be charged. If your card was charged, a full refund
-        will be issued to your credit card.
+        It is the user's responsibility to ensure that their account details,
+        including login credentials, are kept secure. Any unauthorized access or
+        suspicious activities must be reported to us immediately. Failure to
+        comply with these requirements may result in account restrictions or
+        removal.
       </>
     ),
   },
-
   {
-    title: "Limitation of liability",
-    icon: Shield,
+    title: "Payment & Billing",
+    icon: CreditCard,
+    content: (
+      <>
+        All transactions made through our platform must be completed with valid
+        and authorized payment methods.
+        <br />
+        <br />
+        Users are responsible for ensuring that their payment details are
+        accurate and up to date. Refunds and cancellations are subject to our
+        policies, and any discrepancies must be reported within a reasonable
+        timeframe. In case of pricing errors or discrepancies, we will notify
+        the customer before proceeding with the transaction. Additional charges,
+        including taxes, service fees, and shipping costs, will be calculated
+        and displayed at checkout.
+        <br />
+        <br />
+        Users should review all costs before completing their purchase.
+      </>
+    ),
+  },
+  {
+    title: "Use of the Service",
+    icon: Globe,
+    content: (
+      <>
+        Users must comply with all applicable local, national, and international
+        laws and regulations while using our services. Any misuse, including but
+        not limited to unauthorized access, fraudulent activities, distribution
+        of harmful content, or attempts to disrupt the service, is strictly
+        prohibited.
+        <br />
+        <br />
+        Violation of these guidelines may result in account suspension, legal
+        action, or permanent termination from our platform. We reserve the right
+        to monitor activity to ensure compliance and maintain the security of
+        our services.
+      </>
+    ),
+  },
+  {
+    title: "Intellectual Property",
+    icon: FileText,
     content:
-      "HondaPartsNow.com and its affiliates will not be liable for any direct, indirect, incidental, punitive, consequential, or any other damages whatsoever that result from the use or performance of, or the inability to use, the site, the products, or information, or functions on such site, even if HondaPartsNow.com has been advised of the possibility of such damages. In no events will HondaPartsNow.com and its affiliate's total liability to you for all damages, losses, and causes of action, whether arising out of contract, tort, or otherwise, exceed the amount paid by you, if any, for accessing the site or purchasing the products.",
+      "All content, trademarks, logos, and intellectual property displayed on this platform are the sole property of our company or respective licensors. Users are not permitted to copy, reproduce, modify, distribute, or exploit any content without prior written permission. Any unauthorized use of our intellectual property may result in legal action. We take intellectual property rights seriously and actively monitor potential violations to protect our assets and those of our partners.",
+  },
+  {
+    title: "Limitation of Liability",
+    icon: ShieldAlert,
+    content:
+      "We are not liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use our services, including but not limited to data loss, service interruptions, or unauthorized access to user accounts. Users acknowledge that they access our platform at their own risk and agree to hold us harmless from any claims, losses, or damages. We do our best to provide a reliable and secure service, but we do not guarantee that our platform will be error-free or uninterrupted at all times.",
+  },
+  {
+    title: "Termination",
+    icon: Power,
+    content:
+      "We reserve the right to suspend or terminate user accounts at our sole discretion if users violate our terms, engage in fraudulent activities, or pose security risks. Upon termination, users may lose access to their data, purchases, and any associated services. Users are encouraged to back up important information to avoid data loss. If an account is terminated, re-registration may not be permitted without prior approval.",
+  },
+  {
+    title: "Dispute Resolution",
+    icon: Gavel,
+    content: (
+      <>
+        Any disputes arising from these terms will be governed by applicable
+        laws in the designated jurisdiction. Users agree to resolve disputes
+        through arbitration, mediation, or other legal means as specified in our
+        policies.
+        <br />
+        <br />
+        We encourage users to reach out to our support team first to seek an
+        amicable resolution before pursuing legal action. Disputes that cannot
+        be resolved informally may be subject to formal proceedings in
+        accordance with our governing laws and jurisdiction policies.
+      </>
+    ),
+  },
+  {
+    title: "Changes to Terms",
+    icon: RefreshCw,
+    content: (
+      <>
+        We reserve the right to update, modify, or revise these terms at any
+        time to reflect changes in our services, policies, or applicable laws.
+        <br />
+        <br />
+        Users will be notified of significant updates through email, platform
+        announcements, or other communication methods. It is the user's
+        responsibility to review the terms periodically to stay informed about
+        any changes. Continued use of our services after updates constitutes
+        acceptance of the revised terms and conditions.
+        <br />
+        <br />
+        If users disagree with the changes, they must discontinue using our
+        services immediately.
+      </>
+    ),
   },
 ];
+
 export default function Header() {
   return (
     <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg">
       <div className="text-[24px] sm:text-[28px] mb-14">
-        <h1 className="text-[#1C1C1C] font-bold text-center mb-6">
-          Terms and Conditions
+        <h1 className="text-[#1C1C1C] font-bold text-center mb-2">
+          Terms of Service
+        </h1>
+        <h1 className="text-[#1c1c1ca1] font-medium !text-sm text-center mb-6">
+          This agreement governs your use of Mountain Email Verifier. By signing
+          up, you accept these terms.{" "}
         </h1>
       </div>
       <div className="space-y-6 mb-16">
         {terms.map((term, index) => (
           <div key={index} className="flex items-start gap-4">
             <div className="w-7 h-7 rounded-full bg-[#0b996e] flex items-center justify-center">
-              <term.icon className="text-white w-9 p-1"/>
+              <term.icon className="text-white w-9 p-1" />
             </div>
             <div>
               <h2 className="text-[#121212] font-medium mb-2 text-[17px] sm:text-[17px]">

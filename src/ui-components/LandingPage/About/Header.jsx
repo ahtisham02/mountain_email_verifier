@@ -12,24 +12,23 @@ export default function AboutUs() {
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-between h-auto md:h-[88vh] bg-[#d7fec8] px-6 md:px-12 py-12 md:py-16 text-center md:text-left rounded-br-[60px] md:rounded-br-[120px]">
       <div className="max-w-lg">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 md:mb-6 text-[#0b996e]">
-          About Us
+        <h1 className="text-4xl xl:text-nowrap font-extrabold mb-4 md:mb-6 text-[#0b996e]">
+          About Mountain Email Verifier
         </h1>
-        <h2 className="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
-          Empowering Innovation & Collaboration
+        <h2 className="text-xl md:text-[23px] font-semibold mb-3 md:mb-4">
+          From Marketers to Solution Builders
         </h2>
-        <p className="text-base md:text-lg mb-4 md:mb-6">
-          We are pioneers in our field, driven by a passion for excellence and a
-          commitment to creating transformative solutions. Our journey is fueled
-          by innovation, strategic partnerships, and a vision to shape the
-          future.
+        <p className="text-base md:text-[17.5px] mb-4 md:mb-6">
+          At Mountain Email Verifier, we believe every email sent should reach a
+          real person. Our mission is to make email verification simple, fast,
+          and reliable for businesses of all sizes.
         </p>
         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
           <button
             onClick={() => {
               navigate("/");
             }}
-            className="px-6 py-3 bg-[#055a3c] text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition"
+            className="px-6 py-3 bg-[#055a3c] text-white text-[17px] font-semibold rounded-lg shadow-lg hover:scale-105 transition"
           >
             Learn More
           </button>
@@ -37,9 +36,9 @@ export default function AboutUs() {
             onClick={() => {
               navigate("/contact");
             }}
-            className="px-6 py-3 border-2 border-[#055a3c] text-[#055a3c] text-lg font-semibold rounded-lg shadow-lg hover:bg-[#055a3c] hover:text-white transition"
+            className="px-6 py-3 border-2 border-[#055a3c] text-[#055a3c] text-[17px] font-semibold rounded-lg shadow-lg hover:bg-[#055a3c] hover:text-white transition"
           >
-            Contact Us
+            Get in Touch
           </button>
         </div>
       </div>

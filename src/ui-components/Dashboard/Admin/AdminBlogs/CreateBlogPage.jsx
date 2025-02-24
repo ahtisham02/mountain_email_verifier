@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaChevronUp, FaChevronDown, FaCalendarAlt } from "react-icons/fa";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const CreateBlogPage = () => {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ const CreateBlogPage = () => {
     description: "",
     date: "",
     status: "Draft",
+    image: null,
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -18,6 +21,13 @@ const CreateBlogPage = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleFileChange = (e, setFile) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFile(file);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -31,6 +41,37 @@ const CreateBlogPage = () => {
     setFormData({ ...formData, status });
     setIsDropdownOpen(false);
   };
+
+  const FileUpload = ({ label, file, setFile, handleFileChange }) => (
+    <label className="flex flex-col items-center justify-center border rounded-xl cursor-pointer w-48 h-40">
+      {!file ? (
+        <>
+          <p className="text-gray-600 text-2xl">+</p>
+          <p className="text-gray-600">{label}</p>
+        </>
+      ) : (
+        <div className="relative w-48 h-40">
+          <img
+            src={URL.createObjectURL(file)}
+            alt="Preview"
+            className="w-full h-full object-cover rounded-xl"
+          />
+          <button
+            onClick={() => setFile(null)}
+            className="absolute top-[-10px] pb-1 right-[-10px] bg-slate-500 text-white rounded-full px-2.5"
+          >
+            x
+          </button>
+        </div>
+      )}
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => handleFileChange(e, setFile)}
+      />
+    </label>
+  );
 
   return (
     <div className="p-6 overflow-x-hidden">
@@ -72,15 +113,25 @@ const CreateBlogPage = () => {
           >
             Description
           </label>
-          <textarea
-            id="description"
-            name="description"
+          <ReactQuill
             value={formData.description}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            rows="5"
-            placeholder="Enter blog description"
-            required
+            onChange={(value) => setFormData({ ...formData, description: value })}
+            className="w-full h-48 mb-12"
+          />
+        </div>
+
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="image"
+          >
+            Image
+          </label>
+          <FileUpload
+            label="Upload Image"
+            file={formData.image}
+            setFile={(file) => setFormData({ ...formData, image: file })}
+            handleFileChange={handleFileChange}
           />
         </div>
 
@@ -148,7 +199,7 @@ const CreateBlogPage = () => {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="sr-only" // Hide the input visually but keep it accessible
+            className="sr-only"
             required
           />
         </div>

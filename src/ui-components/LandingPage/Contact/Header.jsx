@@ -13,7 +13,7 @@ export default function Header() {
           to contact us at:{" "}
         </p>
         <button className="mt-6 px-5 py-4 bg-[#006a43] shadow-md text-white rounded-2xl text-lg font-medium">
-          Contact@Mountain.com
+          support@mountainverifier.com
         </button>
       </div>
 

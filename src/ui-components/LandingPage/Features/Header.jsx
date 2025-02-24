@@ -1,5 +1,5 @@
 import React from "react";
-import img1 from "../../../assets/Landing/Mimg5.jpg";
+import img1 from "../../../assets/Landing/Mimg3.jpg";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
@@ -9,19 +9,19 @@ export default function Header() {
     <div className="bg-[#d7fec8] px-6 py-12 md:py-20 md:px-16 rounded-br-[70px] md:rounded-br-[120px] flex flex-col md:flex-row items-center md:justify-center text-center md:text-left md:h-[89vh] 2xl:h-[100vh]">
       <div className="max-w-lg w-full">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Verify Your Emails <br /> and Reach Real People
+          Powerful Features for <br /> Accurate Email Verification
         </h1>
         <p className="text-gray-700 mt-4">
-          Mountain Email Verifier helps you clean your lists, improve
-          deliverability, and protect your sender reputation—instantly.
+          Get the tools you need to keep your mailing lists clean, your sender
+          reputation high, and your email ROI better than ever.
         </p>
         <button
           onClick={() => {
-            navigate("/aboutus");
+            navigate("/home");
           }}
-          className="mt-6 px-5 py-4 bg-[#006a43] shadow-md text-white rounded-2xl text-lg font-medium"
+          className="mt-6 px-6 py-3 bg-[#006a43] shadow-md text-white rounded-2xl text-lg font-medium"
         >
-          Get Started for Free
+          Try It Now
         </button>
       </div>
 

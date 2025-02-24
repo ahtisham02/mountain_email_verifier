@@ -26,6 +26,8 @@ import {
   Server,
   Home,
   ShoppingBag,
+  Code,
+  ServerCog,
 } from "lucide-react";
 import { useSelector } from "react-redux";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
@@ -71,7 +73,16 @@ function Navbar() {
         label: "Pricing",
         path: "/pricing",
         icon: <FaMoneyBill1Wave className="size-5 transition-all" />,
-        hiddenOnSmall: true,
+      },
+      {
+        label: "Api",
+        path: "/apis",
+        icon: <Code className="size-5 transition-all" />,
+      },
+      {
+        label: "Features",
+        path: "/features",
+        icon: <ServerCog className="size-5 transition-all" />,
       },
       {
         label: "Dashboard",
@@ -130,12 +141,14 @@ function Navbar() {
             {isOpen ? <X size={28} /> : <AlignRight size={28} />}
           </button>
           <ul className="hidden custom-lg:flex lg:space-x-8 text-black">
-            {["Home", "Products", "Blog", "AboutUs", "Pricing"].map((label) => {
+            {["Home", "Products", "Blog", "AboutUs", "Pricing", "Api", "Features"].map((label) => {
               const path =
                 label === "Home"
                   ? "/"
                   : label === "Pricing"
                   ? "/pricing"
+                  : label === "Api"
+                  ? "/apis"
                   : label === "AboutUs"
                   ? "/aboutus"
                   : `/${label.toLowerCase()}`;

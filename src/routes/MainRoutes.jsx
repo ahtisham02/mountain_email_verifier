@@ -21,8 +21,8 @@ import Api from "../pages/AdminPages/Api/ApiPAge";
 import OtpPage from "../ui-components/Authentication/Otp/OtpPage";
 import ConfirmReset from "../ui-components/Authentication/Reset/ConfirmReset";
 import ConfirmationPage from "../ui-components/Authentication/Reset/Confirm";
-import TermsPage from "../ui-components/LandingPage/TermsandPolicy/Terms&Condition"
-import PolicyPage from "../ui-components/LandingPage/TermsandPolicy/PrivacyPolicy"
+import TermsPage from "../ui-components/LandingPage/TermsandPolicy/Terms&Condition";
+import PolicyPage from "../ui-components/LandingPage/TermsandPolicy/PrivacyPolicy";
 import HomePage from "../pages/LandingPages/Home/Home";
 import BlogPage from "../pages/LandingPages/Blog/Blog";
 import ContactPage from "../pages/LandingPages/Contact/Contact";
@@ -30,8 +30,11 @@ import AboutPage from "../pages/LandingPages/About/About";
 import BlogDetalsPage from "../pages/LandingPages/BlogDetails/BlogDetails";
 import CreateBlogPage from "../pages/AdminPages/Admin/AdminBlogs/CreateBlogPage";
 import PricingPage from "../pages/LandingPages/PricingPage/Pricing";
+import ApiPage from "../pages/LandingPages/Api/Api";
+import FeaturesPage from "../pages/LandingPages/Features/Features";
 import Layout from "./LandingPageLayout";
 import ScrollToTop from "../utils/ScrollToTop";
+import ComparisonPage from "../pages/LandingPages/Comparison/Comparison";
 
 const MainRoutes = () => {
   return (
@@ -102,7 +105,7 @@ const MainRoutes = () => {
             path="/createblog"
             element={
               <RouteMiddleware isAuthRequired={true}>
-                <CreateBlogPage  />
+                <CreateBlogPage />
               </RouteMiddleware>
             }
           />
@@ -223,6 +226,14 @@ const MainRoutes = () => {
             }
           />
           <Route
+            path="/comparison/:topic"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <ComparisonPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
             path="/blog/details/:title"
             element={
               <RouteMiddleware isAuthRequired={false}>
@@ -235,6 +246,22 @@ const MainRoutes = () => {
             element={
               <RouteMiddleware isAuthRequired={false}>
                 <TermsPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/apis"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <ApiPage />
+              </RouteMiddleware>
+            }
+          />
+          <Route
+            path="/features"
+            element={
+              <RouteMiddleware isAuthRequired={false}>
+                <FeaturesPage />
               </RouteMiddleware>
             }
           />

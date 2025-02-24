@@ -61,7 +61,7 @@ const ConfirmReset = () => {
   return (
     <div className="flex min-h-screen font-plus-jakarta">
       <div className="w-full lg:w-1/2 border-r-[1px] border-gray-200 h-screen overflow-y-auto flex flex-col items-center justify-center p-5">
-        <div className="flex items-center space-x-3 text-[#0b996f] font-bold text-2xl w-full">
+        <div onClick={()=> {navigate('/auth')}} className="flex cursor-pointer items-center space-x-3 text-[#0b996f] font-bold text-2xl w-full">
           <div className="h-10 w-10 bg-[#0b996f] rounded-full flex items-center justify-center">
             <Worm className="h-6 w-6 text-white" />
           </div>

@@ -11,11 +11,9 @@ export default function SLFooter() {
           Learn More About Our Journey
         </h2>
         <p className="mt-5">
-          Our mission is to provide innovative solutions while continuously
-          improving based on user feedback. We strive to create an exceptional
-          experience by adapting to your needs and evolving with technology.
-          Your insights drive our progress, and we’re always eager to hear from
-          you.
+          We started as marketers frustrated with bounce rates and invalid
+          leads. Determined to fix the problem, we built a service that
+          prioritizes accuracy, speed, and user-friendly design.
         </p>
         <button
           onClick={() => {

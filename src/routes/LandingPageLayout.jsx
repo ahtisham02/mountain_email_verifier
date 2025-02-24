@@ -30,7 +30,10 @@ const Layout = () => {
   }, [id, Fname, Name, email, boot]);
 
   useEffect(() => {
-    if (location.pathname.includes("blog")) {
+    if (
+      location.pathname.includes("blog") ||
+      location.pathname.includes("pricing")
+    ) {
       setLoading(true);
       const timer = setTimeout(() => {
         setLoading(false);
@@ -48,7 +51,9 @@ const Layout = () => {
         {loading ? (
           <div className="flex flex-col justify-center items-center h-screen pt-16">
             <Hourglass height="80" width="80" colors={["#0b996e", "#5abe7f"]} />
-            <p className="mt-4 text-gray-600 text-lg">Loading Blog, please wait...</p>
+            <p className="mt-4 text-gray-600 text-lg">
+              Loading Blog, please wait...
+            </p>
           </div>
         ) : (
           <div className="pt-16">

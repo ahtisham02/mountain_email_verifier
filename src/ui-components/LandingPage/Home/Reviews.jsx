@@ -89,7 +89,7 @@ export default function Slider() {
   return (
     <div className="relative max-w-6xl mx-auto pt-20 pb-12 px-6 text-center">
       <h1 className="text-3xl font-bold text-gray-900 mb-4">Client Reviews</h1>
-      <h2 className="text-gray-700 mb-12">
+      <h2 className="text-gray-700 mb-12 mx-10 lg:mx-36">
         Mountain Email Finder is reviewed by 500+ people with an average rating of 4.9/5.0
         across different platforms like G2, TrustPilot, Capterra, GetApp, etc.
       </h2>
